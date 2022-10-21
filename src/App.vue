@@ -127,10 +127,7 @@ export default {
 
   //CHECKING FOR THE TOKEN WHEN MOUNTED
   mounted(){
-  console.log('mounted start')
-  let token = localStorage.getItem('access_token')
-  console.log('mounted token', token)
-  console.log('mounted end')
+    let token = localStorage.getItem('access_token')
 
   },
 
