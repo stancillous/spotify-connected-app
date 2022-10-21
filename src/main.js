@@ -108,7 +108,7 @@ function getCode(){
         const urlParams = new URLSearchParams(queryString);
 
         if(urlParams.has('error')){
-            window.location.href = "https://spotw.netlify.app/login.html"
+            window.location.href = "https://spotify-wrapper.netlify.app/login.html"
         }
         else{
             code = urlParams.get('code')
