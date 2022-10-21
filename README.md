@@ -11,7 +11,7 @@ I'm still waiting on Spotify's team to review and allow the app to have unlimite
 
 <h6>Below is a video recording of the app.</h6>
 
-## Project setup
+## Setting up the project
 ```
 npm install
 ```
