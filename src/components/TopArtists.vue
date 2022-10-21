@@ -1,0 +1,264 @@
+<template>
+    <!-- <NavComp/> -->
+    <div class="top-artists-root-div">
+
+        <section class="top-artists-section">
+
+            <div class="tas-container">
+                <h1>your top artists</h1>
+                <div class="tas-content">
+                    <!-- DIV WITH THE ARTIST DETAILS -->
+                    <!-- <div class="artist">
+                        <a href=""><img id="artist-image" src="../images/bazzi.jpg" alt=""></a>
+                        <a id="artist-link" class="artist-spotify-link" href="">bazzi</a>
+                    </div> -->
+
+                    <!-- <router-link to="/artistinfo&:name=this.user" id="artist-link" class="artists-spotify-link rt">bazzi link</router-link> -->
+
+
+
+                </div>
+            </div>
+        </section>
+    
+    </div>
+</template>
+
+<script>
+    // import NavComp from './NavBar.vue'
+    export default {
+        name:'TopArtistsComp',
+
+        components:{
+            // NavComp
+        },
+
+        data(){
+            return{
+                artistID:'',
+                user:'wase',
+                top_artists_url: 'https://api.spotify.com/v1/me/top/artists?limit=20',
+            }
+        },
+
+        //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
+        inject:['token'],
+
+        mounted(){
+            this.getTopArtists()
+
+        },
+
+        methods:{
+            getTopArtists(){
+
+                fetch(this.top_artists_url,{
+                    headers:{
+                        'Authorization':`Bearer ${this.token}`,
+                    }
+                })
+
+                .then(res => res.json())
+                .then(info => {
+                    // console.log(info);
+                    // let rt=document.querySelector('.rt')
+                    // rt.href = './artistinfo?name=stance&age=323'
+
+                    let topArtists = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
+
+
+
+                    topArtists.forEach((item,index)=>{
+                        // console.log(item)
+
+                        //ONLY SHOW AT LEAST 20 TOP ARTISTS
+                        if (index<20){
+
+
+                // ********************************************
+                // ********************************************
+                            // console.log(item.id)
+                            this.artistID = item.id       //THIS ID WILL BE USED TO GET ADDITIONAL INFO ABOUT THE ARTIST 
+                                                        //INSIDE THE ARTIST INFO PAGE
+                // ********************************************
+                // ********************************************
+                // ********************************************
+
+                            //CREATING THE IMAGE OF THE ARTIST
+                            let artistImage = document.createElement('img')
+                            artistImage.setAttribute('id','artist-image')
+                            artistImage.src = item.images[0].url
+
+                            //CREATE ANCHOR TAG WHICH WILL CONTAIN THE ARTIST IMAGE
+                            let artistImageLink = document.createElement('a')
+                            artistImageLink.href = `./artistInfo?artistID=${this.artistID}` 
+
+                            artistImageLink.appendChild(artistImage)  //APPEND CHILD, THE IMAGE WILL BE INSIDE THIS TAG
+
+
+
+                // ********************************************
+                // ********************************************
+                // ********************************************
+                            // artistImageLink.href = `./artistinfo.html?artistID=${artistID}`  //SETTING HREF TO THE ANCHOR TAG
+                // ********************************************
+                // ********************************************
+                // ********************************************
+
+
+
+
+                            //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
+                            let artistName = document.createElement('a')
+                            artistName.setAttribute('id','artist-link')
+                            artistName.textContent = item.name
+                            // artistName.href = `./ArtistInfo.vue?artistID=${this.artistID}` 
+                            artistName.href = `./artistInfo?artistID=${this.artistID}` 
+
+                            // artistName.addEventListener('click',()=>{
+                            //     console.log(this.artistID)
+                            //     console.log('clicked')
+                            //     this.$router.push({path:'/artistinfo',query:{artistID:this.artistID}})
+                            // })
+
+
+                            //APPENDING TO THE DOM
+                            let artistDiv  = document.createElement('div')
+                            artistDiv.setAttribute('class','artist')
+                            artistDiv.append(artistImageLink,artistName)
+
+                            document.querySelector('.tas-content').append(artistDiv)
+                    
+                        }
+
+                    })
+
+                })
+            }
+        }
+
+    }
+</script>
+
+<style lang="scss" >
+
+$web-font1:"Satoshi", sans-serif;
+$web-font2:"General Sans", sans-serif;
+// font weights
+
+$light:300;
+$regular:400;
+$medium:500;
+$bold:700;
+$black:900;
+
+$web-color:rgb(23, 20, 20);
+$padding-top:7rem;
+
+
+.top-artists-section{
+    padding-top:$padding-top ;
+    padding-left: 20rem;
+    width: 100vw;
+    min-height: 100vh;
+    // border: 2px solid;
+    .tas-container{
+        max-width: 1300px;
+        width: 100%;
+        min-height: 100vh;
+        margin: 0 auto;
+        // border: 2px solid;
+
+        h1{
+            font-size: 2rem;
+            font-weight: $black;
+            text-transform: capitalize;
+            padding: 3rem 2rem;
+            // border: 2px solid red;
+            text-align: center;
+        }
+
+        .tas-content{
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            //DIV HOLDING THE ARTIST
+            .artist{
+                text-align: center;
+                margin: 1.4rem;
+                // border: 2px solid;
+                #artist-image{
+                    width:18rem;
+                    height: 18rem;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin: 0.4rem;
+                    
+                }
+                #artist-link{
+                    // text-decoration: none;
+                    font-size: 2rem;
+                    text-transform: capitalize;
+                    font-weight: $bold;
+                    display: block;
+                    text-decoration: none;
+ 
+                }
+
+                
+            }
+
+        }
+    }
+}
+
+
+//MEDIA QUERIES
+@media screen and (max-width:900px) {
+    
+    .top-artists-section{
+        padding: unset;
+        padding-top: 3rem;
+        margin-bottom: 15rem;
+
+        .tas-container{
+
+            h1{
+                font-size: 1.6rem;
+            }
+            .tas-content{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                .artist{
+                    #artist-image{
+                        width: 13rem;
+                        height: 13rem;
+                    }
+                    #artist-link{
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+@media screen and (max-width:700px) {
+    .top-artists-section{
+        padding-top: $padding-top;
+        .tas-container .tas-content .artist{
+            #artist-image{
+                width: 11rem;
+                height: 11rem;
+            }
+            #artist-link{
+                font-size: 1.3rem;
+            }
+
+        }
+    }
+}
+</style>
