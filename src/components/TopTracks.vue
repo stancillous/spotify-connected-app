@@ -128,7 +128,7 @@
                             let artistName = document.createElement('a')
                             artistName.setAttribute('class','artist-name')
                             artistName.textContent = item.artists[0].name
-                            artistName.href = `./artistInfo?artistID=${artistID}`
+                            artistName.href = `/artistInfo?artistID=${artistID}`
 
                             //CREATING ELEMENT TO HOLD THE TRACK DURATION
                             let trackDuration = document.createElement('p')
