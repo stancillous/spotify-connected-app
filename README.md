@@ -1,11 +1,11 @@
 # [SPOTIFY WRAPPER](https://spotify-wrapper.netlify.app/login.html)
 
-Third iteration of spotify wrapper built with vue.js
+<h5>Third iteration of spotify wrapper built with vue.js</h5>
 
-Intergrated with Spotify's API and OAuth flow, this web app shows personalized Spotify data. View recently played tracks, top songs, top artists and more. Get recommended artists based on your top artists.
+<h5>Intergrated with Spotify's API and OAuth flow, this web app shows personalized Spotify data. View recently played tracks, top songs, top artists and more. Get recommended artists based on your top artists.</h5>
 
-<h5>NOTE</h5>If you try to log in and can't see your Spotify info, that's because I have to manually onboard and give you access to use the app.
-I'm still waiting on Spotify's team to review and allow the app to have unlimited number of users. 
+<h4>NOTE</h4> <h5>If you try to log in and can't see your Spotify info, that's because I have to manually onboard and give you access to use the app.
+I'm still waiting on Spotify's team to review and allow the app to have unlimited number of users. </h5>
 
 <h5></h5>
 
