@@ -140,6 +140,10 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
+        created(){
+            console.log('home page token')
+           console.log(this.token)
+        },
         mounted(){
 
             this.getUserDetails()
