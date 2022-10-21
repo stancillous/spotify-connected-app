@@ -127,17 +127,10 @@ export default {
 
   //CHECKING FOR THE TOKEN WHEN MOUNTED
   mounted(){
-    // let at = localStorage.getItem('access_token')
-
-    // if(at===''){
-    //   console.log('token not found')
-    // }
-    // else{
-
-    //   console.log(at)
-    //   // this.access = at
-    //   console.log('access',this.access)
-    // }
+  console.log('mounted start')
+  let token = localStorage.getItem('access_token')
+  console.log('mounted token', token)
+  console.log('mounted end')
 
   },
 
