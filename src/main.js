@@ -53,7 +53,7 @@ showMoreInfoDiv()
 
 // let client_id ='11e1eb62cc504e17bce8867bc8a21897';
 
-let redirect_uri = "http://localhost:8081/"
+let redirect_uri = "https://spotify-wrapper.netlify.app/"
 
 
 //SETTING THE SCOPES FOR INFO TO OBTAIN FROM THE USER WHEN LOGGING IN
