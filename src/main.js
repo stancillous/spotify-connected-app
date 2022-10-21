@@ -205,5 +205,5 @@ function handleAuthorizationResponse(){
 
 
 let token = localStorage.getItem('access_token')
-// console.log(token)
+console.log(token)
 console.log(token.indexOf('a'))
