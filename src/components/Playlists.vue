@@ -179,6 +179,10 @@ $padding-top:7rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+
+                &:hover{
+                    opacity: .8;
+                }
                 #playlist-image{
                     width:22rem;
                     text-align: center;
@@ -195,6 +199,10 @@ $padding-top:7rem;
                     text-decoration: none;
                     display: block;
                     padding: .4rem 0;
+
+                    &:hover{
+                        text-decoration: underline;
+                    }
                 }
 
                 #playlist-track-number{
