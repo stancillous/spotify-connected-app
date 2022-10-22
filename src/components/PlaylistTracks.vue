@@ -390,6 +390,11 @@ $padding-top:7rem;
                                 // margin: 3rem 2rem;
                                 margin-top: 3rem;
                                 position: relative;
+
+                                &:hover{
+                                    opacity: .8;
+                                }
+
                                 #track-image{
                                     width: 6rem;
                                     height: 6rem;
@@ -415,9 +420,26 @@ $padding-top:7rem;
                                         font-weight: $bold;
                                         text-decoration: none;
                                         padding-bottom: .5rem;
+
+                                        &:hover{
+                                            text-decoration: underline;
+                                        }
                                     }
             
-                                    .artist-name, .album-name{
+                                    .artist-name{
+                                        opacity: .8;
+                                        font-size: medium;
+                                        text-transform: capitalize;
+                                        font-size:1.3rem;
+                                        padding-right: .8rem;
+                                        // letter-spacing: .1rem;
+                                        text-decoration: none;
+
+                                        &:hover{
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                    .album-name{
                                         opacity: .8;
                                         font-size: medium;
                                         text-transform: capitalize;

@@ -15,7 +15,7 @@
                         <!-- THIS DIV CONTAINS THE BUTTON TO ALLOW USER TO LOG OUT -->
                         <div class="logout">
                             <!-- <a class="logout-cta" href="https://accounts.spotify.com/en/logout">logout</a> -->
-                            <a class="logout-cta" href="http://localhost:8081/login.html">logout</a>
+                            <a class="logout-cta" href="https://spotify-wrapper.netlify.app/login.html">logout</a>
                         </div>
                     </div>
                 </div>
@@ -71,8 +71,6 @@
                         <h1>your playlists</h1>
                         <!-- <a class="view-all" href="./Playlists.vue">view all</a> -->
                         <router-link class="view-all" to="/playlists">view all</router-link>
-
-
                     </div>
 
                 <!-- THIS IS WHERE i'LL APPEND THE DIVS FOR THE USER'S PLAYLISTS -->
@@ -711,6 +709,10 @@ padding-left: 20rem;
                 // border: 1px solid;
                 display: flex;
                 align-items: center;
+
+                &:hover{
+                    opacity: .8;
+                }
                 #hp-playlist-image{
                     width: 6rem;
                     height: 6rem;
@@ -725,6 +727,10 @@ padding-left: 20rem;
                         text-transform: uppercase;
                         font-weight: $bold;
                         text-decoration: none;
+
+                        &:hover{
+                            text-decoration: underline;
+                        }
                     }
                     #hp-playlist-total-tracks{
                         font-size: 1rem;
@@ -784,6 +790,11 @@ padding-left: 20rem;
                             align-items: center;
                             margin: 2rem;
                             position: relative;
+
+                            &:hover{
+                                opacity: .8;
+                            }
+
                             img{
                                 width: 6rem;
                                 height: 6rem;
@@ -818,8 +829,36 @@ padding-left: 20rem;
                                     font-weight: $bold;
                                     text-decoration: none;
                                     padding-bottom: .5rem;
+
+                                    &:hover{
+                                        text-decoration: underline;
+                                    }
                                 }
         
+                                .artist-name{
+                                    // border: 2px solid;
+                                    opacity: .8;
+                                    font-size: $medium;
+                                    text-transform: capitalize;
+                                    font-size:1.3rem;
+                                    padding-right: 1rem;
+                                    // letter-spacing: .1rem;
+                                    text-decoration: none;
+
+                                    &:hover{
+                                        text-decoration: underline;
+                                    }
+                                }
+                                .album-name{
+                                    // border: 2px solid;
+                                    opacity: .8;
+                                    font-size: $medium;
+                                    text-transform: capitalize;
+                                    font-size:1.3rem;
+                                    padding-right: 1rem;
+                                    // letter-spacing: .1rem;
+                                    text-decoration: none;
+                                }
                                 .artist-name, .album-name{
                                     // border: 2px solid;
                                     opacity: .8;
