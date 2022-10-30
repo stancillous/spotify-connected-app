@@ -39,7 +39,7 @@
                 url += "?client_id=" + this.client_id;
                 url += "&response_type=code";
                 url += "&redirect_uri=" + encodeURI(this.redirect_uri);
-                url += "&show_dialog=true";
+                //url += "&show_dialog=true";
                 url+= `&scope=${this.scope}`
                 window.location.href = url; // Show Spotify's authorization screen
                 // checkAccessStatus() //FUNCTION TO CHECK WHETHER THE USER GRANTED US AUTHORIZATION
