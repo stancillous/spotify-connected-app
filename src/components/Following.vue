@@ -4,6 +4,13 @@
     <div class="following-root-div">
 
         <section class="following-section">
+
+                        <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
+
+            
             <div class="fs-container">
                 <div class="fs-content-parent">
                     <div class="fs-content">
@@ -51,10 +58,12 @@
         },
 
         inject:['token'],
-
-        mounted(){
-            this.getFollowing()
+        created: function() {
+            window.addEventListener('load',this.getFollowing());
         },
+        // mounted(){
+        //     this.getFollowing()
+        // },
 
         methods:{
             getFollowing(){
@@ -139,6 +148,17 @@ $padding-top:7rem;
     width: 100vw;
     padding-left: 16rem;
     padding-top: $padding-top;
+    padding-bottom: 8rem;
+
+            .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
+
+    
     .fs-container{
         .fs-content-parent{
             max-width: 1000px;
@@ -215,6 +235,12 @@ $padding-top:7rem;
         padding: unset;
         padding-top: 3rem;
         margin-bottom: 15rem;
+
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
+        
 
 
         .fs-container .fs-content-parent .fs-content .following-artists-container .following-artists-div {

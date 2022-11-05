@@ -5,6 +5,12 @@
 
         <section class="your-playlists-section">
 
+            <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
+
+
             <div class="yp-container">
                 <h1>your playlists</h1>
                 <div class="yp-content">
@@ -37,6 +43,10 @@
         components:{
             // NavComp
         },
+        created: function() {
+            window.addEventListener('load',this.getPlaylists());
+        },
+
         data(){
             return{
                 user_playlists_url:`https://api.spotify.com/v1/me/playlists?limit=25`,
@@ -47,9 +57,9 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
-        mounted(){
-            this.getPlaylists()
-        },
+        // mounted(){
+        //     this.getPlaylists()
+        // },
 
         methods:{
              getPlaylists(){
@@ -149,6 +159,16 @@ $padding-top:7rem;
     width: 100vw;
     margin-right: 5rem;
     padding-left: 18rem;
+    padding-bottom: 8rem;
+
+            .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
+
 
     
     .yp-container{
@@ -229,6 +249,11 @@ $padding-top:7rem;
 
         // padding: 3rem;
         // border: 2px solid;
+
+        //hiding the spotify attribution icon on smaller screens
+        .spotify-image-div{
+            display: none;
+        }
 
         .yp-container .yp-content{
             display: flex;

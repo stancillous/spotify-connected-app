@@ -3,6 +3,10 @@
     
     <div class="playlist-tracks-root-div">
         <section class="playlist-tracks-section">
+            <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
+
             <div class="pts-container">
                 <div class="pts-content">
 
@@ -80,14 +84,22 @@
         },
 
         inject:['token'],
-
-        mounted(){
-            this.getIdFromUrl()
-            this.getPlaylistsInfo()
-            this.getPlaylistTracks()
+        created: function() {
+            window.addEventListener('load',this.callFuncs());
         },
 
+        // mounted(){
+        //     this.getIdFromUrl()
+        //     this.getPlaylistsInfo()
+        //     this.getPlaylistTracks()
+        // },
+
         methods:{
+            callFuncs(){
+                this.getIdFromUrl()
+                this.getPlaylistsInfo()
+                this.getPlaylistTracks()
+            },
 
             getIdFromUrl(){
                 let page_url_string = window.location.search
@@ -149,7 +161,7 @@
                             //CREATE EXTERNAML LINK THAT WILL DIRECT TO THE ARTIST'S SPOTIFY 
                             let viewPlaylistOnSpotify = document.createElement('a')
                             viewPlaylistOnSpotify.setAttribute('class','view-on-spotify-button')
-                            viewPlaylistOnSpotify.textContent = 'view on spotify'
+                            viewPlaylistOnSpotify.textContent = 'play on spotify'
                             viewPlaylistOnSpotify.setAttribute('target','_blank')
                             viewPlaylistOnSpotify.href = info.external_urls.spotify
                             
@@ -287,6 +299,14 @@ $padding-top:7rem;
     padding-top: $padding-top;
     width: 100vw;
     padding-left: 20rem;
+    padding-bottom:8rem;
+    .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
     .pts-container{
         .pts-content{
             display: flex;
@@ -355,10 +375,10 @@ $padding-top:7rem;
                             text-decoration: none;
                             padding: 1.2rem 1.5rem;
                             border-radius: 34rem;
-                            background-color: #1db954;
+                            background-color: #1d8954;
     
                             &:hover{
-                                background-color: #04f759;
+                                opacity: .8;
                             }
                         }
                     }
@@ -468,6 +488,11 @@ $padding-top:7rem;
         padding-top: 5rem;
         padding: 3rem 2rem ;
         margin-bottom: 15rem;
+
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
 
     }
 }

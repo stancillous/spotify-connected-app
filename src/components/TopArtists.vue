@@ -4,6 +4,12 @@
 
         <section class="top-artists-section">
 
+                        <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
+            
+
             <div class="tas-container">
                 <h1>your top artists</h1>
                 <div class="tas-content">
@@ -44,10 +50,13 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
-        mounted(){
-            this.getTopArtists()
-
+        created: function() {
+            window.addEventListener('load',this.getTopArtists());
         },
+        // mounted(){
+        //     this.getTopArtists()
+
+        // },
 
         methods:{
             getTopArtists(){
@@ -161,7 +170,18 @@ $padding-top:7rem;
     padding-left: 20rem;
     width: 100vw;
     min-height: 100vh;
+    padding-bottom: 8rem;
+
     // border: 2px solid;
+
+            .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
+    
     .tas-container{
         max-width: 1300px;
         width: 100%;
@@ -221,6 +241,11 @@ $padding-top:7rem;
         padding-top: 3rem;
         margin-bottom: 15rem;
 
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
+        
         .tas-container{
 
             h1{

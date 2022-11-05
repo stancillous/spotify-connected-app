@@ -5,6 +5,11 @@
 
 
         <section class="top-tracks-section">
+
+                        <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
             <div class="tts-container">
                 <div class="tts-content">
                     <div class="tts-header">
@@ -62,10 +67,12 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
-        mounted(){
-            this.getTopTracks()
+        // mounted(){
+        //     this.getTopTracks()
+        // },
+        created: function() {
+            window.addEventListener('load',this.getTopTracks());
         },
-
 
         methods:{
             millisToMinutesAndSeconds(millis) {
@@ -183,9 +190,18 @@ $padding-top:7rem;
 
 .top-tracks-section{
     width: 100vw;
+    padding-bottom: 8rem;
     // border: 2px solid;
     padding-top: $padding-top;
     padding-left: 20rem;
+
+            .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
     .tts-container{
         .tts-content{
             // border: 2px solid;
@@ -309,6 +325,10 @@ $padding-top:7rem;
         padding-top: 5rem;
         margin-bottom: 15rem;
 
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
 
     }
 

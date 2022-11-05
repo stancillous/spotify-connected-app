@@ -4,6 +4,13 @@
 
     <div class="discover-root-div">
         <section class="related-artists-section">
+
+                        <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
+
+
             <div class="ras-container">
                 <div class="ras-content-parent">
                     <h1 class="pageTitle"></h1>
@@ -55,14 +62,22 @@
         },
 
         inject:['token'],
-
-        mounted(){
-            this.getIdFromUrl()
-            this.getRelatedArtists()
-
+        created: function() {
+            window.addEventListener('load',this.callFuncs());
         },
 
+        // mounted(){
+        //     this.getIdFromUrl()
+        //     this.getRelatedArtists()
+
+        // },
+
         methods:{
+            callFuncs(){
+                this.getIdFromUrl()
+                this.getRelatedArtists()
+            },
+            
             getIdFromUrl(){
                     //GET THE ARTISTS ID FROM THE URL
                 let windowUrl = location.search
@@ -123,9 +138,9 @@
 
                         //CREATING ELEMENT THAT WILL HOLD THE ARTIST SPOTIFY LINK
                         let relArtistSpotifyLink = document.createElement('a')
-                        relArtistSpotifyLink.setAttribute('id','rel-artist-spotify-link')
                         relArtistSpotifyLink.setAttribute('target','_blank')
-                        relArtistSpotifyLink.textContent = 'check on spotify'
+                        relArtistSpotifyLink.setAttribute('class','rel-artist-link')
+                        relArtistSpotifyLink.textContent = 'play on spotify'
                         relArtistSpotifyLink.href = item.external_urls.spotify
 
 
@@ -177,10 +192,21 @@ $padding-top:7rem;
 
 
 .related-artists-section{
+    padding-bottom: 8rem;
     width: 100vw;
     padding-left: 17rem;
     padding-top: $padding-top;
     min-height: 100vh;
+
+    .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
+
+
     .ras-container{
         .ras-content-parent{
             max-width: 1000px;
@@ -246,7 +272,7 @@ $padding-top:7rem;
                         .rel-artist-link-div{
                             // margin-top: 1rem;
                             text-align: center;
-                            #rel-artist-spotify-link{
+                            .rel-artist-link{
                                 text-decoration: none;
                                 font-size: 1.3rem;
                                 text-transform: capitalize;
@@ -280,6 +306,12 @@ $padding-top:7rem;
         padding: unset;
         margin-bottom: 15rem;
         padding-top: 5rem;
+
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
+        
         .ras-container .ras-content-parent .ras-content {
             display: flex;
             justify-content: center;
