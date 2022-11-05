@@ -249,7 +249,6 @@ $padding-top:7rem;
                 .top-track{
                     display: flex;
                     align-items: center;
-                    // border: 2px solid;
                     margin: 3rem 2rem;
                     position: relative;
 
@@ -267,6 +266,7 @@ $padding-top:7rem;
                     .track-duration{
                         font-size: 1.2rem;
                         position: absolute;
+                        top:40% ;
                         right: 4rem;
                         opacity: .9;
                     }
@@ -340,7 +340,8 @@ $padding-top:7rem;
 
         .tts-container .tts-content .tt-section-div .top-track{
             .track-duration{
-                right: 2rem;
+                right: 1.5rem;
+                font-size: 1rem;
             }
           
             .song-details{
