@@ -3,6 +3,12 @@
     <!-- <NavComp/> -->
 
     <div class="song-info-root-div">
+
+                <!-- spotify attribution logo -->
+        <div class="spotify-image-div">
+            <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+        </div>
+
         <div class="song-info-container">
             <div class="song-info-content">
                 <div class="song-info-div">
@@ -14,7 +20,7 @@
                         <h1 class="artist-name"></h1>
                         
                         <div class="play-song-div">
-                            <a target="_blank" class="play-song" href="">play</a>
+                            <a target="_blank" class="play-song" href="">play on spotify</a>
 
                         </div>
 
@@ -87,13 +93,23 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
-        mounted(){
-            this.getIdFromUrl()
-            this.getSongInfo()
-            this.getTrackInfo()
-        },
+        // mounted(){
+        //     this.getIdFromUrl()
+        //     this.getSongInfo()
+        //     this.getTrackInfo()
+        // },
 
+        created: function() {
+            window.addEventListener('load',this.callFuncs());
+        },
+        
         methods:{
+            callFuncs(){
+                this.getIdFromUrl()
+                this.getSongInfo()
+                this.getTrackInfo()
+    
+            },
             //FUNCTION TO GET ID FROM THE URL
             getIdFromUrl(){
                 let page_url_string = window.location.search
@@ -274,6 +290,14 @@ $padding-top:7rem;
     padding-top: $padding-top;
     padding-left: 20rem;
 
+    .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
+
 
     .song-info-container{
         margin: 2rem;
@@ -372,6 +396,12 @@ $padding-top:7rem;
         padding: unset;
         padding-top: 8rem;
         margin-bottom: 15rem;
+
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
+        
 
         .song-info-container .song-info-content .song-info-div{
             .song-image{

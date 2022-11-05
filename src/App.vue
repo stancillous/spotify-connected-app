@@ -22,7 +22,7 @@
 
     <!-- THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL -->
     <div class="top-page-logo">
-    <a href="/home"><img src="./assets/logo.png" alt=""></a>
+    <a href="/home"><img src="./assets/images.png" alt=""></a>
     </div>
 
     <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
@@ -39,7 +39,7 @@
                 <!-- LOGO IMAGE -->
                 <div class="image-div">
                 <router-link to="/">
-                    <img class="logo-image" src="./assets/logo.png" alt="logo">
+                  <a href="/home"><img src="./assets/images.png" alt=""></a>
                 </router-link>
                 
                 </div>
@@ -128,7 +128,6 @@ export default {
   provide:{
     //TOKEN TO BE PASSED TO THE OTHER COMPONENTS
     token:localStorage.getItem('access_token'),
-    // token:'BQA0llKrcJj2TE1YO-3PrD8JE9Tvkz0p1WrDAgfT2CTHqn2Fez-uPzU_QpioTFu6QTSYJLLIVNTkz-UOFqZJYfCbHg1fiYiBRaL0DX7IqjgwRBplVEqNAwTs8TmRUqJsm1oDU6XZzyP5crggMvF8dJ4pYodB1ueP6bRIvG5M9ouEcrJCbWIQquD7-pvhQ5CW62d2mIDkfDU3I-8u0d2kRQppcWAIM5xiAshXpEOEGCr3oulWzw'
   }
 
 
@@ -146,7 +145,8 @@ $medium:500;
 $bold:700;
 $black:900;
 
-$web-color:rgb(21, 20, 23);
+// $web-color:rgb(21, 20, 23);
+$web-color:#191414;
 
 *{
     margin: 0;
@@ -232,12 +232,13 @@ body{
 //THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL
 .top-page-logo{
     position: absolute;
-    top:.1rem;
-    left: .1rem;
+    top:3%;
+    left: 3%;
     display: none;
 
     img{
         width: 6rem;
+        border-radius: 50%;
     }
 }
 
@@ -286,7 +287,8 @@ body{
         //LOGO
         .image-div{
           img{
-            width: 7rem;
+            width: 9rem;
+            opacity: .8;
           }
         }
 

@@ -4,7 +4,6 @@ import router from './router'
 
 createApp(App).use(router).mount('#app')
 
-// console.log('main js')
 
 
 let tabsContainer = document.querySelector('.tabs-container')
@@ -21,6 +20,7 @@ tabs.forEach((item)=>{
 
     })
 })
+
 
 
 //SHOWING THE DIV WITH THE ADDITIONAL ACTIONS ie LOGOUT AND ABOUT DEVELOPER
@@ -53,13 +53,10 @@ showMoreInfoDiv()
 
 // let client_id ='11e1eb62cc504e17bce8867bc8a21897';
 
-let redirect_uri = "https://spotify-wrapper.netlify.app/"
+let redirect_uri = "https://my-muzik.netlify.app/"
+//client id to be passed when getting a refresh token
+let client_id='11e1eb62cc504e17bce8867bc8a21897'
 
-
-//SETTING THE SCOPES FOR INFO TO OBTAIN FROM THE USER WHEN LOGGING IN
-// let scope = 'user-read-private user-read-recently-played playlist-read-private user-follow-read user-top-read'
-
-// let scope = 'user-read-private user-library-read user-read-recently-played playlist-read-private user-follow-read user-top-read'
 
 
 var access_token = null;
@@ -74,19 +71,36 @@ window.addEventListener('load',()=>{
     // console.log(window.location.search.length)
     // console.log('laoded')
     
-    if ( window.location.search.length > 0 ){
-        handleRedirect();
-        // console.log('found')
-    }
-    else{
-        // console.log('none')
-    }
+    setTimeout(() => {
+        if ( window.location.search.length > 0 ){
+            handleRedirect();
+        }
+        else{
+            // console.log('none')
+        }
+    }, 1000);
+
 })
+
+//function to get user profile and call refreshAccessToken()
+async function getUserProfile(){
+    let response = await fetch('https://api.spotify.com/v1/me',{
+        headers:{
+            'Authorization':`Bearer ${token}`,
+        }
+    })
+    let info = await response.json()
+    if(info.error.status===401){
+        refreshAccessToken()
+    }
+}
+getUserProfile()
 
 
 function onPageLoad(){
     // client_id = localStorage.getItem("client_id");
     // client_secret = localStorage.getItem("client_secret");
+    // console.log('on page load functon')
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
@@ -100,6 +114,7 @@ function handleRedirect(){
     window.history.pushState("", "", redirect_uri); // remove param from url
 }
 
+//function to get code from the url which is then used to the the access token
 function getCode(){
     let code = null;
     const queryString = window.location.search;
@@ -120,21 +135,6 @@ function getCode(){
 }
 
 
-
-
-//FUNCTION TO REQUEST AUTHORIZATION FROM THE USER ONCE THEY CLICK THE LOGIN BUTTON
-// function requestAuthorization(){
-
-//     let url = AUTHORIZE;
-//     url += "?client_id=" + client_id;
-//     url += "&response_type=code";
-//     url += "&redirect_uri=" + encodeURI(redirect_uri);
-//     url += "&show_dialog=true";
-//     url+= `&scope=${scope}`
-//     window.location.href = url; // Show Spotify's authorization screen
-//     // checkAccessStatus() //FUNCTION TO CHECK WHETHER THE USER GRANTED US AUTHORIZATION
-// }
-
 //FUNCTION TO FETCH THE ACCESS TOKEN
 function fetchAccessToken( code ){
     let body = "grant_type=authorization_code";
@@ -145,17 +145,17 @@ function fetchAccessToken( code ){
     callAuthorizationApi(body);
 }
 
-// function refreshAccessToken(){
-//     refresh_token = localStorage.getItem("refresh_token");
-//     let body = "grant_type=refresh_token";
-//     body += "&refresh_token=" + refresh_token;
-//     body += "&client_id=" + client_id;
-//     callAuthorizationApi(body);
-// }
+//function to get refresh token when the access token expires
+function refreshAccessToken(){
+    refresh_token = localStorage.getItem("refresh_token");
+    let body = "grant_type=refresh_token";
+    body += "&refresh_token=" + refresh_token;
+    body += "&client_id=" + client_id;
+    callAuthorizationApi(body);
+}
 
 
 // ENCODED BASIC OAUTH
-
 let authBody = 'Basic MTFlMWViNjJjYzUwNGUxN2JjZTg4NjdiYzhhMjE4OTc6ZGUzNGIzYWIzNmY2NDFiZTkzY2RkNjNkMTVmNTMxMTg='
 
 
@@ -203,6 +203,6 @@ function handleAuthorizationResponse(){
 
 
 
-
-let token = localStorage.getItem('access_token')
+var token = localStorage.getItem('access_token')
 console.log(token.indexOf('a'))
+

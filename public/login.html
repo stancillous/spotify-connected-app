@@ -83,7 +83,7 @@
 
         }
         .main #login-page #lpc .login-btn-container #login-btn{
-            background-color: #1db954;
+            background-color: #1d8954;
             cursor: pointer;
             color: white;
             font-size: 1.1rem;
@@ -98,7 +98,7 @@
 
         }
         .main #login-page #lpc .login-btn-container #login-btn:hover{
-            background-color: #29d766;
+            opacity: .8;
 
         }
 
@@ -118,7 +118,7 @@
         <div class="main">
             <div id="login-page">
                 <div id="lpc">
-                    <h1 class="app-name" id="app-name">Spotify Wrapper</h1>
+                    <h1 class="app-name" id="app-name">My Muzik</h1>
 
                     <div class="login-btn-container">
                         <!-- <a @click="requestAuthorization" id="login-btn" href="/home">login to spotify</a> -->
@@ -136,7 +136,8 @@
 
         let AUTHORIZE='https://accounts.spotify.com/authorize'
         let scope='user-read-private user-library-read user-read-recently-played playlist-read-private user-follow-read user-top-read'
-        let redirect_uri = 'https://spotify-wrapper.netlify.app/'
+        //let redirect_uri = 'https://my-muzik.netlify.app/'
+        let redirect_uri = 'https://my-muzik.netlify.app/'
         let client_id='11e1eb62cc504e17bce8867bc8a21897'
 
   

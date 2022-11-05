@@ -4,9 +4,16 @@
         <!-- <NavComp/> -->
         
         <section class="user-details-info-section">
+
+   
+
             <div class="udis-container">
                 <!-- the div in the top right corner with the image and user name  -->
                 <div class="user-name-img">
+                    <!-- spotify attribution logo -->
+                    <div class="spotify-image-div">
+                        <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+                    </div>
                     <div id="name-img">
                         <!-- <img  src="./images/profile.jpg" alt=""> -->
                         <!-- <p id="tiny-user-name">stancillous</p> -->
@@ -22,6 +29,7 @@
 
                 <!-- this has the image, name, followers, following, and playlists of the user -->
                 <div class="udis-content">
+
                     <div class="content-display-flex">
 
                         <div class="udis-image">
@@ -70,7 +78,7 @@
                     <div class="see-more">
                         <h1>your playlists</h1>
                         <!-- <a class="view-all" href="./Playlists.vue">view all</a> -->
-                        <router-link class="view-all" to="/playlists">view all</router-link>
+                        <router-link  id="playlist-hpv" class="view-all" to="/playlists">view all</router-link>
                     </div>
 
                 <!-- THIS IS WHERE i'LL APPEND THE DIVS FOR THE USER'S PLAYLISTS -->
@@ -116,7 +124,6 @@
 </template>
 
 <script>
-// import NavComp from './NavBar.vue'
 
     export default {
         name:'HomePageComp',
@@ -137,17 +144,21 @@
 
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
-
-  
-        mounted(){
-
-            this.getUserDetails()
-            this.recentlyPlayed()
-            this.getPlaylists()
-            this.getFollowing()
+        created: function() {
+            window.addEventListener('load',this.callFuncs());
         },
+  
 
         methods:{
+            callFuncs(){
+                setTimeout(() => {
+                    this.getFollowing()
+                    this.getUserDetails()
+                    this.recentlyPlayed()
+                    this.getPlaylists()
+                    
+                }, 1500);
+            },
 
             millisToMinutesAndSeconds(millis) {
                     var minutes = Math.floor(millis / 60000);
@@ -157,7 +168,8 @@
                         (minutes+1) + ":00" :
                         minutes + ":" + (seconds < 10 ? "0" : "") + seconds
                     );
-                },
+            },
+            //log info
             getUserDetails(){
                 fetch(this.user_details_url,{
                     headers:{
@@ -167,7 +179,7 @@
                 
                 .then(res => res.json())
                 .then((info) =>{
-
+                    // console.log(info)
 
                 //CREATING THE TINY USER AVATAR ON THE TOP OF THE DESKTOP SITE
                 let tinyUserAvatar = document.createElement('img')
@@ -488,6 +500,8 @@ margin-bottom: 8rem;
 width: 100vw;
 padding-left: 20rem;
 
+
+
     .udis-container{
         // border: 1px solid red;
         // border: 1px solid;
@@ -498,12 +512,18 @@ padding-left: 20rem;
 
         //THE DIV ON THE TOP RIGHT PART OF THE PAGE
         .user-name-img{
-            // border: 1px solid red;
-            
             padding: 4rem;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: space-between;
+
+            .spotify-image-div{
+                margin-bottom: 3rem;
+
+                img{
+                    width: 14rem;
+                }
+            }
 
             #name-img{
                 display: flex;
@@ -573,8 +593,12 @@ padding-left: 20rem;
         .udis-content{
             // border: 1px solid red;
             margin-top: 2rem;
-            display: grid;
-            place-items: center;
+            // display: grid;
+            // place-items: center;
+
+            
+
+
             .content-display-flex{
                 // border: 2px solid wheat;
                 //USER IMAGE
@@ -600,6 +624,8 @@ padding-left: 20rem;
                     }
                 }
                 .udis-following{
+                    display: grid;
+                    place-items: center;
                     .following-playlists-followers{
                         display: flex;
                         div{
@@ -892,6 +918,13 @@ padding-left: 20rem;
     .user-details-info-section{
         padding: unset;
         margin-bottom: 15rem;
+
+        .udis-container .udis-content{
+             //hiding the spotify attribution icon on smaller screens
+            .spotify-image-div{
+                display: none;
+            }
+        }
 
     }
     .top-artists-playlists{

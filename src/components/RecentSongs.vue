@@ -6,6 +6,10 @@
         
         
         <section class="recently-played-section">
+            <!-- spotify attribution logo -->
+             <div class="spotify-image-div">
+                <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
+            </div>
             <div class="rp-container">
                 <div class="rp-content">
                     <h1 class="rp-h">recently played tracks</h1>
@@ -33,14 +37,15 @@
 </template>
 
 <script>
-// import NavComp from './NavBar.vue'
     export default {
         name:'RecentSongsComp',
 
         components:{
             // NavComp
         },
-
+        created: function() {
+            window.addEventListener('load',this.recentlyPlayed());
+        },
         data(){
             return{
                 recently_played_tracks :`https://api.spotify.com/v1/me/player/recently-played?limit=25`,
@@ -51,9 +56,9 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
 
-        mounted(){
-            this.recentlyPlayed()
-        },
+        // mounted(){
+        //     this.recentlyPlayed()
+        // },
 
         methods:{
              millisToMinutesAndSeconds(millis) {
@@ -176,9 +181,18 @@ $padding-top:7rem;
 
 
 .recently-played-section{
+    padding-bottom: 8rem;
     width: 100vw;
     padding-left: 20rem;
     padding-top: $padding-top;
+
+        .spotify-image-div{
+        margin-bottom: 3rem;
+
+        img{
+            width: 14rem;
+        }
+    }
 
     .rp-container{
         .rp-content{
@@ -218,6 +232,7 @@ $padding-top:7rem;
                         position: absolute;
                         font-weight: $regular;
                         right: 4rem;
+                        top:40%;
                         opacity: .9;
                     }
 
@@ -271,6 +286,12 @@ $padding-top:7rem;
         padding: unset;
         padding-top: 5rem;
         margin-bottom: 15rem;
+
+         //hiding the spotify attribution icon on smaller screens
+         .spotify-image-div{
+            display: none;
+        }
+        
 
     }
 
