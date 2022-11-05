@@ -1,4 +1,4 @@
-# [SPOTIFY WRAPPER](https://spotify-wrapper.netlify.app/login.html)
+# [My Muzik](https://spotify-wrapper.netlify.app/login.html)
 
 <h5>Fourth iteration of spotify wrapper, built with vue.js</h5>
 
