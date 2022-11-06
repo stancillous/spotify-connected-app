@@ -193,7 +193,7 @@
                 }
                 else{
                     // console.log('absent')
-                    tinyUserAvatar.src ='./images/user.png'
+                    tinyUserAvatar.src ='../assets/user.png'
                 }
 
                 //CREATING THE TINY USER NAME ON THE TOP OF THE DESKTOP SITE
@@ -239,7 +239,7 @@
 
                 }
                 else{
-                    userAvatar.src = './images/user.png'
+                    userAvatar.src = ''../assets/user.png'
                 }
                 
                     //APPENDING USER AVATAR TO THIS DOM ELEMENT
