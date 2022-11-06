@@ -8,8 +8,10 @@
 I'm still waiting on Spotify's team to review and allow the app to have unlimited number of users. </h5>
 
 <h5></h5>
+![Screenshot (49)](https://user-images.githubusercontent.com/99094257/200167115-4b3055a2-7459-4685-a257-c6cb118b1216.png)
 
 <h6>Below is a video recording of the app.</h6>
+
 
 ## Setting up the project
 ```
