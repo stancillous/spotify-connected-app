@@ -80,7 +80,7 @@
                 
                 .then(res => res.json())
                 .then(info => {
-                    // console.log(info)
+                    console.log(info)
                     let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
                     // console.log(recentSongsArray);
 
