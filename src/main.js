@@ -132,14 +132,6 @@ function fetchAccessToken( code ){
     callAuthorizationApi(body);
 }
 
-//function to get refresh token when the access token expires
-function refreshAccessToken(){
-    refresh_token = localStorage.getItem("refresh_token");
-    let body = "grant_type=refresh_token";
-    body += "&refresh_token=" + refresh_token;
-    body += "&client_id=" + client_id;
-    callAuthorizationApi(body);
-}
 
 
 // ENCODED BASIC OAUTH
@@ -188,6 +180,14 @@ function handleAuthorizationResponse(){
 
 }
 
+//function to get refresh token when the access token expires
+function refreshAccessToken(){
+    refresh_token = localStorage.getItem("refresh_token");
+    let body = "grant_type=refresh_token";
+    body += "&refresh_token=" + refresh_token;
+    body += "&client_id=" + client_id;
+    callAuthorizationApi(body);
+}
 
 
 var token = localStorage.getItem('access_token')
