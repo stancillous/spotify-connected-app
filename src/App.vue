@@ -22,7 +22,7 @@
 
     <!-- THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL -->
     <div class="top-page-logo">
-    <a href="/home"><img src="./assets/images.png" alt=""></a>
+    <a href="https://my-muzik.netlify.app/"><img src="./assets/images.png" alt=""></a>
     </div>
 
     <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
@@ -39,7 +39,7 @@
                 <!-- LOGO IMAGE -->
                 <div class="image-div">
                 <router-link to="/">
-                  <a href="/home"><img src="./assets/images.png" alt=""></a>
+                  <a href="https://my-muzik.netlify.app/"><img src="./assets/images.png" alt=""></a>
                 </router-link>
                 
                 </div>
