@@ -14,6 +14,7 @@
                 <div class="tts-content">
                     <div class="tts-header">
                         <h1 class="tts-h">your top tracks</h1>
+                        <h3 class="no-top-tracks">You currently have no top tracks :( </h3>
                         <div class="period">
                             <!-- <a class="last4weeks" href="">last 4 weeks</a>
                             <a href="" class="last6months">last 6 months</a>
@@ -96,7 +97,9 @@
                 .then(res => res.json())
                 .then(info => {
 
-                    // console.log(info)
+                    if(info.total==0 && info.items.length==0){
+                        document.querySelector('.no-top-tracks').style.display = "block"
+                    }
                     let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
                     
                     
@@ -195,7 +198,7 @@ $padding-top:7rem;
     padding-top: $padding-top;
     padding-left: 20rem;
 
-            .spotify-image-div{
+    .spotify-image-div{
         margin-bottom: 3rem;
 
         img{
@@ -212,16 +215,28 @@ $padding-top:7rem;
 
             .tts-header{
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
+                // align-items: center;
+                flex-direction:column;
+                // justify-content: space-between;
                 // border: 2px solid;
                 padding-right: 4rem;
+                
                 h1{
                     font-weight: $black;
                     font-size: 2rem;
                     text-transform: capitalize;
                     padding: 2rem;
                 }
+                
+                //the text to be shown if user has no top tracks
+                .no-top-tracks{
+                    display: none;
+                    padding:2rem;
+                    opacity:.7;
+                    font-size: 1.4rem;
+
+                }
+
                 .period{
                     p{
                         font-size: 1.4rem;

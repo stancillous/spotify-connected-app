@@ -44,7 +44,7 @@
                                             <a href="" class="artist-name">lil nas</a>
                                             <a class="album-name" href="">album name making this paragraph ver ver ver ver long </a>
                                         </div>
-                                        <a class="preview-song-button" href=""><span class="iconify" data-icon="akar-icons:play"></span></a>
+                                        <p class="track-duration"></p>
                                     </div> -->
 
                      
@@ -101,6 +101,16 @@
                 this.getPlaylistTracks()
             },
 
+            millisToMinutesAndSeconds(millis) {
+                    var minutes = Math.floor(millis / 60000);
+                    var seconds = Math.floor((millis % 60000) / 1000).toFixed(0);
+                    return (
+                        seconds == 60 ?
+                        (minutes+1) + ":00" :
+                        minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+                    );
+            },
+
             getIdFromUrl(){
                 let page_url_string = window.location.search
 
@@ -111,6 +121,7 @@
                 // console.log(this.thisPlaylistId)
                 
             },
+
             //THIS FUNCTION WILL TAKE THE ID PASSED IN THE URL AND ONLY SHOW
             //PLAYLIST INFO OF THE SPECIFIC PLAYLIST USING THE PLAYLIST ID
             getPlaylistsInfo(){
@@ -245,11 +256,11 @@
 
 
                             //CREATING ELEMENT TO HOLD THE TRACK DURATION
-                            // let trackDuration = document.createElement('p')
-                            // trackDuration.setAttribute('class','track-duration')
-                            // let trackDurationInMinutes= millisToMinutesAndSeconds(item.track.duration_ms)
+                            let trackDuration = document.createElement('p')
+                            trackDuration.setAttribute('class','track-duration')
+                            let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
 
-                            // trackDuration.textContent = trackDurationInMinutes
+                            trackDuration.textContent = trackDurationInMinutes
 
 
 
@@ -261,7 +272,7 @@
                             songDetailsDiv.setAttribute('class','song-details')
                             songDetailsDiv.append(songName,artistName,albumName)
 
-                            trackDiv.append(trackImage,songDetailsDiv)
+                            trackDiv.append(trackImage,songDetailsDiv,trackDuration)
                     
                             document.querySelector('.pt-songs-div').append(trackDiv)
                     
@@ -410,7 +421,6 @@ $padding-top:7rem;
                                 // margin: 3rem 2rem;
                                 margin-top: 3rem;
                                 position: relative;
-
                                 &:hover{
                                     opacity: .8;
                                 }
@@ -426,6 +436,7 @@ $padding-top:7rem;
                                     font-size: 1.2rem;
                                     position: absolute;
                                     right: 4rem;
+                                    top: 40%;
                                     opacity: .9;
                                     font-weight: $regular;
                                 }

@@ -15,6 +15,7 @@
                 <div class="fs-content-parent">
                     <div class="fs-content">
                         <h1>artists you follow</h1>
+                        <h3 class="zero-following">You do not follow anyone on Spotify</h3>
                         <div class="following-artists-container">
                             <div class="following-artists-div">
                             
@@ -77,6 +78,10 @@
                 .then(res => res.json())
                 .then(info => {
 
+                    //showing the text if the user doesn't follow anyone
+                    if(info.artists.total==0 && info.artists.items.length==0){
+                        document.querySelector('.zero-following').style.display="block"
+                    }
 
                     let artists = info.artists.items  //RETURNS ARRAY OF THE ARTISTS THAT THE USER IF FOLLOWING
 
@@ -174,6 +179,14 @@ $padding-top:7rem;
                     font-size: 2rem;
                     padding:2rem 4rem;
                     text-align: center;
+                }
+
+                //text to be shown if user doesn't follow anyone
+                .zero-following{
+                    text-align: center;
+                    opacity: .7;
+                    font-size: 1.3rem;
+                    display: none;
                 }
                 .following-artists-container{
                     // border: 2px solid;

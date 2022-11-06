@@ -12,6 +12,7 @@
 
             <div class="tas-container">
                 <h1>your top artists</h1>
+                <h2 class="no-top-artists">You currently have no top artists :(</h2>
                 <div class="tas-content">
                     <!-- DIV WITH THE ARTIST DETAILS -->
                     <!-- <div class="artist">
@@ -70,6 +71,13 @@
                 .then(res => res.json())
                 .then(info => {
                     // console.log(info);
+
+                    //showing user the text that they have no top artists
+                    if(info.items.length==0 && info.total==0){
+                        document.querySelector('.no-top-artists').style.display = 'block'
+                    }
+
+
                     // let rt=document.querySelector('.rt')
                     // rt.href = './artistinfo?name=stance&age=323'
 
@@ -196,6 +204,15 @@ $padding-top:7rem;
             padding: 3rem 2rem;
             // border: 2px solid red;
             text-align: center;
+        }
+
+        //text to show if there are no top artists
+        .no-top-artists{
+            text-align: center;
+            display: none;
+            opacity:.7;
+            font-size: 1.4rem;
+
         }
 
         .tas-content{
