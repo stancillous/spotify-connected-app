@@ -13,6 +13,7 @@
 
             <div class="yp-container">
                 <h1>your playlists</h1>
+                <h3 class="zero-playlists">You do not have any saved playlists</h3>
                 <div class="yp-content">
                     <!-- DIV WITH THE PLAYLIST DETAILS-->
                     <!-- <div class="playlist">
@@ -72,8 +73,11 @@
 
                 .then(res => res.json())
                 .then(info => {
-                    // console.log(info)
-                    
+
+                    //text to be shown if user doesn't have any playlists
+                    if(info.total==0 && info.items.length==0){
+                        document.querySelector('.zero-playlists').style.display = "block"
+                    }
 
                     let playlists = info.items  //THIS WILL SELECT THE ARRAY WITH THE PLAYLIST DETAILS
                     // console.log(playlists);
@@ -184,6 +188,15 @@ $padding-top:7rem;
             text-transform: capitalize;
             padding: 3rem 2rem;
             text-align: center;
+        }
+
+        //the text to be shown if use doesn't have any playlists
+        .zero-playlists{
+            opacity: .7;
+            text-align: center;
+            font-size: 1.3rem;
+            display: none;
+
         }
 
         .yp-content{
