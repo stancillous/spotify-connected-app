@@ -78,7 +78,7 @@ window.addEventListener('load',()=>{
         else{
             // console.log('none')
         }
-    }, 1000);
+    }, 2000);
 
 })
 
