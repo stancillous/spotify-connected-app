@@ -67,64 +67,69 @@
         // },
 
         methods:{
-            getFollowing(){
-
-                fetch(this.following_url,{
+            async getFollowing(){
+                try{
+                    let response = fetch(this.following_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
+             
+                //showing the text if the user doesn't follow anyone
+                if(info.artists.total==0 && info.artists.items.length==0){
+                    document.querySelector('.zero-following').style.display="block"
+                }
 
-                    //showing the text if the user doesn't follow anyone
-                    if(info.artists.total==0 && info.artists.items.length==0){
-                        document.querySelector('.zero-following').style.display="block"
-                    }
-
-                    let artists = info.artists.items  //RETURNS ARRAY OF THE ARTISTS THAT THE USER IF FOLLOWING
-
-
-                    //ITERATE OVER EACH ARTIST
-                    artists.forEach((item)=>{
+                let artists = info.artists.items  //RETURNS ARRAY OF THE ARTISTS THAT THE USER IF FOLLOWING
 
 
-                        //CREATING THE IMAGE OF THE ARTIST
-                        let artistImage = document.createElement('img')
-                        artistImage.setAttribute('class','artist-image')
-                        artistImage.src = item.images[0].url
+                //ITERATE OVER EACH ARTIST
+                artists.forEach((item)=>{
 
 
-                        //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
-                        let artistName = document.createElement('a')
-                        artistName.setAttribute('class','artist-name')
-                        artistName.textContent = item.name
-                        artistName.href = item.external_urls.spotify
-                        artistName.setAttribute('target','_blank')
-
-                        // console.log(item.external_urls.spotify)
+                    //CREATING THE IMAGE OF THE ARTIST
+                    let artistImage = document.createElement('img')
+                    artistImage.setAttribute('class','artist-image')
+                    artistImage.src = item.images[0].url
 
 
-                        //APPENDING TO THE DOM
-                        let nameAndImageDiv = document.createElement('div')
-                        nameAndImageDiv.setAttribute('class','image-and-name')
-                        nameAndImageDiv.append(artistImage,artistName)
+                    //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
+                    let artistName = document.createElement('a')
+                    artistName.setAttribute('class','artist-name')
+                    artistName.textContent = item.name
+                    artistName.href = item.external_urls.spotify
+                    artistName.setAttribute('target','_blank')
 
-                        let artistDiv  = document.createElement('div')
-                        artistDiv.setAttribute('class','artist')
-                        artistDiv.append(nameAndImageDiv)
-                        
-
-                        document.querySelector('.following-artists-div').append(artistDiv)
+                    // console.log(item.external_urls.spotify)
 
 
+                    //APPENDING TO THE DOM
+                    let nameAndImageDiv = document.createElement('div')
+                    nameAndImageDiv.setAttribute('class','image-and-name')
+                    nameAndImageDiv.append(artistImage,artistName)
 
-                    })
+                    let artistDiv  = document.createElement('div')
+                    artistDiv.setAttribute('class','artist')
+                    artistDiv.append(nameAndImageDiv)
+                    
+
+                    document.querySelector('.following-artists-div').append(artistDiv)
 
 
 
                 })
+
+
+
+           
+                }
+                catch(error){
+                    console.log(error.message)
+                }
+
+                
             }
 
         }

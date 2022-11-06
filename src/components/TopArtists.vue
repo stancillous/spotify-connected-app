@@ -60,97 +60,100 @@
         // },
 
         methods:{
-            getTopArtists(){
-
-                fetch(this.top_artists_url,{
+            async getTopArtists(){
+                try {
+                    let response = await fetch(this.top_artists_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
-                    // console.log(info);
+                let info = await response.json()
 
-                    //showing user the text that they have no top artists
-                    if(info.items.length==0 && info.total==0){
-                        document.querySelector('.no-top-artists').style.display = 'block'
+                // console.log(info);
+
+                //showing user the text that they have no top artists
+                if(info.items.length==0 && info.total==0){
+                    document.querySelector('.no-top-artists').style.display = 'block'
+                }
+
+
+                // let rt=document.querySelector('.rt')
+                // rt.href = './artistinfo?name=stance&age=323'
+
+                let topArtists = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
+
+
+
+                topArtists.forEach((item,index)=>{
+                    // console.log(item)
+
+                    //ONLY SHOW AT LEAST 20 TOP ARTISTS
+                    if (index<20){
+
+
+            // ********************************************
+            // ********************************************
+                        // console.log(item.id)
+                        this.artistID = item.id       //THIS ID WILL BE USED TO GET ADDITIONAL INFO ABOUT THE ARTIST 
+                                                    //INSIDE THE ARTIST INFO PAGE
+            // ********************************************
+            // ********************************************
+            // ********************************************
+
+                        //CREATING THE IMAGE OF THE ARTIST
+                        let artistImage = document.createElement('img')
+                        artistImage.setAttribute('id','artist-image')
+                        artistImage.src = item.images[0].url
+
+                        //CREATE ANCHOR TAG WHICH WILL CONTAIN THE ARTIST IMAGE
+                        let artistImageLink = document.createElement('a')
+                        artistImageLink.href = `./artistInfo?artistID=${this.artistID}` 
+
+                        artistImageLink.appendChild(artistImage)  //APPEND CHILD, THE IMAGE WILL BE INSIDE THIS TAG
+
+
+
+            // ********************************************
+            // ********************************************
+            // ********************************************
+                        // artistImageLink.href = `./artistinfo.html?artistID=${artistID}`  //SETTING HREF TO THE ANCHOR TAG
+            // ********************************************
+            // ********************************************
+            // ********************************************
+
+
+
+
+                        //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
+                        let artistName = document.createElement('a')
+                        artistName.setAttribute('id','artist-link')
+                        artistName.textContent = item.name
+                        // artistName.href = `./ArtistInfo.vue?artistID=${this.artistID}` 
+                        artistName.href = `./artistInfo?artistID=${this.artistID}` 
+
+                        // artistName.addEventListener('click',()=>{
+                        //     console.log(this.artistID)
+                        //     console.log('clicked')
+                        //     this.$router.push({path:'/artistinfo',query:{artistID:this.artistID}})
+                        // })
+
+
+                        //APPENDING TO THE DOM
+                        let artistDiv  = document.createElement('div')
+                        artistDiv.setAttribute('class','artist')
+                        artistDiv.append(artistImageLink,artistName)
+
+                        document.querySelector('.tas-content').append(artistDiv)
+                
                     }
 
-
-                    // let rt=document.querySelector('.rt')
-                    // rt.href = './artistinfo?name=stance&age=323'
-
-                    let topArtists = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
-
-
-
-                    topArtists.forEach((item,index)=>{
-                        // console.log(item)
-
-                        //ONLY SHOW AT LEAST 20 TOP ARTISTS
-                        if (index<20){
-
-
-                // ********************************************
-                // ********************************************
-                            // console.log(item.id)
-                            this.artistID = item.id       //THIS ID WILL BE USED TO GET ADDITIONAL INFO ABOUT THE ARTIST 
-                                                        //INSIDE THE ARTIST INFO PAGE
-                // ********************************************
-                // ********************************************
-                // ********************************************
-
-                            //CREATING THE IMAGE OF THE ARTIST
-                            let artistImage = document.createElement('img')
-                            artistImage.setAttribute('id','artist-image')
-                            artistImage.src = item.images[0].url
-
-                            //CREATE ANCHOR TAG WHICH WILL CONTAIN THE ARTIST IMAGE
-                            let artistImageLink = document.createElement('a')
-                            artistImageLink.href = `./artistInfo?artistID=${this.artistID}` 
-
-                            artistImageLink.appendChild(artistImage)  //APPEND CHILD, THE IMAGE WILL BE INSIDE THIS TAG
-
-
-
-                // ********************************************
-                // ********************************************
-                // ********************************************
-                            // artistImageLink.href = `./artistinfo.html?artistID=${artistID}`  //SETTING HREF TO THE ANCHOR TAG
-                // ********************************************
-                // ********************************************
-                // ********************************************
-
-
-
-
-                            //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
-                            let artistName = document.createElement('a')
-                            artistName.setAttribute('id','artist-link')
-                            artistName.textContent = item.name
-                            // artistName.href = `./ArtistInfo.vue?artistID=${this.artistID}` 
-                            artistName.href = `./artistInfo?artistID=${this.artistID}` 
-
-                            // artistName.addEventListener('click',()=>{
-                            //     console.log(this.artistID)
-                            //     console.log('clicked')
-                            //     this.$router.push({path:'/artistinfo',query:{artistID:this.artistID}})
-                            // })
-
-
-                            //APPENDING TO THE DOM
-                            let artistDiv  = document.createElement('div')
-                            artistDiv.setAttribute('class','artist')
-                            artistDiv.append(artistImageLink,artistName)
-
-                            document.querySelector('.tas-content').append(artistDiv)
-                    
-                        }
-
-                    })
-
                 })
+
+            
+                } catch (error) {
+                    console.log(error.message)
+                }
             }
         }
 

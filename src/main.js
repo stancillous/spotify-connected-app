@@ -54,7 +54,7 @@ showMoreInfoDiv()
 // let client_id ='11e1eb62cc504e17bce8867bc8a21897';
 
 // let redirect_uri = "https://my-muzik.netlify.app/"
-let redirect_uri = "https://my-muzik.netlify.app/"
+let redirect_uri = "http://localhost:8080/"
 //client id to be passed when getting a refresh token
 let client_id='11e1eb62cc504e17bce8867bc8a21897'
 
@@ -78,6 +78,7 @@ window.addEventListener('load',()=>{
         }
         else{
             // console.log('none')
+            getUserProfile()
         }
     }, 1500);
 

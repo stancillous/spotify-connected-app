@@ -124,164 +124,171 @@
 
             //THIS FUNCTION WILL TAKE THE ID PASSED IN THE URL AND ONLY SHOW
             //PLAYLIST INFO OF THE SPECIFIC PLAYLIST USING THE PLAYLIST ID
-            getPlaylistsInfo(){
-
-                fetch(`https://api.spotify.com/v1/playlists/${this.thisPlaylistId}`,{
+            async getPlaylistsInfo(){
+                try {
+                    let response = await fetch(`https://api.spotify.com/v1/playlists/${this.thisPlaylistId}`,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
 
-                            //CREATING THE IMAGE OF THE PLAYLIST
-                            let playlistImage =document.createElement("img")
-                            playlistImage.setAttribute('id','playlist-image')
-                            playlistImage.src = info.images[0].url
-                    
-                            //CREATING THE PLAYLIST NAME
-                            let playlistname = document.createElement('a')
-                            playlistname.setAttribute('class','playlist-name')
-                            playlistname.textContent = info.name
-                    
-                            //CREATING ELEMENT TO HOLD THE PLAYLIST'S DESCRIPTION
-                            let playlistDescription = document.createElement('p')
-                            playlistDescription.setAttribute('class','description')
-                            playlistDescription.textContent = info.description
-                    
-                            //CREATE ELEMENT TO HOLD THE OWNER'S NAME
-                            let playlistOwner = document.createElement('p')
-                            playlistOwner.setAttribute('class','created-by')
-                            playlistOwner.textContent = "Created by: "+ info.owner.display_name
-                    
-                            //CREATING ELEMENT TO HOLD THE NUMBER OF LIKES OF THE PLAYLIST
-                            let playlistLikes = document.createElement('p')
-                            playlistLikes.setAttribute('class','playlist-likes')
-                            // playlistLikes.textContent = info.followers.total
+                //CREATING THE IMAGE OF THE PLAYLIST
+                let playlistImage =document.createElement("img")
+                playlistImage.setAttribute('id','playlist-image')
+                playlistImage.src = info.images[0].url
+        
+                //CREATING THE PLAYLIST NAME
+                let playlistname = document.createElement('a')
+                playlistname.setAttribute('class','playlist-name')
+                playlistname.textContent = info.name
+        
+                //CREATING ELEMENT TO HOLD THE PLAYLIST'S DESCRIPTION
+                let playlistDescription = document.createElement('p')
+                playlistDescription.setAttribute('class','description')
+                playlistDescription.textContent = info.description
+        
+                //CREATE ELEMENT TO HOLD THE OWNER'S NAME
+                let playlistOwner = document.createElement('p')
+                playlistOwner.setAttribute('class','created-by')
+                playlistOwner.textContent = "Created by: "+ info.owner.display_name
+        
+                //CREATING ELEMENT TO HOLD THE NUMBER OF LIKES OF THE PLAYLIST
+                let playlistLikes = document.createElement('p')
+                playlistLikes.setAttribute('class','playlist-likes')
+                // playlistLikes.textContent = info.followers.total
 
-                            //GET THE TOTAL LIKES OF THE PLAYLIST
-                            // let playlistTotalLikes = info.followers.total
+                //GET THE TOTAL LIKES OF THE PLAYLIST
+                // let playlistTotalLikes = info.followers.total
 
-                            //FORMATTING THE USER'S FOLLOWERS SO AS TO PUT COMMAS
-                            //WHERE NEEDED IN THE NUMBER
-                            // internationalNumberFormat = new Intl.NumberFormat('en-US')
-                            // playlistLikes.textContent = internationalNumberFormat.format(playlistTotalLikes) +' likes'
+                //FORMATTING THE USER'S FOLLOWERS SO AS TO PUT COMMAS
+                //WHERE NEEDED IN THE NUMBER
+                // internationalNumberFormat = new Intl.NumberFormat('en-US')
+                // playlistLikes.textContent = internationalNumberFormat.format(playlistTotalLikes) +' likes'
 
-                        
-                            //CREATE EXTERNAML LINK THAT WILL DIRECT TO THE ARTIST'S SPOTIFY 
-                            let viewPlaylistOnSpotify = document.createElement('a')
-                            viewPlaylistOnSpotify.setAttribute('class','view-on-spotify-button')
-                            viewPlaylistOnSpotify.textContent = 'play on spotify'
-                            viewPlaylistOnSpotify.setAttribute('target','_blank')
-                            viewPlaylistOnSpotify.href = info.external_urls.spotify
-                            
+            
+                //CREATE EXTERNAML LINK THAT WILL DIRECT TO THE ARTIST'S SPOTIFY 
+                let viewPlaylistOnSpotify = document.createElement('a')
+                viewPlaylistOnSpotify.setAttribute('class','view-on-spotify-button')
+                viewPlaylistOnSpotify.textContent = 'play on spotify'
+                viewPlaylistOnSpotify.setAttribute('target','_blank')
+                viewPlaylistOnSpotify.href = info.external_urls.spotify
+                
 
-                            let viewPlaylistOnSpotifyContainer  = document.createElement('div')
-                            viewPlaylistOnSpotifyContainer.setAttribute('class','view-on-spotify')
+                let viewPlaylistOnSpotifyContainer  = document.createElement('div')
+                viewPlaylistOnSpotifyContainer.setAttribute('class','view-on-spotify')
 
-                            viewPlaylistOnSpotifyContainer.append(viewPlaylistOnSpotify)
-                    
-                            //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
-                            let playlistDetails = document.createElement('div')
-                            playlistDetails.setAttribute('class','playlist-details')
-                    
-                            //CREATE DIV THAT WILL HAVE THE PLAYLISTS INFO
-                            let playlistInfo = document.createElement('div')
-                            playlistInfo.setAttribute('class','playlist-info')
-                            playlistInfo.append(playlistname,playlistDescription,playlistOwner,playlistLikes,viewPlaylistOnSpotifyContainer)
-                    
-                    
-                            playlistDetails.append(playlistImage,playlistInfo)
-                    
-                            //APPENDING TO THE DOM
-                            document.querySelector('.pts-content').append(playlistDetails)
-                    
+                viewPlaylistOnSpotifyContainer.append(viewPlaylistOnSpotify)
+        
+                //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
+                let playlistDetails = document.createElement('div')
+                playlistDetails.setAttribute('class','playlist-details')
+        
+                //CREATE DIV THAT WILL HAVE THE PLAYLISTS INFO
+                let playlistInfo = document.createElement('div')
+                playlistInfo.setAttribute('class','playlist-info')
+                playlistInfo.append(playlistname,playlistDescription,playlistOwner,playlistLikes,viewPlaylistOnSpotifyContainer)
+        
+        
+                playlistDetails.append(playlistImage,playlistInfo)
+        
+                //APPENDING TO THE DOM
+                document.querySelector('.pts-content').append(playlistDetails)
+        
 
-                })
+        
+                } catch (error) {
+                    console.log(error.message)
+                }
+                
             },
 
             //THIS FUNCTION WILL GET, BY THE HELP OF THE PLAYLIST ID, THE TRACKS BELONGING TO
             //THAT PLAYLIST AND THEN DISPLAY THEM 
-            getPlaylistTracks(){
-
-                fetch(`https://api.spotify.com/v1/playlists/${this.thisPlaylistId}/tracks`,{
+            async getPlaylistTracks(){
+                try {
+                    let response = await fetch(`https://api.spotify.com/v1/playlists/${this.thisPlaylistId}/tracks`,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
 
-                    let playlistTrack = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
-
-
-                    playlistTrack.forEach((item,index)=>{
-
-                        //ONLY SHOW THIS MUCH
-                        if (index<40){
-
-                            //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
-                            //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
-                            let id = item.track.id
-
-                            //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
-                            //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
-                            let artistID = item.track.artists[0].id
-               
-                            
-                            //CREATING THE THUMNAIL IMAGE OF THE TRACK SONG
-                            let trackImage = document.createElement('img')
-                            trackImage.setAttribute('id','track-image')
-                            trackImage.src = item.track.album.images[0].url
+                let playlistTrack = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
 
 
-                            //CREATING ELEMENT FOR THE ALBUM NAME
-                            let albumName = document.createElement('a')
-                            albumName.setAttribute('class','album-name')
-                            albumName.textContent = item.track.album.name
-                    
-                            //CREATE ELEMENT FOR THE SONG NAME
-                            let songName = document.createElement('a')
-                            songName.setAttribute('class','song-name')
-                            songName.textContent = item.track.name
-                            songName.href = `/trackinfo?id=${id}`
+                playlistTrack.forEach((item,index)=>{
 
-                            //CREATING ELEMENT FOR THE ARTIST NAME
-                            let artistName = document.createElement('a')
-                            artistName.setAttribute('class','artist-name')
-                            artistName.textContent = item.track.artists[0].name
-                            artistName.href = `./artistInfo?artistID=${artistID}`
+                    //ONLY SHOW THIS MUCH
+                    if (index<40){
 
+                        //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
+                        //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
+                        let id = item.track.id
 
-                            //CREATING ELEMENT TO HOLD THE TRACK DURATION
-                            let trackDuration = document.createElement('p')
-                            trackDuration.setAttribute('class','track-duration')
-                            let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
-
-                            trackDuration.textContent = trackDurationInMinutes
+                        //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
+                        //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
+                        let artistID = item.track.artists[0].id
+            
+                        
+                        //CREATING THE THUMNAIL IMAGE OF THE TRACK SONG
+                        let trackImage = document.createElement('img')
+                        trackImage.setAttribute('id','track-image')
+                        trackImage.src = item.track.album.images[0].url
 
 
+                        //CREATING ELEMENT FOR THE ALBUM NAME
+                        let albumName = document.createElement('a')
+                        albumName.setAttribute('class','album-name')
+                        albumName.textContent = item.track.album.name
+                
+                        //CREATE ELEMENT FOR THE SONG NAME
+                        let songName = document.createElement('a')
+                        songName.setAttribute('class','song-name')
+                        songName.textContent = item.track.name
+                        songName.href = `/trackinfo?id=${id}`
 
-                            //APPENDING TO THE DOM
-                            let trackDiv = document.createElement('div')
-                            trackDiv.setAttribute('class','playlist-tracks')
+                        //CREATING ELEMENT FOR THE ARTIST NAME
+                        let artistName = document.createElement('a')
+                        artistName.setAttribute('class','artist-name')
+                        artistName.textContent = item.track.artists[0].name
+                        artistName.href = `./artistInfo?artistID=${artistID}`
 
-                            let  songDetailsDiv = document.createElement('div')
-                            songDetailsDiv.setAttribute('class','song-details')
-                            songDetailsDiv.append(songName,artistName,albumName)
 
-                            trackDiv.append(trackImage,songDetailsDiv,trackDuration)
-                    
-                            document.querySelector('.pt-songs-div').append(trackDiv)
-                    
+                        //CREATING ELEMENT TO HOLD THE TRACK DURATION
+                        let trackDuration = document.createElement('p')
+                        trackDuration.setAttribute('class','track-duration')
+                        let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
 
-                        }
+                        trackDuration.textContent = trackDurationInMinutes
 
-                    })
+
+
+                        //APPENDING TO THE DOM
+                        let trackDiv = document.createElement('div')
+                        trackDiv.setAttribute('class','playlist-tracks')
+
+                        let  songDetailsDiv = document.createElement('div')
+                        songDetailsDiv.setAttribute('class','song-details')
+                        songDetailsDiv.append(songName,artistName,albumName)
+
+                        trackDiv.append(trackImage,songDetailsDiv,trackDuration)
+                
+                        document.querySelector('.pt-songs-div').append(trackDiv)
+                
+
+                    }
 
                 })
+
+      
+                } catch (error) {
+                    console.log(error.message)
+                }
+
+                
             }
 
         }

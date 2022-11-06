@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
 
 import HomePageComp from '../components/HomePage.vue'
 import PlaylistsComp from '../components/Playlists.vue'
@@ -13,7 +12,6 @@ import PlaylistTracksComp from '../components/PlaylistTracks.vue'
 import DiscoverArtistsComp from '../components/Discover.vue'
 import TrackInfoComp from '../components/TrackInfo.vue'
 
-// import IndexComp from '../components/Index.vue'
 
 
 const routes = [

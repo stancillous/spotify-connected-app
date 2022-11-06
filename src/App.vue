@@ -128,6 +128,7 @@ export default {
   provide:{
     //TOKEN TO BE PASSED TO THE OTHER COMPONENTS
     token:localStorage.getItem('access_token'),
+    // token:'gskgjskjsgknsgs'
   }
 
 

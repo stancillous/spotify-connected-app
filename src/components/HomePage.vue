@@ -155,6 +155,7 @@
                     this.getUserDetails()
                     this.recentlyPlayed()
                     this.getPlaylists()
+
                     
                 }, 2000);
             },
@@ -169,189 +170,193 @@
                     );
             },
             //log info
-            getUserDetails(){
-                fetch(this.user_details_url,{
+            async getUserDetails(){
+
+                try{
+                    let response = await fetch(this.user_details_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
-                
-                .then(res => res.json())
-                .then((info) =>{
+                    let info = await response.json()
+                    
                     // console.log(info)
 
-                //CREATING THE TINY USER AVATAR ON THE TOP OF THE DESKTOP SITE
-                let tinyUserAvatar = document.createElement('img')
-                tinyUserAvatar.setAttribute('id','tiny-user-img')
-                
-                //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
-                if(info.images.length>0){
-                    tinyUserAvatar.src = info.images[0].url
-                    // console.log('present')
-
-                }
-                else{
-                    // tinyUserAvatar.src ='../assets/user.png'
-                    tinyUserAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
-                }
-
-                //CREATING THE TINY USER NAME ON THE TOP OF THE DESKTOP SITE
-
-                let tinyUserName = document.createElement('p')
-                tinyUserName.setAttribute('id','tiny-user-name')
-                tinyUserName.textContent = info.display_name
-                // console.log(info.display_name)
-                //CREATING THE TINY BUTTON ON THE TOP OF THE DESKTOP SITE
-                let logoutButton = document.createElement('a')
-                logoutButton.setAttribute('id','logout-button')
-                // logoutButton.innerHTML = `<i class="fa-solid fa-play"></i>`
-                logoutButton.innerHTML = `<i class="fa-solid fa-ellipsis-vertical"></i>`
-                // logoutButton.href = ''
+                    //CREATING THE TINY USER AVATAR ON THE TOP OF THE DESKTOP SITE
+                    let tinyUserAvatar = document.createElement('img')
+                    tinyUserAvatar.setAttribute('id','tiny-user-img')
                     
-                //WHEN THIS LOGOUT BUTTON IS CILCKED,
-                //WE WANT TO SHOW THE BUTTON THAT WILL ALLOW USER
-                //TO LOGOUT 
-                logoutButton.addEventListener('click',()=>{
-                    // console.log(document.querySelector('.logout'))
-                    // console.log(document.querySelector('.logout-cta'))
-                    // document.querySelector('.logout-cta').classList.toggle('showLogoutButton')
-                    document.querySelector('.logout').classList.toggle('showLogoutButton')
-                })
-
-
-
-
-                //ADDING THE ABOVE ELEMENTS TO THIS DIV THAT IS ON THE TOP RIGHT 
-                //PART OF THE DESKTOP
-                document.querySelector('#name-img').append(tinyUserAvatar,tinyUserName,logoutButton)
-
-
-
-                
-                //CREATING IMAGE FOR THE USER AVATAR
-                let userAvatar = document.createElement('img')
-                userAvatar.setAttribute('id','user-avatar')
                     //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
+                    if(info.images.length>0){
+                        tinyUserAvatar.src = info.images[0].url
+                        // console.log('present')
 
-                if(info.images.length>0){
-                    userAvatar.src = info.images[0].url
+                    }
+                    else{
+                        // tinyUserAvatar.src ='../assets/user.png'
+                        tinyUserAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
+                    }
+
+                    //CREATING THE TINY USER NAME ON THE TOP OF THE DESKTOP SITE
+
+                    let tinyUserName = document.createElement('p')
+                    tinyUserName.setAttribute('id','tiny-user-name')
+                    tinyUserName.textContent = info.display_name
+                    // console.log(info.display_name)
+                    //CREATING THE TINY BUTTON ON THE TOP OF THE DESKTOP SITE
+                    let logoutButton = document.createElement('a')
+                    logoutButton.setAttribute('id','logout-button')
+                    // logoutButton.innerHTML = `<i class="fa-solid fa-play"></i>`
+                    logoutButton.innerHTML = `<i class="fa-solid fa-ellipsis-vertical"></i>`
+                    // logoutButton.href = ''
+                        
+                    //WHEN THIS LOGOUT BUTTON IS CILCKED,
+                    //WE WANT TO SHOW THE BUTTON THAT WILL ALLOW USER
+                    //TO LOGOUT 
+                    logoutButton.addEventListener('click',()=>{
+                        // console.log(document.querySelector('.logout'))
+                        // console.log(document.querySelector('.logout-cta'))
+                        // document.querySelector('.logout-cta').classList.toggle('showLogoutButton')
+                        document.querySelector('.logout').classList.toggle('showLogoutButton')
+                    })
+
+
+
+
+                    //ADDING THE ABOVE ELEMENTS TO THIS DIV THAT IS ON THE TOP RIGHT 
+                    //PART OF THE DESKTOP
+                    document.querySelector('#name-img').append(tinyUserAvatar,tinyUserName,logoutButton)
+
+
+
+                    
+                    //CREATING IMAGE FOR THE USER AVATAR
+                    let userAvatar = document.createElement('img')
+                    userAvatar.setAttribute('id','user-avatar')
+                        //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
+
+                    if(info.images.length>0){
+                        userAvatar.src = info.images[0].url
+
+                    }
+                    else{
+                        // userAvatar.src = '../assets/user.png'
+                        userAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
+                        // userAvatar.src = 'https://imgs.search.brave.com/12i1FNNds0agVZxa_b9zokrmo2qq2xD2lednKJsZTek/rs:fit:432:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5E/OWRlVnlJN0ltN0Z4/SGJWVEdzcy1RSGFJ/SCZwaWQ9QXBp'
+
+                    }
+                    
+                        //APPENDING USER AVATAR TO THIS DOM ELEMENT
+                    document.querySelector('.udis-image').append(userAvatar)
+
+                    //CREATING ELEMENT TO HOLD THE USERNAME
+                    let userName = document.createElement('a')
+                        userName.setAttribute('id','username')
+                        userName.setAttribute('target','_blank')
+                        userName.textContent = info.display_name
+                        userName.href = info.external_urls.spotify
+
+                        //APPENDING THE USERNAME TO THIS DOM ELEMENT
+                        document.querySelector('.udis-name').append(userName)
+
+
+                        //APPENDING THE NUMBER OF USER FOLLOWERS TO THIS DOM ELEMEEN
+                        document.querySelector('#followers').textContent = info.followers.total
+
 
                 }
-                else{
-                    // userAvatar.src = '../assets/user.png'
-                    userAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
-                    // userAvatar.src = 'https://imgs.search.brave.com/12i1FNNds0agVZxa_b9zokrmo2qq2xD2lednKJsZTek/rs:fit:432:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5E/OWRlVnlJN0ltN0Z4/SGJWVEdzcy1RSGFJ/SCZwaWQ9QXBp'
-
+                catch(error){
+                    console.log(error.message)
                 }
-                
-                    //APPENDING USER AVATAR TO THIS DOM ELEMENT
-                document.querySelector('.udis-image').append(userAvatar)
-
-                //CREATING ELEMENT TO HOLD THE USERNAME
-                let userName = document.createElement('a')
-                    userName.setAttribute('id','username')
-                    userName.setAttribute('target','_blank')
-                    userName.textContent = info.display_name
-                    userName.href = info.external_urls.spotify
-
-                    //APPENDING THE USERNAME TO THIS DOM ELEMENT
-                    document.querySelector('.udis-name').append(userName)
-
-
-                    //APPENDING THE NUMBER OF USER FOLLOWERS TO THIS DOM ELEMEEN
-                    document.querySelector('#followers').textContent = info.followers.total
-
-
-
-                })
 
             },
 
-            recentlyPlayed(){
-
-                fetch(this.recently_played_tracks_url,{
+            async recentlyPlayed(){
+                try{
+                    let response = await fetch(this.recently_played_tracks_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
 
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
+                // console.log(info);
+                let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
 
-                    // console.log(info);
-                    let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
+                recentSongsArray.forEach((item,index)=>{
 
+                    //ONLY SHOW AT LEAST 12 RECENTLY PLAYED SONGS
+                    if (index<12){
 
-                    recentSongsArray.forEach((item,index)=>{
+                    //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
+                    //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
+                    let id = item.track.id
 
-                        //ONLY SHOW AT LEAST 12 RECENTLY PLAYED SONGS
-                        if (index<12){
+                    //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
+                    //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
+                    let artistID = item.track.artists[0].id
 
-                        //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
-                        //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
-                        let id = item.track.id
-
-                        //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
-                        //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
-                        let artistID = item.track.artists[0].id
-
-                        //CREATING THE THUMNAIL IMAGE OF THE RECENT SONG
-                        let recentImage = document.createElement('img')
-                        recentImage.setAttribute('id','recent-song-image')
-                        recentImage.src = item.track.album.images[0].url
+                    //CREATING THE THUMNAIL IMAGE OF THE RECENT SONG
+                    let recentImage = document.createElement('img')
+                    recentImage.setAttribute('id','recent-song-image')
+                    recentImage.src = item.track.album.images[0].url
 
 
-                        //CREATING ELEMENT FOR THE ALBUM NAME
-                        let albumName = document.createElement('a')
-                        albumName.setAttribute('class','album-name')
-                        albumName.textContent = item.track.album.name
+                    //CREATING ELEMENT FOR THE ALBUM NAME
+                    let albumName = document.createElement('a')
+                    albumName.setAttribute('class','album-name')
+                    albumName.textContent = item.track.album.name
 
-                        //CREATE ELEMENT FOR THE SONG NAME
-                        let songName = document.createElement('a')
-                        songName.setAttribute('class','song-name')
-                        songName.textContent = item.track.name
-                        songName.href = `/trackinfo?id=${id}`
-
-
-                        //CREATING ELEMENT FOR THE ARTIST NAME
-                        let artistName = document.createElement('a')
-                        artistName.setAttribute('class','artist-name')
-                        artistName.textContent = item.track.artists[0].name
-                        artistName.href = `./artistInfo?artistID=${artistID}`
+                    //CREATE ELEMENT FOR THE SONG NAME
+                    let songName = document.createElement('a')
+                    songName.setAttribute('class','song-name')
+                    songName.textContent = item.track.name
+                    songName.href = `/trackinfo?id=${id}`
 
 
-                        //CREATING ELEMENT TO HOLD THE TRACK DURATION
-                        let trackDuration = document.createElement('p')
-                        trackDuration.setAttribute('class','track-duration')
-                        let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
+                    //CREATING ELEMENT FOR THE ARTIST NAME
+                    let artistName = document.createElement('a')
+                    artistName.setAttribute('class','artist-name')
+                    artistName.textContent = item.track.artists[0].name
+                    artistName.href = `./artistInfo?artistID=${artistID}`
 
-                        trackDuration.textContent = trackDurationInMinutes
+
+                    //CREATING ELEMENT TO HOLD THE TRACK DURATION
+                    let trackDuration = document.createElement('p')
+                    trackDuration.setAttribute('class','track-duration')
+                    let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
+
+                    trackDuration.textContent = trackDurationInMinutes
 
 
-                        //APPENDING TO THE DOM
-                        let recentSongContainer = document.createElement('div')
-                        recentSongContainer.setAttribute('class','hp-song')
+                    //APPENDING TO THE DOM
+                    let recentSongContainer = document.createElement('div')
+                    recentSongContainer.setAttribute('class','hp-song')
 
-                        let  songDetailsContainer = document.createElement('div')
-                        songDetailsContainer.setAttribute('class','song-details')
-                        songDetailsContainer.append(songName,artistName,albumName,trackDuration)
+                    let  songDetailsContainer = document.createElement('div')
+                    songDetailsContainer.setAttribute('class','song-details')
+                    songDetailsContainer.append(songName,artistName,albumName,trackDuration)
 
-                        recentSongContainer.append(recentImage,songDetailsContainer)
-                
-                        document.querySelector('.hprs-div').append(recentSongContainer)
-                
+                    recentSongContainer.append(recentImage,songDetailsContainer)
+            
+                    document.querySelector('.hprs-div').append(recentSongContainer)
+            
 
                         }
 
-                    })
 
                 })
+                }
+                catch(error){
+                    console.log(error.message)
+                }
             },
 
-            getPlaylists(){
+            async getPlaylists(){
 
-                fetch(this.user_playlists_url,{
+                try{
+                    let response = await fetch(this.user_playlists_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                         // 'Authorization':`Bearer ` + localStorage.getItem('access_token'),
@@ -359,116 +364,114 @@
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
+     
+                // console.log(info);
+                //SETTING THE USER'S TOTAL PLAYLISTS
+                if(info.total>0){
+                    document.querySelector('#user-total-playlists').textContent = info.total
+                }
+
+
+                let playlists = info.items  //THIS WILL SELECT THE ARRAY WITH THE PLAYLIST DETAILS
+
+                playlists.forEach((item,index)=>{
+
+                    //ONLY SHOW AT LEAST 12 PLAYLISTS
+                    if(index <12){
+
+                        // ****************************************************
+                        // ****************************************************
+                        let id = item.id;
+                        // console.log(id)
+                        // ****************************************************
+                        // ****************************************************
+
+                        //CREATING THE IMAGE OF THE PLAYLIST
+                        let playlistImage =document.createElement("img")
+                        playlistImage.setAttribute('id','hp-playlist-image')
+                        playlistImage.src = item.images[0].url
+
+                        //CREATING ANCHOR LINK FOR THE PLAYLIST IMAGE SO THAT 
+                        //IT WILL BE A LINK TO ANOTHER PAGE
+                        let playlistImageLink = document.createElement('a')
+                        playlistImageLink.append(playlistImage)
+
+                        // ****************************************************
+                        // ****************************************************
+                        playlistImageLink.href = `/playlisttracks?id=${id}`
+                        // ****************************************************
+                        // ****************************************************
                     
-                    // console.log(info);
-                    //SETTING THE USER'S TOTAL PLAYLISTS
-                    if(info.total>0){
-                        document.querySelector('#user-total-playlists').textContent = info.total
+
+
+                        //CREATING THE PLAYLIST NAME
+                        let playlistname = document.createElement('a')
+                        playlistname.setAttribute('id','hp-playlist-name')
+                        playlistname.href = `/playlisttracks?id=${id}`
+                        playlistname.textContent = item.name
+
+                        // ****************************************************
+                        // ****************************************************
+
+                        // playlistname.href = `./playlist/playlisttracks.html?id=${id}`
+                    // ****************************************************
+                        // ****************************************************
+
+
+
+                        //CREATING THE P TAG TO HOLD THE PLAYLIST TOTAL NUMBER OF TRACKS
+                        let playlisttracks = document.createElement('p')
+                        playlisttracks.setAttribute('id','hp-playlist-total-tracks')
+                        playlisttracks.textContent = item.tracks.total + '  SONGS'
+
+
+                        //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
+                        let playlistsContainer = document.createElement('div')
+                        playlistsContainer.setAttribute('class','playlists-container')
+                    
+                        //CREATING THE DIV TO HOLD THE PLAYLIST NAME AND NUMBER OF TRAKCS
+                        let playlistInfo = document.createElement('div')
+                        playlistInfo.setAttribute('class','playlist-info')
+
+                        //APPENDING TO THE DOM
+                        playlistInfo.append(playlistname,playlisttracks)
+                        playlistsContainer.append(playlistImageLink,playlistInfo)
+                        document.querySelector('.your-playlists').append(playlistsContainer)
+
                     }
 
 
-                    let playlists = info.items  //THIS WILL SELECT THE ARRAY WITH THE PLAYLIST DETAILS
-
-                    playlists.forEach((item,index)=>{
-
-                        //ONLY SHOW AT LEAST 12 PLAYLISTS
-                        if(index <12){
-
-                            // ****************************************************
-                            // ****************************************************
-                            let id = item.id;
-                            // console.log(id)
-                            // ****************************************************
-                            // ****************************************************
-
-                            //CREATING THE IMAGE OF THE PLAYLIST
-                            let playlistImage =document.createElement("img")
-                            playlistImage.setAttribute('id','hp-playlist-image')
-                            playlistImage.src = item.images[0].url
-
-                            //CREATING ANCHOR LINK FOR THE PLAYLIST IMAGE SO THAT 
-                            //IT WILL BE A LINK TO ANOTHER PAGE
-                            let playlistImageLink = document.createElement('a')
-                            playlistImageLink.append(playlistImage)
-
-                            // ****************************************************
-                            // ****************************************************
-                            playlistImageLink.href = `/playlisttracks?id=${id}`
-                            // ****************************************************
-                            // ****************************************************
-                        
-
-
-                            //CREATING THE PLAYLIST NAME
-                            let playlistname = document.createElement('a')
-                            playlistname.setAttribute('id','hp-playlist-name')
-                            playlistname.href = `/playlisttracks?id=${id}`
-                            playlistname.textContent = item.name
-
-                            // ****************************************************
-                            // ****************************************************
-
-                            // playlistname.href = `./playlist/playlisttracks.html?id=${id}`
-                        // ****************************************************
-                            // ****************************************************
-
-
-
-                            //CREATING THE P TAG TO HOLD THE PLAYLIST TOTAL NUMBER OF TRACKS
-                            let playlisttracks = document.createElement('p')
-                            playlisttracks.setAttribute('id','hp-playlist-total-tracks')
-                            playlisttracks.textContent = item.tracks.total + '  SONGS'
-
-
-                            //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
-                            let playlistsContainer = document.createElement('div')
-                            playlistsContainer.setAttribute('class','playlists-container')
-                        
-                            //CREATING THE DIV TO HOLD THE PLAYLIST NAME AND NUMBER OF TRAKCS
-                            let playlistInfo = document.createElement('div')
-                            playlistInfo.setAttribute('class','playlist-info')
-
-                            //APPENDING TO THE DOM
-                            playlistInfo.append(playlistname,playlisttracks)
-                            playlistsContainer.append(playlistImageLink,playlistInfo)
-                            document.querySelector('.your-playlists').append(playlistsContainer)
-
-                        }
-
-
-                    })
-
                 })
+                }
+                catch(error){
+                    console.log(error.message)
+                }
+                
+
             },
 
-            getFollowing(){
-
-                fetch(this.following_url,{
+            async getFollowing(){
+                try{
+                    let response =await fetch(this.following_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
 
                     }
                 })
 
-                .then((res)=>{
+                let item = await response.json()
+
+                // console.log(item);
+                //DISPLAYING THE NUMBER OF FOLLOWING TO THIS DOM ELEMENT
+                document.querySelector('#number-of-following').textContent = item.artists.items.length
+                document.querySelector('.following-link').href = './Following.vue'
+
+                }
                 
-                    return res.json()
-
-                })
-                .then((item)=>{
-
-                    // console.log(item);
-                    //DISPLAYING THE NUMBER OF FOLLOWING TO THIS DOM ELEMENT
-                    document.querySelector('#number-of-following').textContent = item.artists.items.length
-                    document.querySelector('.following-link').href = './Following.vue'
-
-
-
-                })
-
-
+                catch(error){
+                    console.log(error.message)
+                }
 
             }
             

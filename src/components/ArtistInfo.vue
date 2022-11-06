@@ -86,73 +86,80 @@
 
 
             },
-            getArtistInfo(){
+            async getArtistInfo(){
 
-                fetch(`https://api.spotify.com/v1/artists/${this.artistID}`,{
+                try{
+                    let response = await fetch(`https://api.spotify.com/v1/artists/${this.artistID}`,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then(info => {
+                let info = await response.json()
 
-                    //CREATING THE ARTIST IMAGE
-                    let artistImage = document.createElement('img')
-                    artistImage.setAttribute('id','artist-image')
-                    artistImage.src= info.images[0].url
-
-
-                    //CREATING THE ARTIST NAME
-                    let artistName = document.createElement('p')
-                    artistName.setAttribute('class','artist-name')
-                    artistName.textContent =info.name
-                    
-                    //STORING THE ARTIST NAME AND PASSING IT TO THE PAGE SHOWING THE ARTISTS RELATED LIKE THIS ARTIST
-                    //SENDING IT IN THE HREF BELOW
-                    let thisArtistName = info.name
-
-                    //CREATING ELEMENT TO HOLD THE FOLLOWERS OF THE ARTIST
-                    let artistFollowers = document.createElement('p')
-                    artistFollowers.setAttribute('class','artist-details-p')
-
-                //GET THE TOTAL FOLLOWERS OF THE ARTIST
-                    let artistFollowersFormated = info.followers.total
-                    //FORMATTING THE USER'S FOLLOWERS SO AS TO PUT COMMAS
-                    //WHERE NEEDED IN THE NUMBER
-                    let internationalNumberFormat = new Intl.NumberFormat('en-US')
-                    artistFollowers.textContent = internationalNumberFormat.format(artistFollowersFormated) +' followers'
+                //CREATING THE ARTIST IMAGE
+                let artistImage = document.createElement('img')
+                artistImage.setAttribute('id','artist-image')
+                artistImage.src= info.images[0].url
 
 
-                    //ELEMENT THAT WILL HOLD POPULARITY OF THE ARTIST
-                    let artistPopularity = document.createElement('p')
-                    artistPopularity.setAttribute ('class','artist-details-p')
-                    artistPopularity.textContent = info.popularity +"% popular"
+                //CREATING THE ARTIST NAME
+                let artistName = document.createElement('p')
+                artistName.setAttribute('class','artist-name')
+                artistName.textContent =info.name
+                
+                //STORING THE ARTIST NAME AND PASSING IT TO THE PAGE SHOWING THE ARTISTS RELATED LIKE THIS ARTIST
+                //SENDING IT IN THE HREF BELOW
+                let thisArtistName = info.name
 
-                    //CREATE EXTERNAML LINK THAT WILL DIRECT TO THE ARTIST'S SPOTIFY 
-                    let artistSpotify = document.createElement('a')
-                    artistSpotify.setAttribute('class','view-on-spotify-button')
-                    artistSpotify.textContent = 'play on spotify'
-                    artistSpotify.setAttribute('target','_blank')
-                    artistSpotify.href = `https://open.spotify.com/artist/${this.artistID}`
+                //CREATING ELEMENT TO HOLD THE FOLLOWERS OF THE ARTIST
+                let artistFollowers = document.createElement('p')
+                artistFollowers.setAttribute('class','artist-details-p')
 
-                    //CREATING LINK TO THE ARTIST'S RELATED ARTISTS
-
-                    let relatedArtistsLink = document.createElement('a')
-                    relatedArtistsLink.setAttribute('id','check-related-artists')
-                    relatedArtistsLink.textContent = 'recommended artists'
-                    //SETTING THE HREF TO THE PAGE THAT CONTAINS RELATED ARTISTS
-                    // relatedArtistsLink.href =`./Discover.vue?id=${this.artistID}&name=${thisArtistName}`
-                    relatedArtistsLink.href =`./discover?id=${this.artistID}&name=${thisArtistName}`
+            //GET THE TOTAL FOLLOWERS OF THE ARTIST
+                let artistFollowersFormated = info.followers.total
+                //FORMATTING THE USER'S FOLLOWERS SO AS TO PUT COMMAS
+                //WHERE NEEDED IN THE NUMBER
+                let internationalNumberFormat = new Intl.NumberFormat('en-US')
+                artistFollowers.textContent = internationalNumberFormat.format(artistFollowersFormated) +' followers'
 
 
-                    //APPENDING TO THE DOM
-                    document.querySelector('.artist-image').append(artistImage)
-                    document.querySelector('.artist-name-container').append(artistName)
-                    document.querySelector('.artist-details').append(artistFollowers,artistPopularity)
-                    document.querySelector('.view-on-spotify').append(artistSpotify)
-                    document.querySelector('.related-artists').append(relatedArtistsLink)
-                })
+                //ELEMENT THAT WILL HOLD POPULARITY OF THE ARTIST
+                let artistPopularity = document.createElement('p')
+                artistPopularity.setAttribute ('class','artist-details-p')
+                artistPopularity.textContent = info.popularity +"% popular"
+
+                //CREATE EXTERNAML LINK THAT WILL DIRECT TO THE ARTIST'S SPOTIFY 
+                let artistSpotify = document.createElement('a')
+                artistSpotify.setAttribute('class','view-on-spotify-button')
+                artistSpotify.textContent = 'play on spotify'
+                artistSpotify.setAttribute('target','_blank')
+                artistSpotify.href = `https://open.spotify.com/artist/${this.artistID}`
+
+                //CREATING LINK TO THE ARTIST'S RELATED ARTISTS
+
+                let relatedArtistsLink = document.createElement('a')
+                relatedArtistsLink.setAttribute('id','check-related-artists')
+                relatedArtistsLink.textContent = 'recommended artists'
+                //SETTING THE HREF TO THE PAGE THAT CONTAINS RELATED ARTISTS
+                // relatedArtistsLink.href =`./Discover.vue?id=${this.artistID}&name=${thisArtistName}`
+                relatedArtistsLink.href =`./discover?id=${this.artistID}&name=${thisArtistName}`
+
+
+                //APPENDING TO THE DOM
+                document.querySelector('.artist-image').append(artistImage)
+                document.querySelector('.artist-name-container').append(artistName)
+                document.querySelector('.artist-details').append(artistFollowers,artistPopularity)
+                document.querySelector('.view-on-spotify').append(artistSpotify)
+                document.querySelector('.related-artists').append(relatedArtistsLink)
+                }
+
+                catch(error){
+                    console.log(error.message)
+                }
+
+                
+            
             }
 
         }
