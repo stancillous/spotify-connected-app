@@ -5,7 +5,6 @@
         
         <section class="user-details-info-section">
 
-   
 
             <div class="udis-container">
                 <!-- the div in the top right corner with the image and user name  -->
@@ -157,7 +156,7 @@
                     this.recentlyPlayed()
                     this.getPlaylists()
                     
-                }, 1500);
+                }, 2000);
             },
 
             millisToMinutesAndSeconds(millis) {
@@ -192,8 +191,8 @@
 
                 }
                 else{
-                    // console.log('absent')
-                    tinyUserAvatar.src ='../assets/user.png'
+                    // tinyUserAvatar.src ='../assets/user.png'
+                    tinyUserAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
                 }
 
                 //CREATING THE TINY USER NAME ON THE TOP OF THE DESKTOP SITE
@@ -239,7 +238,10 @@
 
                 }
                 else{
-                    userAvatar.src = ''../assets/user.png'
+                    // userAvatar.src = '../assets/user.png'
+                    userAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
+                    // userAvatar.src = 'https://imgs.search.brave.com/12i1FNNds0agVZxa_b9zokrmo2qq2xD2lednKJsZTek/rs:fit:432:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5E/OWRlVnlJN0ltN0Z4/SGJWVEdzcy1RSGFJ/SCZwaWQ9QXBp'
+
                 }
                 
                     //APPENDING USER AVATAR TO THIS DOM ELEMENT
@@ -459,7 +461,7 @@
 
                     // console.log(item);
                     //DISPLAYING THE NUMBER OF FOLLOWING TO THIS DOM ELEMENT
-                    document.querySelector('#number-of-following').textContent = item.artists.total
+                    document.querySelector('#number-of-following').textContent = item.artists.items.length
                     document.querySelector('.following-link').href = './Following.vue'
 
 
