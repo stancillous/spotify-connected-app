@@ -1,4 +1,3 @@
-
 <template>
 
     <!-- <NavComp/> -->
@@ -70,87 +69,89 @@
                         minutes + ":" + (seconds < 10 ? "0" : "") + seconds
                     );
                 },
-            recentlyPlayed(){
-
-                fetch(this.recently_played_tracks,{
+            async recentlyPlayed(){
+                try {
+                    let response = await fetch(this.recently_played_tracks,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
+                let info = await response.json()
+
+                let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
+                // console.log(recentSongsArray);
+
+                recentSongsArray.forEach((item,index)=>{
+
+                    //ONLY SHOW AT LEAST 25 RECENTLY PLAYED SONGS
+                    if (index<25){
+
+                        //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
+                        //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
+                        let id = item.track.id
+
+                        //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
+                        //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
+                        let artistID = item.track.artists[0].id
+
+
+                        // console.log(item)
+                        // console.log(item.track.artists[0].id)
+
+                        //CREATING THE THUMNAIL IMAGE OF THE RECENT SONG
+                        let recentImage = document.createElement('img')
+                        recentImage.setAttribute('id','recently-played-song-image')
+                        recentImage.src = item.track.album.images[0].url
+
+
+                        //CREATING ELEMENT FOR THE ALBUM NAME
+                        let albumName = document.createElement('a')
+                        albumName.setAttribute('class','album-name')
+                        albumName.textContent = item.track.album.name
                 
-                .then(res => res.json())
-                .then(info => {
-                    console.log(info)
-                    let recentSongsArray = info.items //WILL RETURN AN ARRAY WITH THE RECENT SONGS
-                    // console.log(recentSongsArray);
+                        //CREATE ELEMENT FOR THE SONG NAME
+                        let songName = document.createElement('a')
+                        songName.setAttribute('class','song-name')
+                        songName.textContent = item.track.name
+                        songName.href = `/trackinfo?id=${id}`
 
-                    recentSongsArray.forEach((item,index)=>{
+                        //CREATING ELEMENT FOR THE ARTIST NAME
+                        let artistName = document.createElement('a')
+                        artistName.setAttribute('class','artist-name')
+                        artistName.textContent = item.track.artists[0].name
+                        artistName.href = `./artistInfo?artistID=${artistID}`
 
-                        //ONLY SHOW AT LEAST 25 RECENTLY PLAYED SONGS
-                        if (index<25){
-
-                            //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
-                            //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
-                            let id = item.track.id
-
-                            //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
-                            //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
-                            let artistID = item.track.artists[0].id
-
-
-                            // console.log(item)
-                            // console.log(item.track.artists[0].id)
-
-                            //CREATING THE THUMNAIL IMAGE OF THE RECENT SONG
-                            let recentImage = document.createElement('img')
-                            recentImage.setAttribute('id','recently-played-song-image')
-                            recentImage.src = item.track.album.images[0].url
-
-
-                            //CREATING ELEMENT FOR THE ALBUM NAME
-                            let albumName = document.createElement('a')
-                            albumName.setAttribute('class','album-name')
-                            albumName.textContent = item.track.album.name
-                    
-                            //CREATE ELEMENT FOR THE SONG NAME
-                            let songName = document.createElement('a')
-                            songName.setAttribute('class','song-name')
-                            songName.textContent = item.track.name
-                            songName.href = `/trackinfo?id=${id}`
-
-                            //CREATING ELEMENT FOR THE ARTIST NAME
-                            let artistName = document.createElement('a')
-                            artistName.setAttribute('class','artist-name')
-                            artistName.textContent = item.track.artists[0].name
-                            artistName.href = `./artistInfo?artistID=${artistID}`
-
-                            //CREATING ELEMENT TO HOLD THE TRACK DURATION
-                            let trackDuration = document.createElement('p')
-                            trackDuration.setAttribute('class','track-duration')
-                            let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
-                
-                            trackDuration.textContent = trackDurationInMinutes
-
-
-
-                            //APPENDING TO THE DOM
-                            let recentSongDiv = document.createElement('div')
-                            recentSongDiv.setAttribute('class','recent-song-div')
-
-                            let  songDetailsDiv = document.createElement('div')
-                            songDetailsDiv.setAttribute('class','song-details')
-                            songDetailsDiv.append(songName,artistName,albumName, trackDuration)
-
-                            recentSongDiv.append(recentImage,songDetailsDiv)
-                    
-                            document.querySelector('.rp-songs-div').append(recentSongDiv)
-                    
-
-                        }
-
-                    })
+                        //CREATING ELEMENT TO HOLD THE TRACK DURATION
+                        let trackDuration = document.createElement('p')
+                        trackDuration.setAttribute('class','track-duration')
+                        let trackDurationInMinutes= this.millisToMinutesAndSeconds(item.track.duration_ms)
             
+                        trackDuration.textContent = trackDurationInMinutes
+
+
+
+                        //APPENDING TO THE DOM
+                        let recentSongDiv = document.createElement('div')
+                        recentSongDiv.setAttribute('class','recent-song-div')
+
+                        let  songDetailsDiv = document.createElement('div')
+                        songDetailsDiv.setAttribute('class','song-details')
+                        songDetailsDiv.append(songName,artistName,albumName, trackDuration)
+
+                        recentSongDiv.append(recentImage,songDetailsDiv)
+                
+                        document.querySelector('.rp-songs-div').append(recentSongDiv)
+                
+
+                    }
+
                 })
+        
+           
+                } catch (error) {
+                    console.log(error.message)
+                }
+
             }
 
         },

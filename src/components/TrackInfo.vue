@@ -134,68 +134,72 @@
             },
 
             //FUNCTION TO GET AUDIO FEATURES OF THE TRACK
-            getSongInfo(){
-
-                fetch(`https://api.spotify.com/v1/audio-features/${this.id}`,{
+            async getSongInfo(){
+                try {
+                    let response = await fetch(`https://api.spotify.com/v1/audio-features/${this.id}`,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
 
-                .then(res => res.json())
-                .then((data)=>{
-                    // console.log(data)
+                let data = await response.json()
+
+                // console.log(data)
 
 
-                    //CREATING ELEMENT FOR THE IMAGE
-                    let songImage = document.createElement('img')
-                    songImage.setAttribute('class','song-img')
+                //CREATING ELEMENT FOR THE IMAGE
+                let songImage = document.createElement('img')
+                songImage.setAttribute('class','song-img')
 
 
-                    //CREATING ELEMENT FOR SONG NAME
-                    let songName = document.createElement('h1')
-                    songName.setAttribute('class','song-name')
+                //CREATING ELEMENT FOR SONG NAME
+                let songName = document.createElement('h1')
+                songName.setAttribute('class','song-name')
 
 
-                    //CREATING ELEMENT FOR THE SONG'S LINK TO SPOTIFY
-                    let songSpotifyLink = document.createElement('a')
-                    songSpotifyLink.textContent = 'play'
+                //CREATING ELEMENT FOR THE SONG'S LINK TO SPOTIFY
+                let songSpotifyLink = document.createElement('a')
+                songSpotifyLink.textContent = 'play'
 
-                    //CREATING ELEMENT FOR ARTIST NAME
-                    let artistName = document.createElement('h1')
-                    artistName.setAttribute('class','artist-name')
+                //CREATING ELEMENT FOR ARTIST NAME
+                let artistName = document.createElement('h1')
+                artistName.setAttribute('class','artist-name')
 
-                    // ELEMENTS FOR THE SONG AUDIO FEATURES
+                // ELEMENTS FOR THE SONG AUDIO FEATURES
 
-                    document.querySelector('.song-duration').textContent = this.millisToMinutesAndSeconds(data.duration_ms)
-                    document.querySelector('.song-tempo').textContent = Math.round(data.tempo) 
-                    document.querySelector('.song-danceability').textContent = data.danceability
-                    document.querySelector('.song-energy').textContent = data.energy
-                    document.querySelector('.time-signature').textContent = data.time_signature
-                    document.querySelector('.song-key').textContent = data.key
+                document.querySelector('.song-duration').textContent = this.millisToMinutesAndSeconds(data.duration_ms)
+                document.querySelector('.song-tempo').textContent = Math.round(data.tempo) 
+                document.querySelector('.song-danceability').textContent = data.danceability
+                document.querySelector('.song-energy').textContent = data.energy
+                document.querySelector('.time-signature').textContent = data.time_signature
+                document.querySelector('.song-key').textContent = data.key
+                
+                
+                
+                //FETCHING THE AUDIO ANALYSIS
+                let analysis_url = data.analysis_url
+                
+                fetch(analysis_url,{
+                    headers:{
+                        'Authorization':`Bearer ${this.token}`,
+                    }
+                })
+                .then((res)=>res.json())
+                .then((info)=>{
+                    // console.log(info)
                     
-                    
-                    
-                    //FETCHING THE AUDIO ANALYSIS
-                    let analysis_url = data.analysis_url
-                    
-                    fetch(analysis_url,{
-                        headers:{
-                            'Authorization':`Bearer ${this.token}`,
-                        }
-                    })
-                    .then((res)=>res.json())
-                    .then((info)=>{
-                        // console.log(info)
-                        
-                    document.querySelector('.song-beats').textContent = info.beats.length
-                    document.querySelector('.song-bars').textContent = info.bars.length
-                    document.querySelector('.song-segments').textContent = info.segments.length
-
-                    })
-                    
+                document.querySelector('.song-beats').textContent = info.beats.length
+                document.querySelector('.song-bars').textContent = info.bars.length
+                document.querySelector('.song-segments').textContent = info.segments.length
 
                 })
+                
+
+    
+                } catch (error) {
+                    console.log(error.message)
+                }
+                
             },
 
             //FUNCTION TO GET IMAGE,SONG NAME AND ARTIST NAME OF THE TRACK

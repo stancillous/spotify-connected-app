@@ -63,77 +63,82 @@
         // },
 
         methods:{
-             getPlaylists(){
+             async getPlaylists(){
 
-                fetch(this.user_playlists_url,{
+                try{
+                    let response = await fetch(this.user_playlists_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }
                 })
+                let info = await response.json()
 
-                .then(res => res.json())
-                .then(info => {
 
-                    //text to be shown if user doesn't have any playlists
-                    if(info.total==0 && info.items.length==0){
-                        document.querySelector('.zero-playlists').style.display = "block"
+                //text to be shown if user doesn't have any playlists
+                if(info.total==0 && info.items.length==0){
+                    document.querySelector('.zero-playlists').style.display = "block"
+                }
+
+                let playlists = info.items  //THIS WILL SELECT THE ARRAY WITH THE PLAYLIST DETAILS
+                // console.log(playlists);
+                playlists.forEach((item,index)=>{
+                    // console.log(item);
+
+                    let playlist_id;  //THIS PLAYLIST ID WILL HELP TO FIND
+                                        //THE TRAKCS OF THAT PLAYLIST
+                    
+                    if(index <20){
+
+                        //THIS PLAYLIST ID WILL BE PASSED AS A PARAMETER TO THE PLAYLIST TRACKS PAGE
+                        //WHICH WILL TEHN SHOW TRACKS OF THIS PLAYLIST'S ID
+                        playlist_id = item.id
+                    
+
+                        //CREATING THE IMAGE OF THE PLAYLIST
+                        let playlistImage =document.createElement("img")
+                        playlistImage.setAttribute('id','playlist-image')
+                        playlistImage.src = item.images[0].url
+
+                        //CREATING THE PLAYLIST NAME
+                        let playlistname = document.createElement('a')
+                        playlistname.setAttribute('id','playlist-name')
+                        playlistname.textContent = item.name
+                        playlistname.href = `./playlisttracks?id=${playlist_id}`
+
+
+                        //CREATING AN ANCHOR TAG THAT WILL CONTAIN THEPLAYLIST IMAGE
+                        //INSIDE IT
+                        let playlistImageLink = document.createElement('a')
+                        // playlistImageLink.href = `./PlaylistTracks.vue?id=${playlist_id}`
+                        playlistImageLink.href = `./playlisttracks?id=${playlist_id}`
+                        playlistImageLink.appendChild(playlistImage)
+
+
+                        //CREATING THE P TAG TO HOLD THE PLAYLIST TOTAL NUMBER OF TRACKS
+                        let playlisttracks = document.createElement('p')
+                        playlisttracks.setAttribute('id','playlist-track-number')
+                        playlisttracks.textContent = item.tracks.total + '  SONGS'
+
+
+                        //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
+                        let playlistsContainer = document.createElement('div')
+                        playlistsContainer.setAttribute('class','playlist')
+                        playlistsContainer.append(playlistImageLink,playlistname,playlisttracks)
+
+
+                        //APPENDING TO THE DOM
+                        document.querySelector('.yp-content').append(playlistsContainer)
+
                     }
 
-                    let playlists = info.items  //THIS WILL SELECT THE ARRAY WITH THE PLAYLIST DETAILS
-                    // console.log(playlists);
-                    playlists.forEach((item,index)=>{
-                        // console.log(item);
-
-                        let playlist_id;  //THIS PLAYLIST ID WILL HELP TO FIND
-                                            //THE TRAKCS OF THAT PLAYLIST
-                        
-                        if(index <20){
-
-                            //THIS PLAYLIST ID WILL BE PASSED AS A PARAMETER TO THE PLAYLIST TRACKS PAGE
-                            //WHICH WILL TEHN SHOW TRACKS OF THIS PLAYLIST'S ID
-                            playlist_id = item.id
-                        
-
-                            //CREATING THE IMAGE OF THE PLAYLIST
-                            let playlistImage =document.createElement("img")
-                            playlistImage.setAttribute('id','playlist-image')
-                            playlistImage.src = item.images[0].url
-
-                            //CREATING THE PLAYLIST NAME
-                            let playlistname = document.createElement('a')
-                            playlistname.setAttribute('id','playlist-name')
-                            playlistname.textContent = item.name
-                            playlistname.href = `./playlisttracks?id=${playlist_id}`
-
-
-                            //CREATING AN ANCHOR TAG THAT WILL CONTAIN THEPLAYLIST IMAGE
-                            //INSIDE IT
-                            let playlistImageLink = document.createElement('a')
-                            // playlistImageLink.href = `./PlaylistTracks.vue?id=${playlist_id}`
-                            playlistImageLink.href = `./playlisttracks?id=${playlist_id}`
-                            playlistImageLink.appendChild(playlistImage)
-
-
-                            //CREATING THE P TAG TO HOLD THE PLAYLIST TOTAL NUMBER OF TRACKS
-                            let playlisttracks = document.createElement('p')
-                            playlisttracks.setAttribute('id','playlist-track-number')
-                            playlisttracks.textContent = item.tracks.total + '  SONGS'
-
-
-                            //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
-                            let playlistsContainer = document.createElement('div')
-                            playlistsContainer.setAttribute('class','playlist')
-                            playlistsContainer.append(playlistImageLink,playlistname,playlisttracks)
-
-
-                            //APPENDING TO THE DOM
-                            document.querySelector('.yp-content').append(playlistsContainer)
-
-                        }
-
-                    })
-
                 })
+
+            
+                }
+                catch(error){
+                    console.log(error.message)
+                }
+                
             }
         }
 
