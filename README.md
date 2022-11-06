@@ -1,6 +1,6 @@
 # [My Muzik](https://spotify-wrapper.netlify.app/login.html)
 
-<h5>Fourth iteration of spotify wrapper, built with vue.js</h5>
+<h5>Fourth iteration of my muzik, built with vue.js</h5>
 
 <h5>Intergrated with Spotify's API and OAuth flow, this web app shows personalized Spotify data. View recently played tracks, top songs, top artists and more. Get recommended artists based on your top artists.</h5>
 
@@ -8,9 +8,12 @@
 I'm still waiting on Spotify's team to review and allow the app to have unlimited number of users. </h5>
 
 <h5></h5>
-![Screenshot (49)](https://user-images.githubusercontent.com/99094257/200167115-4b3055a2-7459-4685-a257-c6cb118b1216.png)
-![Screenshot (25)](https://user-images.githubusercontent.com/99094257/188593466-498c3557-d9c2-4902-ab91-8838506d7e32.png)
+
 <h6>Below is a video recording of the app.</h6>
+
+
+https://user-images.githubusercontent.com/99094257/200167692-e71dac84-581b-482f-8a85-49ccdab3f21b.mp4
+
 
 
 ## Setting up the project
