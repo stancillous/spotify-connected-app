@@ -682,7 +682,7 @@ padding-left: 20rem;
 
 }
 
-//SECTION SHOWING USER'S PLAYLISTS AND TOP ARTISTS ON THE HOME PAGE
+
 .top-artists-playlists{
     // border: 1px solid red;
     width: 100vw;
@@ -838,6 +838,7 @@ padding-left: 20rem;
                                 position: absolute;
                                 font-weight: $regular;
                                 right: 4rem;
+                                top:40%;
                                 opacity: .9;
                             }
         
