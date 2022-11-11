@@ -242,8 +242,11 @@ $medium:500;
 $bold:700;
 $black:900;
 
-$web-color:rgb(23, 20, 20);
 $padding-top:7rem;
+
+$web-color:rgb(14, 14, 15);
+
+
 
 
 * {
@@ -294,11 +297,20 @@ $padding-top:7rem;
     padding-top: $padding-top;
     padding-left: 20rem;
 
+    //SPOTIFY ATTRIBUTION IMAGE
     .spotify-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
         margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
 
         img{
-            width: 14rem;
+            width: 12rem;
         }
     }
 

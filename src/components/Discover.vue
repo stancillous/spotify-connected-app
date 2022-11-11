@@ -94,7 +94,7 @@
             },
             async getRelatedArtists(){
                 try{
-                    let response = fetch(`https://api.spotify.com/v1/artists/${this.artistID}/related-artists?limit=9`,{
+                    let response = await fetch(`https://api.spotify.com/v1/artists/${this.artistID}/related-artists?limit=9`,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,                    }
                 })
@@ -142,6 +142,10 @@
                     relArtistSpotifyLink.setAttribute('target','_blank')
                     relArtistSpotifyLink.setAttribute('class','rel-artist-link')
                     relArtistSpotifyLink.textContent = 'play on spotify'
+                    relArtistSpotifyLink.style.fontSize = '13px'
+                    relArtistSpotifyLink.style.fontWeight = 'bold'
+                    relArtistSpotifyLink.style.opacity = 0.9
+
                     relArtistSpotifyLink.href = item.external_urls.spotify
 
 
@@ -192,8 +196,12 @@ $medium:500;
 $bold:700;
 $black:900;
 
-$web-color:rgb(23, 20, 20);
 $padding-top:7rem;
+$web-color:rgb(14, 14, 15);
+
+body{
+    background-color: $web-color;
+}
 
 
 .related-artists-section{
@@ -203,11 +211,20 @@ $padding-top:7rem;
     padding-top: $padding-top;
     min-height: 100vh;
 
+    //SPOTIFY ATTRIBUTION IMAGE
     .spotify-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
         margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
 
         img{
-            width: 14rem;
+            width: 12rem;
         }
     }
 

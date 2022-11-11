@@ -20,7 +20,7 @@
 
             <!-- THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL -->
             <div class="top-page-logo">
-            <a href="/home"><img src="../assets/logo.png" alt=""></a>
+            <a href="/home"><img src="../assets/images.png" alt=""></a>
             </div>
 
             <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
@@ -36,15 +36,15 @@
                     <div class="app-container-content">
                         <!-- LOGO IMAGE -->
                         <div class="image-div">
-                        <router-link to="/">
-                            <img class="logo-image" src="../assets/logo.png" alt="logo">
+                        <router-link :to="{name:'home'}">
+                            <img class="logo-image" src="../assets/images.png" alt="logo">
                         </router-link>
                         
                         </div>
                         <!-- THE ICONS ALLOWING USER TO NAVIGATE -->
                         <div class="tabs-container">
 
-                        <router-link class="router-link-class" to="/">
+                        <router-link class="router-link-class" :to="{name:'home'}">
 
                             <div class="user-profile-div nav-tabs ">
                             <span style="font-size: 2.4rem;" class="iconify" data-icon="carbon:home"></span>
@@ -53,7 +53,7 @@
                         </div>
                         </router-link>
 
-                        <router-link class="router-link-class" to="/toptracks">
+                        <router-link class="router-link-class" :to="{name:'toptracks'}">
                             <div class="top-tracks-div nav-tabs">
                             <span style="font-size: 2.4rem;" class="iconify" data-icon="bytesize:music"></span>
                             <p class="tab-details-text">top tracks</p>
@@ -61,7 +61,7 @@
                         </div>
                         </router-link>
 
-                        <router-link class="router-link-class" to="/topartists">
+                        <router-link class="router-link-class" :to="{name:'topartists'}">
 
                             <div class="top-artists-div nav-tabs">
                             <span style="font-size: 3rem;" class="iconify" data-icon="fad:microphone"></span>
@@ -70,7 +70,7 @@
                         </div>
                         </router-link>
 
-                        <router-link class="router-link-class" to="/recent">
+                        <router-link class="router-link-class" :to="{name:'recent'}">
                             <div class="recents-div nav-tabs">
                             <span style="font-size: 2.3rem;" class="iconify" data-icon="carbon:recently-viewed"></span>
                             <p class="tab-details-text">recent</p>
@@ -78,7 +78,7 @@
                         </div>
                         </router-link>
 
-                        <router-link class="router-link-class" to="/playlists">
+                        <router-link class="router-link-class" :to="{name:'playlists'}">
                             <div class="playlists-div nav-tabs">
                             <span style="font-size: 2.2rem;" class="iconify" data-icon="bi:music-note-list"></span>
                             <p class="tab-details-text">playlists</p>
@@ -173,12 +173,13 @@ $web-color:rgb(21, 20, 23);
 //THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL
 .top-page-logo{
     position: absolute;
-    top:.1rem;
-    left: .1rem;
+    top:3%;
+    left: 3%;
     display: none;
 
     img{
-        width: 6rem;
+        width: 5rem;
+        border-radius: 50%;
     }
 }
 
@@ -228,7 +229,7 @@ $web-color:rgb(21, 20, 23);
         //LOGO
         .image-div{
           img{
-            width: 7rem;
+            width: 9rem;
           }
         }
 
@@ -236,22 +237,20 @@ $web-color:rgb(21, 20, 23);
 
           .router-link-class{  //REMOVING THE DEFAULT TEXT DECORATION FROM THE ROUTER LINK ELEMENTS
             text-decoration: none;
-            
-            .nav-tabs{
-              opacity: .8;
-              &:hover{
-                border-left: 1px solid whitesmoke;
-                border-right: 1px solid whitesmoke;
+            text-decoration:dotted;
+            opacity: .7;
+
+            &.router-link-exact-active{//ACTIVE ROUTER LINK
+              opacity: 1;
+             
+              div{  
+              border-right:1px solid white;
+              border-left:1px solid white;
               }
+          
+            } 
+              
 
-            }
-
-            // .active-nav-tab{
-            //   opacity: 1;
-            //   border-left: 1px solid whitesmoke;
-            //   border-right: 1px solid whitesmoke;
-            //   transition: all .2s ease-in;
-            // }
           }
 
 
@@ -282,6 +281,7 @@ $web-color:rgb(21, 20, 23);
 
 
   }
+
 
   @media screen and (max-width:900px) {
         //SHOWING THE LOGO AND MY GITHUB IMAGE ON THE TOP 

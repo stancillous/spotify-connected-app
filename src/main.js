@@ -6,55 +6,34 @@ createApp(App).use(router).mount('#app')
 
 
 
-let tabsContainer = document.querySelector('.tabs-container')
-
-let tabs = document.querySelectorAll('.nav-tabs')
-
-//DETECTING WHICH NAV TAB IS CLICKED
-tabs.forEach((item)=>{
-    item.addEventListener('click',()=>{
-        //REMOVING THE TAB WITH THE ACTIVE CLASS
-        tabsContainer.querySelector('.active-nav-tab').classList.remove('active-nav-tab')
-        //ADDING THE ACTIVE TAB CLASS TO THE ITEM THAT IS CLICKED
-        item.classList.add('active-nav-tab')
-
-    })
-})
-
-
-
 //SHOWING THE DIV WITH THE ADDITIONAL ACTIONS ie LOGOUT AND ABOUT DEVELOPER
-function showMoreInfoDiv(){
+// function showMoreInfoDiv(){
     
-    let moreInfoButton = document.querySelector('#more-info-button')
+//     let moreInfoButton = document.querySelector('#more-info-button')
     
-    //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
-    moreInfoButton.addEventListener('click',()=>{
-        document.querySelector('.fd-container').classList.add('show')
+//     //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
+//     moreInfoButton.addEventListener('click',()=>{
+//         document.querySelector('.fd-container').classList.add('show')
     
-    })
+//     })
     
-    //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
-    window.addEventListener('mouseup',function(event){
-        let moreInfoContainer = document.querySelector('.fd-container');
-        if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
+//     //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
+//     window.addEventListener('mouseup',function(event){
+//         let moreInfoContainer = document.querySelector('.fd-container');
+//         if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
      
     
-            moreInfoContainer.classList.remove('show')
-        }
-    });  
+//             moreInfoContainer.classList.remove('show')
+//         }
+//     });  
 
-}
+// }
 
-showMoreInfoDiv()
+// showMoreInfoDiv()
 
 
-//ALL SPOTIFY FUNCTIONS
-
-// let client_id ='11e1eb62cc504e17bce8867bc8a21897';
-
-let redirect_uri = "https://my-muzik.netlify.app/"
-//client id to be passed when getting a refresh token
+// let redirect_uri = "https://my-muzik.netlify.app/"
+let redirect_uri = "http://localhost:8080/"
 let client_id='11e1eb62cc504e17bce8867bc8a21897'
 
 
@@ -63,23 +42,28 @@ var access_token = null;
 var refresh_token = null;
 
 
-// const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
 
 
-window.addEventListener('load',()=>{
+window.addEventListener('DOMContentLoaded',()=>{
     // console.log(window.location.search.length)
     // console.log('laoded')
+    if ( window.location.search.length > 0 ){
+        handleRedirect();
+    }
+    else{
+        getUserProfile()
+    }
     
-    setTimeout(() => {
-        if ( window.location.search.length > 0 ){
-            handleRedirect();
-        }
-        else{
-            // console.log('none')
-            getUserProfile()
-        }
-    }, 1500);
+    // setTimeout(() => {
+    //     if ( window.location.search.length > 0 ){
+    //         handleRedirect();
+    //     }
+    //     else{
+    //         // console.log('none')
+    //         getUserProfile()
+    //     }
+    // }, 1500);
 
 })
 
@@ -190,22 +174,31 @@ function refreshAccessToken(){
 }
 
 
-var token = localStorage.getItem('access_token')
+let token = localStorage.getItem('access_token')
 console.log(token.indexOf('a'))
+// console.log(token)
+
 
 //function to get user profile and call refreshAccessToken()
 async function getUserProfile(){
-    let response = await fetch('https://api.spotify.com/v1/me',{
-        headers:{
-            'Authorization':`Bearer ${token}`,
+    try {
+        let response = await fetch('https://api.spotify.com/v1/me',{
+            headers:{
+                'Authorization':`Bearer ${token}`,
+            }
+        })
+        let info = await response.json()
+        // console.log(info)
+        if(info.error.status===401 || info.error.message==="The access token has expiredd"){
+            console.log('getting refresh token')
+            refreshAccessToken()
         }
-    })
-    let info = await response.json()
-    // console.log(info)
-    if(info.error.status===401 || info.error.message==="The access token has expiredd"){
-        console.log('getting refresh token')
-        refreshAccessToken()
+    } catch (error) {
+        console.log(error.message)
+        
     }
+
 }
-getUserProfile()
+// getUserProfile()
+
 

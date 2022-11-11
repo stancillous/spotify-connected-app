@@ -16,12 +16,12 @@
                 <h3 class="zero-playlists">You do not have any saved playlists</h3>
                 <div class="yp-content">
                     <!-- DIV WITH THE PLAYLIST DETAILS-->
-                    <!-- <div class="playlist">
-                        <a href="./playlisttracks.html"><img id="playlist-image" src="../images/playlist.jpg" alt=""></a>
-                        <a id="playlist-name" class="artist-spotify-link" href="./playlisttracks.html">street car</a>
+                    <!-- <div class="playlist"> -->
+                        <!-- <a href="./playlisttracks.html"><img id="playlist-image" src="../images/playlist.jpg" alt=""></a> -->
+                        <!-- <a id="playlist-name" class="artist-spotify-link" href="./playlisttracks.html">street car</a> -->
 
-                        <p class="playlist-track-number">43 tracks</p>
-                    </div> -->
+                        <!-- <p class="playlist-track-number">43 tracks</p> -->
+                    <!-- </div> -->
 
 
 
@@ -104,6 +104,9 @@
                         playlistname.setAttribute('id','playlist-name')
                         playlistname.textContent = item.name
                         playlistname.href = `./playlisttracks?id=${playlist_id}`
+                        playlistname.setAttribute('href','/artistinfo')
+
+
 
 
                         //CREATING AN ANCHOR TAG THAT WILL CONTAIN THEPLAYLIST IMAGE
@@ -124,7 +127,6 @@
                         let playlistsContainer = document.createElement('div')
                         playlistsContainer.setAttribute('class','playlist')
                         playlistsContainer.append(playlistImageLink,playlistname,playlisttracks)
-
 
                         //APPENDING TO THE DOM
                         document.querySelector('.yp-content').append(playlistsContainer)
@@ -170,11 +172,20 @@ $padding-top:7rem;
     padding-left: 18rem;
     padding-bottom: 8rem;
 
-            .spotify-image-div{
+   //SPOTIFY ATTRIBUTION IMAGE
+   .spotify-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
         margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
 
         img{
-            width: 14rem;
+            width: 12rem;
         }
     }
 

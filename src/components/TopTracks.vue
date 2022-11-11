@@ -5,7 +5,6 @@
 
 
         <section class="top-tracks-section">
-
                         <!-- spotify attribution logo -->
              <div class="spotify-image-div">
                 <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
@@ -203,11 +202,20 @@ $padding-top:7rem;
     padding-top: $padding-top;
     padding-left: 20rem;
 
+    //SPOTIFY ATTRIBUTION IMAGE
     .spotify-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
         margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
 
         img{
-            width: 14rem;
+            width: 12rem;
         }
     }
     .tts-container{
