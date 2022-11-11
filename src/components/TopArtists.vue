@@ -70,7 +70,7 @@
 
                 let info = await response.json()
 
-                // console.log(info);
+                // console.log('top artists', info);
 
                 //showing user the text that they have no top artists
                 if(info.items.length==0 && info.total==0){
@@ -185,11 +185,20 @@ $padding-top:7rem;
 
     // border: 2px solid;
 
-            .spotify-image-div{
+    //SPOTIFY ATTRIBUTION IMAGE
+    .spotify-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
         margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
 
         img{
-            width: 14rem;
+            width: 12rem;
         }
     }
     

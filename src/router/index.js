@@ -1,93 +1,70 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomePageComp from '../components/HomePage.vue'
-import PlaylistsComp from '../components/Playlists.vue'
-import FollowingComp from '../components/Following.vue'
-import RecentSongsComp from '../components/RecentSongs.vue'
-import TopArtistsComp from '../components/TopArtists.vue'
-import TopTracksComp from '../components/TopTracks.vue'
-
-import ArtistInfoComp from '../components/ArtistInfo.vue'
-import PlaylistTracksComp from '../components/PlaylistTracks.vue'
-import DiscoverArtistsComp from '../components/Discover.vue'
-import TrackInfoComp from '../components/TrackInfo.vue'
-
-
 
 const routes = [
   {
-    path:'/playlists', //PLAYLISTS ROUTE
+    path:'/playlists',
     name:'playlists',
-    component:PlaylistsComp
+    component:()=> import('../components/Playlists.vue')
   },
-  // {
-  //   path: '/',  //INDEX ROUTE
-  //   name: 'indexcomp',
-  //   component: IndexComp
-  // },
+
   {
-    path: '/',  //HOMEPAGE ROUTE
+    path: '/',  
     name: 'home',
-    component: HomePageComp
+    component:()=> import('../components/HomePage.vue')
   },
 
   {
-    path:'/following',  //ROUTE FOR ARTISTS THAT USER IS FOLLOWING 
+    path:'/following',  
     name:'following',
-    component:FollowingComp
+    component:()=> import('../components/Following.vue')
+
   },
   {
-    path:'/trackinfo', //ROUTE FOR GETTING MORE ABOUT A TRACK'S INFO
+    path:'/trackinfo', 
     name:'trackinfo',
-    component:TrackInfoComp
+    component:()=> import('../components/TrackInfo.vue')
+
   },
   {
-    path:'/topartists',  //TOP ARTISTS ROUTE
+    path:'/topartists', 
     name:'topartists',
-    component:TopArtistsComp,
+    component:()=> import('../components/TopArtists.vue')
+
 
   },
   {
-    path:'/discover', //RELATED ARTISTS ROUTE
+    path:'/discover', 
     name:'discover',
-    component:DiscoverArtistsComp
+    component:()=> import('../components/Discover.vue')
+
   },
   {
-    path:'/artistinfo', //ARTIST INFO ROUTE
+    path:'/artistinfo', 
     name:'artistinfo',
-    component:ArtistInfoComp
+    component:()=> import('../components/ArtistInfo.vue')
+
   },
   {
-    path:'/playlisttracks',  //PLAYLIST TRACKS ROUTE
+    path:'/playlisttracks', 
     name:'playlisttracks',
-    component:PlaylistTracksComp
+    component:()=> import('../components/PlaylistTracks.vue')
+
   },
 
   {
-    path:'/recent',  //RECENT SONGS ROUTE
+    path:'/recent',  
     name:'recent',
-    component:RecentSongsComp
+    component:()=> import('../components/RecentSongs.vue')
+
 
   },
   {
-    path:'/toptracks', //TOP TRACKS ROUTE
+    path:'/toptracks', 
     name:'toptracks',
-    component:TopTracksComp
+    component:()=> import('../components/TopTracks.vue')
 
   },
-
-
-
-
-
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = createRouter({

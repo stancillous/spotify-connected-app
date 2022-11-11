@@ -1,134 +1,106 @@
 <template>
+  <div class="outer-app-div">
+
+    <div v-show="token" class="nav-component">
+      <TheNav/>
+
+    </div>
+
+    <div v-show="!token" class="user-login">
+      <div>
+        <div class="gh-container">
+            <div class="gh-div">
+                <a class="gh-ex-link" target="_blank" href="https://github.com/stancillous/my-muzik-v4"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <div class="main">
+            <div id="login-page">
+                <div id="lpc">
+                    <h1 class="app-name" id="app-name">My Muzik</h1>
+
+                    <div class="login-btn-container">
+                        <!-- <a @click="requestAuthorization" id="login-btn" href="/home">login to spotify</a> -->
+                        <p @click="requestAuthorization()" id="login-btn">login to spotify</p>
+                    </div>
+                    <!-- <button id="login-btn"> <a href="/home">login to spotify</a> </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
 
   <router-view/>
 
-  <section>
-
-    <!-- THE DIV THAT WILL SHOW ADDITIONAL ACTIONS LIKE LOGGING OUT -->
-    <div class="fd-container">
-
-        <div class="fd">
-            <div class="fd-logout">
-                <a href="https://accounts.spotify.com/en/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-                <a href="https://accounts.spotify.com/en/logout">logout</a>
-            </div>
-
-            <div class="f-developer">
-                <a target="_blank" href="https://github.com/stancillous"><i class="fa-brands fa-github"></i></a>
-                <a target="_blank" href="https://github.com/stancillous">about developer</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL -->
-    <div class="top-page-logo">
-    <a href="https://my-muzik.netlify.app/"><img src="./assets/images.png" alt=""></a>
-    </div>
-
-    <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
-    <div class="tpm-info">
-    <div class="tpm-button">
-        <i id="more-info-button" class="fa-solid fa-ellipsis-vertical"></i>
-    </div>
-    </div>
-
-    <!-- DIV HOLDING THE NAVIGATION TABS -->
-    <div class="app-root-div">
-        <div class="app-container">
-            <div class="app-container-content">
-                <!-- LOGO IMAGE -->
-                <div class="image-div">
-                <router-link to="/">
-                  <a href="https://my-muzik.netlify.app/"><img src="./assets/images.png" alt=""></a>
-                </router-link>
-                
-                </div>
-                <!-- THE ICONS ALLOWING USER TO NAVIGATE -->
-                <div class="tabs-container">
-
-                <router-link class="router-link-class" to="/">
-
-                    <div class="user-profile-div nav-tabs active-nav-tab">
-                    <span style="font-size: 2.4rem;" class="iconify" data-icon="carbon:home"></span>
-                    <p class="tab-details-text">home</p>
-
-                </div>
-                </router-link>
-
-                <router-link class="router-link-class" to="/toptracks">
-                    <div class="top-tracks-div nav-tabs">
-                    <span style="font-size: 2.4rem;" class="iconify" data-icon="bytesize:music"></span>
-                    <p class="tab-details-text">top tracks</p>
-
-                </div>
-                </router-link>
-
-                <router-link class="router-link-class" to="/topartists">
-
-                    <div class="top-artists-div nav-tabs">
-                    <span style="font-size: 3rem;" class="iconify" data-icon="fad:microphone"></span>
-                    <p class="tab-details-text">top artists</p>
-
-                </div>
-                </router-link>
-
-                <router-link class="router-link-class" to="/recent">
-                    <div class="recents-div nav-tabs">
-                    <span style="font-size: 2.3rem;" class="iconify" data-icon="carbon:recently-viewed"></span>
-                    <p class="tab-details-text">recent</p>
-
-                </div>
-                </router-link>
-
-                <router-link class="router-link-class" to="/playlists">
-                    <div class="playlists-div nav-tabs">
-                    <span style="font-size: 2.2rem;" class="iconify" data-icon="bi:music-note-list"></span>
-                    <p class="tab-details-text">playlists</p>
-                </div>
-                </router-link>
-
-                </div>
-
-                <div class="github-div">
-                <a target="_blank" href="https://github.com/stancillous/"><span style="font-size: 2.5rem;" class="iconify" data-icon="charm:github"></span></a>
-
-                </div>
-
-
-            </div>
-        </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- <IndexComp  /> -->
 
 </template>
 
 <script>
-// import IndexComp from './components/Index.vue'
-
+import TheNav from './components/NavBar.vue'
 export default {
   name: 'App',
 
   components:{
-    // IndexComp
+    TheNav
   },
 
 
   data(){
     return {
-      // access:''  //INITIALLY SETTING ACCESS TOKEN TO AN EMPTY STRING
-    }
+        AUTHORIZE:'https://accounts.spotify.com/authorize',
+         scope:'user-read-private user-read-recently-played playlist-read-private user-follow-read user-top-read',
+         redirect_uri : 'http://localhost:8080/' ,
+         client_id:'11e1eb62cc504e17bce8867bc8a21897',
+         token:localStorage.getItem('access_token'),
+        }
   },
 
 
   provide:{
     //TOKEN TO BE PASSED TO THE OTHER COMPONENTS
     token:localStorage.getItem('access_token'),
-    // token:'gskgjskjsgknsgs'
+    // token:'BQB8IdCb5-breSRlb1cvprs2XBuSZUkRvDD71aURTg74QuMvJBtcfantorf-xOxaqqwmoKQuxyd_AIRpWdtXVHdPNNEhMVXzYOyH4IsnZiff_z5mdDa6Rjg_XtX5v9gFBcOF5v4wJhA5c7Abitmf89b6klf_PaMcTv1YkrgC1OJaIEiYqoICBOoZ50jRJFKWucLm7JkHucbHJzf0cKRBW0mzrC8_C-rlf-Gx'
+  },
+
+  created(){
+    this.checkToken()
+  },
+
+  methods:{
+      
+    checkToken(){
+        console.log('looking')
+        if(localStorage.getItem('access_token')){
+            console.log('tooken found') 
+            console.log('check', localStorage.getItem('access_token'))
+
+            // this.showScreen()  
+
+
+
+        } else{
+            console.log('no token')
+        }
+
+
+    },
+    showScreen(){
+        console.log('show screen fun')
+        // document.querySelector('.user-login').style.display = 'none'
+            // document.querySelector('.nav-component').style.display = 'block'
+    },
+
+    requestAuthorization(){
+        
+        let url =this.AUTHORIZE;
+        url += "?client_id=" + this.client_id;
+        url += "&response_type=code";
+        url += "&redirect_uri=" + encodeURI(this.redirect_uri);
+        url += "&show_dialog=true";
+        url+= `&scope=${this.scope}`
+        window.location.href = url; // Show Spotify's authorization screen
+        // checkAccessStatus() //FUNCTION TO CHECK WHETHER THE USER GRANTED US AUTHORIZATION
+    }
   }
 
 
@@ -147,7 +119,9 @@ $bold:700;
 $black:900;
 
 // $web-color:rgb(21, 20, 23);
-$web-color:#191414;
+$web-color:rgb(14, 14, 15);
+
+
 
 *{
     margin: 0;
@@ -187,203 +161,81 @@ body{
 }
 
 
-// THE DIV THAT WILL SHOW ADDITIONAL ACTIONS LIKE LOGGING OUT 
-.fd-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: black;
-    z-index: 199;
-    height: 16rem;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    transition: all .3s ease-in-out;
-    clip-path: inset(0 0 100% 0);
+
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            font-size: 11px;
+        }
 
 
-    .fd{
-        div{
-            margin: 2rem 0;
+        .gh-container .gh-div{
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
         }
-        i{
-            margin-right: 1.3rem;
-            font-size: 2rem;
-            opacity: .9;
-        }
-        a{
-            font-weight: $medium;
-            text-transform: capitalize;
+        .gh-container .gh-div .gh-ex-link{
             text-decoration: none;
             color: white;
-            opacity: .9;
-            font-size: 1.4rem;
+
         }
-    }
-}
-
-//HIDING THE ABOVE DIV AND ONLY SHOWING IT WHEN THE 3 DOTS ARE CLICKED
-.fd-container.show{
-    clip-path: inset(0 0 0 0);
-
-}
-
-
-//THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL
-.top-page-logo{
-    position: absolute;
-    top:3%;
-    left: 3%;
-    display: none;
-
-    img{
-        width: 6rem;
-        border-radius: 50%;
-    }
-}
-
-// THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT
-//WILL ONLY BE VISIBLE ON SMALL SCREENS 
-.tpm-info{
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    display: none;
-    .tpm-button{
-        i{
-            font-size: 3rem;
-            padding: 0 1rem;    
-            cursor: pointer;
-        }
-    }
-}
-
-
-  .app-root-div{
-    position: fixed;
-    height: 100vh;
-    width: 15rem;
-    left: 0;
-    bottom: 0;
-    background-color: black;
-    white-space: nowrap;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .app-container{
-      // padding-left: 3rem;
-      height: 100%;
-      width: 100%;
-      .app-container-content{
-        text-align: center;
-        height: 100%;
-        padding: 0 .5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-
-        //LOGO
-        .image-div{
-          img{
-            width: 9rem;
+        .gh-container .gh-div .gh-ex-link:hover{
             opacity: .8;
-          }
-        }
-
-        .tabs-container{
-
-          .router-link-class{  //REMOVING THE DEFAULT TEXT DECORATION FROM THE ROUTER LINK ELEMENTS
-            text-decoration: none;
-            
-            .nav-tabs{
-              opacity: .8;
-              &:hover{
-                border-left: 1px solid whitesmoke;
-                border-right: 1px solid whitesmoke;
-              }
-
-            }
-
-            .active-nav-tab{
-              opacity: 1;
-              border-left: 1px solid whitesmoke;
-              border-right: 1px solid whitesmoke;
-              transition: all .2s ease-in;
-            }
-          }
-
 
         }
-        div{
-          // border: 1px solid;
-          padding: .5rem;
-        }
-        //THE TEXTS UNDER THE ICONS
-        .tab-details-text{
-          font-weight: $medium;
-          text-transform: capitalize;
-          font-size: 1.1rem;
-          padding: 1rem 0;     
-          text-decoration: none;     
+        .gh-container .gh-div .gh-ex-link i{
+            font-size: 2.5rem;
         }
 
-        .github-div{
-          border: 1px solid;
-          padding: 1rem;
-          opacity: .8;
-          border-radius: 50%;
+        .main{
+            height: 100vh;
+            width: 100vw;
         }
-
-        
-      }
-    }
-
-
-  }
-
-  @media screen and (max-width:900px) {
-        //SHOWING THE LOGO AND MY GITHUB IMAGE ON THE TOP 
-    //AND HIDING THEM FROM THE NAVBAR
-    .top-page-logo{
-        display: block;
-    }
-
-    .tpm-info{
-        display: block;
-    }
-
-
-    .app-root-div{
-      position: fixed;
-      height: 10rem;
-      width: 100vw;
-      left: 0;
-      bottom: 0;
-      right: 0;
-
-      .app-container{
-        .app-container-content{
-          display: flex;
-          align-items: center;
-          flex-direction: row;
-
-          .image-div,.github-div{
-            display: none;
-          }
-
-          .tabs-container{
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
+        .main #login-page{
+            height: 100%;
             width: 100%;
-          }
+            display: grid;
+            place-items: center;
+
         }
-      }
-    }
-  }
+        .main #login-page #lpc{
+            text-align: center;
+
+        }
+
+        .main #login-page #lpc #app-name{
+            text-transform: capitalize;
+            font-weight: 900;
+            opacity: .8;
+            font-size: 1.9rem;
+            margin-bottom: 1.7rem;
+        }
+        .main #login-page #lpc .login-btn-container{
+            margin-top: 3rem;
+
+        }
+        .main #login-page #lpc .login-btn-container #login-btn{
+            background-color: #1d8954;
+            cursor: pointer;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 23rem;
+            border: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-decoration: none;
+            padding: .8rem 1.2rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+
+        }
+        .main #login-page #lpc .login-btn-container #login-btn:hover{
+            opacity: .8;
+
+        }
 
 
 </style>

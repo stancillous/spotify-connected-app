@@ -1,10 +1,9 @@
 <template>
-    <div class="homepage-root-div">
+    <div v-if="token" class="homepage-root-div">
 
         <!-- <NavComp/> -->
         
         <section class="user-details-info-section">
-
 
             <div class="udis-container">
                 <!-- the div in the top right corner with the image and user name  -->
@@ -13,15 +12,17 @@
                     <div class="spotify-image-div">
                         <img src="../assets/Spotify_Logo_CMYK_Green.png" alt="">
                     </div>
+
                     <div id="name-img">
-                        <!-- <img  src="./images/profile.jpg" alt=""> -->
-                        <!-- <p id="tiny-user-name">stancillous</p> -->
-                        <!-- <a id="logout-button" href=""><i class="fa-solid fa-play"></i></a>  -->
+                        <img id="tiny-user-img" src="" alt="">
+                        <p id="tiny-user-name"></p>
+                        <!-- <a id="logout-button" href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>  -->
+                        <p id="logout-button" ><i class="fa-solid fa-ellipsis-vertical"></i></p> 
                   
                         <!-- THIS DIV CONTAINS THE BUTTON TO ALLOW USER TO LOG OUT -->
                         <div class="logout">
                             <!-- <a class="logout-cta" href="https://accounts.spotify.com/en/logout">logout</a> -->
-                            <a class="logout-cta" href="https://spotify-wrapper.netlify.app/login.html">logout</a>
+                            <a href="" @click="logUserOut()" class="logout-cta" >logout</a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                                 <div class="following">
                                     <p id="number-of-following">0</p>
                                     <!-- <a class="following-link"  href="">following</a> -->
-                                    <router-link class="following-link" to="/following">following</router-link>
+                                    <router-link class="following-link" :to="{name:'following'}">following</router-link>
                                 </div>
 
                                 <div class="following">
@@ -57,7 +58,7 @@
                                 <div class="playlists">
                                     <p id="user-total-playlists">0</p>
                                     <!-- <a id="playlists" href="./Playlists.vue">playlists</a> -->
-                                    <router-link id="playlists" to="/playlists">playlists</router-link>
+                                    <router-link id="playlists" :to="{name:'playlists'}">playlists</router-link>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                     <div class="see-more">
                         <h1>your playlists</h1>
                         <!-- <a class="view-all" href="./Playlists.vue">view all</a> -->
-                        <router-link  id="playlist-hpv" class="view-all" to="/playlists">view all</router-link>
+                        <router-link  id="playlist-hpv" class="view-all" :to="{name:'playlists'}">view all</router-link>
                     </div>
 
                 <!-- THIS IS WHERE i'LL APPEND THE DIVS FOR THE USER'S PLAYLISTS -->
@@ -89,7 +90,7 @@
                             <div class="see-more">
                                 <h1>recently played</h1>
                                 <!-- <a href="./RecentSongs.vue">view all</a> -->
-                                <router-link class="view-all" to="/recent">view all</router-link>
+                                <router-link class="view-all" :to="{name:'recent'}">view all</router-link>
                             </div>
 
                             <div class="hprs-div">
@@ -144,6 +145,8 @@
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
         inject:['token'],
         created: function() {
+            // console.log('created')
+            // console.log(this.token)
             window.addEventListener('load',this.callFuncs());
         },
   
@@ -159,6 +162,12 @@
                     
                 }, 2000);
             },
+
+            logUserOut(){
+                console.log('logging out')
+                localStorage.removeItem('access_token')
+            },
+
 
             millisToMinutesAndSeconds(millis) {
                     var minutes = Math.floor(millis / 60000);
@@ -180,69 +189,37 @@
                 })
                     let info = await response.json()
                     
-                    // console.log(info)
-
-                    //CREATING THE TINY USER AVATAR ON THE TOP OF THE DESKTOP SITE
-                    let tinyUserAvatar = document.createElement('img')
-                    tinyUserAvatar.setAttribute('id','tiny-user-img')
-                    
                     //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
                     if(info.images.length>0){
-                        tinyUserAvatar.src = info.images[0].url
-                        // console.log('present')
 
-                    }
-                    else{
-                        // tinyUserAvatar.src ='../assets/user.png'
-                        tinyUserAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
-                    }
-
-                    //CREATING THE TINY USER NAME ON THE TOP OF THE DESKTOP SITE
-
-                    let tinyUserName = document.createElement('p')
-                    tinyUserName.setAttribute('id','tiny-user-name')
-                    tinyUserName.textContent = info.display_name
-                    // console.log(info.display_name)
-                    //CREATING THE TINY BUTTON ON THE TOP OF THE DESKTOP SITE
-                    let logoutButton = document.createElement('a')
-                    logoutButton.setAttribute('id','logout-button')
-                    // logoutButton.innerHTML = `<i class="fa-solid fa-play"></i>`
-                    logoutButton.innerHTML = `<i class="fa-solid fa-ellipsis-vertical"></i>`
-                    // logoutButton.href = ''
+                        document.querySelector('#tiny-user-img').src=info.images[0].url
+                    } else{
+                        document.querySelector('#tiny-user-img').src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
                         
-                    //WHEN THIS LOGOUT BUTTON IS CILCKED,
-                    //WE WANT TO SHOW THE BUTTON THAT WILL ALLOW USER
-                    //TO LOGOUT 
-                    logoutButton.addEventListener('click',()=>{
-                        // console.log(document.querySelector('.logout'))
-                        // console.log(document.querySelector('.logout-cta'))
-                        // document.querySelector('.logout-cta').classList.toggle('showLogoutButton')
+                    }
+
+                    document.querySelector('#tiny-user-img').style.display = 'block'   //showing the image that has a display of none in the css  
+
+                    document.querySelector('#tiny-user-name').textContent = info.display_name
+                  
+                    //showing the option of logging out when the 3dots are clicked
+                    document.querySelector('#logout-button').addEventListener('click',()=>{
                         document.querySelector('.logout').classList.toggle('showLogoutButton')
                     })
 
 
 
-
-                    //ADDING THE ABOVE ELEMENTS TO THIS DIV THAT IS ON THE TOP RIGHT 
-                    //PART OF THE DESKTOP
-                    document.querySelector('#name-img').append(tinyUserAvatar,tinyUserName,logoutButton)
-
-
-
-                    
                     //CREATING IMAGE FOR THE USER AVATAR
                     let userAvatar = document.createElement('img')
                     userAvatar.setAttribute('id','user-avatar')
-                        //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
 
+                        //CHECKING TO SEE IF THE USER HAS AN AVATAR PRESENT
                     if(info.images.length>0){
+                        // document.querySelector('#tiny-user-name').src = info.images[0].url
                         userAvatar.src = info.images[0].url
 
-                    }
-                    else{
-                        // userAvatar.src = '../assets/user.png'
+                    } else{
                         userAvatar.src = 'https://imgs.search.brave.com/EbUF_NRlSuuT7tbrtfSksbcyIE_l2PMHsvyMHKhfmhc/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4z/aWZLLVpZRmRUVFBJ/bTFqaUdJZVp3SGFI/YSZwaWQ9QXBp'
-                        // userAvatar.src = 'https://imgs.search.brave.com/12i1FNNds0agVZxa_b9zokrmo2qq2xD2lednKJsZTek/rs:fit:432:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5E/OWRlVnlJN0ltN0Z4/SGJWVEdzcy1RSGFJ/SCZwaWQ9QXBp'
 
                     }
                     
@@ -495,7 +472,8 @@ $medium:500;
 $bold:700;
 $black:900;
 
-$web-color:rgb(21, 20, 23);
+$web-color:rgb(14, 14, 15);
+
 
 
 
@@ -508,7 +486,6 @@ padding-left: 20rem;
 
 
     .udis-container{
-        // border: 1px solid red;
         // border: 1px solid;
         max-width: 1400px;
         width: 100%;
@@ -517,16 +494,18 @@ padding-left: 20rem;
 
         //THE DIV ON THE TOP RIGHT PART OF THE PAGE
         .user-name-img{
+            margin-top: 1.3rem;
+            // border: 1px solid red;
             padding: 4rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
 
             .spotify-image-div{
-                margin-bottom: 3rem;
+                // margin-bottom: 3rem;
 
                 img{
-                    width: 14rem;
+                    width: 12rem;
                 }
             }
 
@@ -536,25 +515,30 @@ padding-left: 20rem;
                 border: 1px solid white;
                 border-radius: 4rem;
                 // padding: 0 1rem;
-                padding:.2rem 1rem .2rem .3rem;
+                // padding:.2rem 1rem .2rem .3rem;
                 position: relative;
-
+                
 
                 #tiny-user-img{
                     width: 4rem;
                     height: 4rem;
+                    margin: .3rem;
                     object-fit: cover;
                     border-radius: 50%;
-                }
 
+                    display: none;  ///
+                }
+                
                 #tiny-user-name{
                     font-size: 1.5rem;
-                    padding:0 1rem;
+                    margin: .4rem ;
+                    margin-right: .8rem;
                     font-weight: $black;
                     // text-transform: lowercase;
                 }
                 #logout-button{
                     cursor: pointer;
+                    margin-right:1rem;
                     color: white;
                     i{
                         font-size: 1.7rem;
@@ -682,7 +666,7 @@ padding-left: 20rem;
 
 }
 
-
+//SECTION SHOWING USER'S PLAYLISTS AND TOP ARTISTS ON THE HOME PAGE
 .top-artists-playlists{
     // border: 1px solid red;
     width: 100vw;
@@ -838,8 +822,8 @@ padding-left: 20rem;
                                 position: absolute;
                                 font-weight: $regular;
                                 right: 4rem;
-                                top:40%;
                                 opacity: .9;
+                                top:40%;
                             }
         
                             .song-details{
