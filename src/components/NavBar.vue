@@ -24,11 +24,11 @@
             </div>
 
             <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
-            <!-- <div class="tpm-info">
+            <div class="tpm-info">
             <div class="tpm-button">
                 <i id="more-info-button" class="fa-solid fa-ellipsis-vertical"></i>
             </div>
-            </div> -->
+            </div> 
 
             <!-- DIV HOLDING THE NAVIGATION TABS -->
             <div class="app-root-div">
@@ -106,7 +106,32 @@
 
 <script>
     export default {
-        name:'NavComp'
+        name:'NavComp',
+        
+        mounted:{
+          this.showMoreInfoDiv()
+        }
+        methods:{
+          showMoreInfoDiv(){
+            let moreInfoButton = document.querySelector('#more-info-button')
+    
+            //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
+            moreInfoButton.addEventListener('click',()=>{
+                document.querySelector('.fd-container').classList.add('show')
+            
+            })
+            
+            //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
+            window.addEventListener('mouseup',function(event){
+                let moreInfoContainer = document.querySelector('.fd-container');
+                if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
+            
+            
+                    moreInfoContainer.classList.remove('show')
+                }
+            }); 
+          }
+        }
 
     }
 </script>
