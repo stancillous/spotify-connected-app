@@ -163,8 +163,10 @@
             },
 
             logUserOut(){
-                console.log('logging out')
+                console.log( 'before', localStorage.getItem('access_token'))
                 localStorage.removeItem('access_token')
+                console.log( 'after delete',localStorage.getItem('access_token'))
+
             },
 
 
@@ -703,6 +705,7 @@ padding-left: 20rem;
                 
                 .view-all{
                     border: 1px solid rgb(255, 255, 255);
+                    background-color: transparent;
                     text-decoration: none;
                     font-size: 1.2rem;
                     font-weight: $black;
@@ -974,6 +977,8 @@ padding-left: 20rem;
 
 
 @media screen and (max-width:503px) {
+
+ 
     
     .user-details-info-section .udis-container .udis-content{
         .content-display-flex{
@@ -1011,10 +1016,10 @@ padding-left: 20rem;
         //PLAYLISTS PART
         .your-playlists{
             .see-more{
-                h1{font-size: 1.6rem;
+                h1{font-size: 1.4rem;
                 }
-                a{
-                    font-size: 1rem;
+                .view-all{
+                    font-size: .9rem;
                 }
             }
 
@@ -1026,7 +1031,7 @@ padding-left: 20rem;
 
                 .playlist-info{
                     #hp-playlist-name{
-                        font-size: 1.2rem;
+                        font-size: 1.1rem;
                     }
                 }
             } 
@@ -1038,10 +1043,10 @@ padding-left: 20rem;
         //RECENT SONGS PART
         .home-page-recent-songs-section .hp-container .hp-content {
             .see-more{
-                h1{font-size: 1.6rem;
+                h1{font-size: 1.4rem;
                 }
-                a{
-                    font-size: 1rem;
+                .view-all{
+                    font-size: .9rem;
                 }
             }
 

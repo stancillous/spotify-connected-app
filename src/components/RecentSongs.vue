@@ -331,7 +331,7 @@ $padding-top:7rem;
 @media screen and (max-width:504px) {
     .recently-played-section .rp-container .rp-content {
         h1{
-        font-size: 1.6rem;}
+        font-size: 1.4rem;}
 
         .rp-songs-div {
             .recent-song-div{

@@ -393,7 +393,7 @@ $padding-top:7rem;
 @media screen and (max-width:503px) {
     .top-tracks-section .tts-container .tts-content{
         .tts-header h1{
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         .tt-section-div .top-track{
             #top-track-image{

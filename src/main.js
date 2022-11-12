@@ -5,36 +5,6 @@ import router from './router'
 createApp(App).use(router).mount('#app')
 
 
-
-
-
-
-//SHOWING THE DIV WITH THE ADDITIONAL ACTIONS ie LOGOUT AND ABOUT DEVELOPER
-// function showMoreInfoDiv(){
-    
-//     let moreInfoButton = document.querySelector('#more-info-button')
-    
-//     //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
-//     moreInfoButton.addEventListener('click',()=>{
-//         document.querySelector('.fd-container').classList.add('show')
-    
-//     })
-    
-//     //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
-//     window.addEventListener('mouseup',function(event){
-//         let moreInfoContainer = document.querySelector('.fd-container');
-//         if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
-     
-    
-//             moreInfoContainer.classList.remove('show')
-//         }
-//     });  
-
-// }
-
-// showMoreInfoDiv()
-
-
 // let redirect_uri = "https://my-muzik.netlify.app/"
 let redirect_uri = "https://my-muzik.netlify.app/"
 let client_id='11e1eb62cc504e17bce8867bc8a21897'
@@ -55,7 +25,7 @@ window.addEventListener('load',()=>{
         handleRedirect();
     }
     else{
-        // getUserProfile()
+        getUserProfile()
     }
     
 
@@ -128,10 +98,8 @@ function callAuthorizationApi(body){
 
 //FUNCTION TO HANDLE THE RESPONSE AFTER POSTING THE ACCESS TOKEN REQUEST
 function handleAuthorizationResponse(){
-    // console.log('okay')
     if ( this.status == 200 ){
         var data = JSON.parse(this.responseText);
-        // console.log(data);
         if ( data.access_token != undefined ){
             access_token = data.access_token;
             localStorage.setItem("access_token", access_token);
@@ -140,17 +108,15 @@ function handleAuthorizationResponse(){
             refresh_token = data.refresh_token;
             localStorage.setItem("refresh_token", refresh_token);
         }
-        window.location.reload()       ///
+        // window.location.reload()       ///
         onPageLoad();
 
     }
 
 
     else {
-        // console.log(this.responseText);
-        // alert(this.responseText);
+        //
     }
-    // console.log(localStorage.getItem('access_token'))
 
 
 }
@@ -166,7 +132,6 @@ function refreshAccessToken(){
 
 
 let token = localStorage.getItem('access_token')
-// console.log(token.indexOf('a'))
 
 
 //function to get user profile and call refreshAccessToken()

@@ -12,22 +12,23 @@
                     </div>
 
                     <div class="f-developer">
-                        <a target="_blank" href="https://github.com/stancillous"><i class="fa-brands fa-github"></i></a>
-                        <a target="_blank" href="https://github.com/stancillous">about developer</a>
+                        <a target="_blank" href="https://github.com/stancillous/spotify-connected-app"><i class="fa-brands fa-github"></i></a>
+                        <a target="_blank" href="https://github.com/stancillous/spotify-connected-app">project files</a>
                     </div>
                 </div>
+
             </div>
 
             <!-- THE LOGO AND MY GITHUB TO BE SHOWN WHEN THE SCREENSIZE IS SMALL -->
             <div class="top-page-logo">
-            <a href="/home"><img src="../assets/images.png" alt=""></a>
+            <a href="/"><img src="../assets/images.png" alt=""></a>
             </div>
 
             <!-- THE 3 DOTS THAT WILL SHOW THE DIV WITH ADDITIONAL ACTIONS LIKE LOGGING OUT -->
             <div class="tpm-info">
-            <div class="tpm-button">
-                <i id="more-info-button" class="fa-solid fa-ellipsis-vertical"></i>
-            </div>
+              <div class="tpm-button">
+                  <i id="more-info-button" class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
             </div> 
 
             <!-- DIV HOLDING THE NAVIGATION TABS -->
@@ -108,7 +109,8 @@
     export default {
         name:'NavComp',
         
-        created(){
+
+        mounted(){
           this.showMoreInfoDiv()
         },
         
@@ -213,12 +215,12 @@ $web-color:rgb(21, 20, 23);
 //WILL ONLY BE VISIBLE ON SMALL SCREENS 
 .tpm-info{
     position: absolute;
-    top: 2rem;
+    top: 2.5rem;
     right: 2rem;
     display: none;
     .tpm-button{
         i{
-            font-size: 3rem;
+            font-size: 2.5rem;
             padding: 0 1rem;    
             cursor: pointer;
         }

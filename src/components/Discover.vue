@@ -282,9 +282,9 @@ body{
 
                         }
                         .rel-artist-followers{
-                            font-size: 1.1rem;
+                            font-size: 1rem;
                             padding-bottom: 1rem;
-                            letter-spacing: .15rem;
+                            letter-spacing: .05rem;
                             font-weight: $light;
                             text-transform: uppercase;
                             opacity: .9;
@@ -327,14 +327,18 @@ body{
     .related-artists-section{
         padding: unset;
         margin-bottom: 15rem;
-        padding-top: 5rem;
-
+        padding-top: 8rem;
+        
          //hiding the spotify attribution icon on smaller screens
          .spotify-image-div{
             display: none;
         }
         
-        .ras-container .ras-content-parent .ras-content {
+        .ras-container .ras-content-parent {
+            .pageTitle{
+                font-size: 1.6rem;
+            }
+        }.ras-content {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;

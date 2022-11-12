@@ -581,12 +581,30 @@ body{
                 margin-bottom: 1rem;
             }
 
+            .playlist-info{
+                .playlist-name{
+                    font-size: 1.7rem;
+                }
+                .description{
+                    font-size: 1.4rem;
+                }
+                .created-by{
+                    font-size: 1.2rem;
+
+                }
+                .view-on-spotify{
+                    .view-on-spotify-button{
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+
         }
 
         .the-playlist-songs{
             .pt-container .pt-content{
                 h1{
-                    font-size: 1.6rem;
+                    font-size: 1.4rem;
                 }
 
                 .pt-songs-div{
