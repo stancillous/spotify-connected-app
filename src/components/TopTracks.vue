@@ -25,16 +25,19 @@
                     </div>
 
                     <div class="tt-section-div">
+ 
+
                         <!-- DIV WITH EACH RECENT TRACK -->
 
                         <!-- <div class="top-track">
-                            <img id="top-track-image" src="../assets/user.png" alt="">
+                            <img id="top-track-image" src="../assets/images.png" alt="">
                             <div class="song-details">
                                 <a href="" class="song-name">montero</a>
                                 <a href="" class="artist-name">lil nas</a>
                                 <a class="album-name" href="">album name</a>
                             </div>
                             <p class="track-duration">2:34</p>
+                            <i id="track-info-icon" class="fa-solid fa-ellipsis-vertical"></i>
                         </div> -->
      
                         
@@ -106,15 +109,16 @@
                     
                     //ONLY SHOW AT LEAST 25 RECENTLY PLAYED SONGS
                     if (index<25){
-                        
+                        // console.log( 'index of item',item,index)
+
                         //ID TO BE PASSED AS A QUERY TO THE TRACKINFO COMP 
                         //THE ID WILL BE USED TO GET AUDIO INFO ABOUT THE SPECIFIC TRACK
                         let id = item.id
-                        // console.log(id)
                         
                         //GRABBING ARTIST ID: WHEN ARTIST NAME IS CLICKED REDIRECT TO ANOTHER PAGE
                         //WITH THE ARTIST INFO. THE artistID WILL BE USED THERE
                         let artistID = item.artists[0].id
+
 
                         //CREATING THE THUMNAIL IMAGE OF THE RECENT SONG
                         let recentImage = document.createElement('img')
@@ -148,19 +152,19 @@
 
                         trackDuration.textContent = trackDurationInMinutes
 
-
-                        //APPENDING TO THE DOM
-                        let topTrackDiv = document.createElement('div')
+                        let topTrackDiv = document.createElement('a')
+                        topTrackDiv.href = `/trackinfo?id=${id}`
                         topTrackDiv.setAttribute('class','top-track')
-
-                        let  songDetailsDiv = document.createElement('div')
+               
+                        let songDetailsDiv = document.createElement('div')
                         songDetailsDiv.setAttribute('class','song-details')
+                        //APPENDING TO THE DOM
                         songDetailsDiv.append(songName,artistName,albumName,trackDuration)
 
                         topTrackDiv.append(recentImage,songDetailsDiv)
                 
                         document.querySelector('.tt-section-div').append(topTrackDiv)
-                
+    
 
                     }
 
@@ -273,14 +277,16 @@ $padding-top:7rem;
 
 
             .tt-section-div{
-                // border: 2px solid red;
                 .top-track{
+                    
                     display: flex;
                     align-items: center;
                     margin: 3rem 2rem;
                     position: relative;
+                    text-decoration: none;
 
                     &:hover{
+                        border: 2px solid rgb(245, 245, 245,.5);
                         opacity: .8;
                     }
                     #top-track-image{
@@ -294,7 +300,7 @@ $padding-top:7rem;
                     .track-duration{
                         font-size: 1.2rem;
                         position: absolute;
-                        top:40% ;
+                        top:30% ;
                         right: 4rem;
                         opacity: .9;
                     }

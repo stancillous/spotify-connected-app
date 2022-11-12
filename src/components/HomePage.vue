@@ -2,7 +2,6 @@
     <div v-if="token" class="homepage-root-div">
 
         <!-- <NavComp/> -->
-        
         <section class="user-details-info-section">
 
             <div class="udis-container">
@@ -308,7 +307,8 @@
 
 
                     //APPENDING TO THE DOM
-                    let recentSongContainer = document.createElement('div')
+                    let recentSongContainer = document.createElement('a')
+                    recentSongContainer.href = `/trackinfo?id=${id}`
                     recentSongContainer.setAttribute('class','hp-song')
 
                     let  songDetailsContainer = document.createElement('div')
@@ -404,7 +404,8 @@
 
 
                         //CREATING A DIV THAT WILL HOLD INFO ABOUT EACH PLAYLIST
-                        let playlistsContainer = document.createElement('div')
+                        let playlistsContainer = document.createElement('a')
+                        playlistsContainer.href = `/playlisttracks?id=${id}`
                         playlistsContainer.setAttribute('class','playlists-container')
                     
                         //CREATING THE DIV TO HOLD THE PLAYLIST NAME AND NUMBER OF TRAKCS
@@ -722,10 +723,11 @@ padding-left: 20rem;
             .playlists-container{
                 margin: 2rem;
                 // border: 1px solid;
+                text-decoration: none;
                 display: flex;
                 align-items: center;
-
                 &:hover{
+                    border: 1px solid rgba(245, 245, 245,.4);
                     opacity: .8;
                 }
                 #hp-playlist-image{
@@ -805,10 +807,11 @@ padding-left: 20rem;
                             align-items: center;
                             margin: 2rem;
                             position: relative;
-
+                            text-decoration: none;
                             &:hover{
+                                border: 1px solid rgba(245, 245, 245,.4);
                                 opacity: .8;
-                            }
+                            }   
 
                             img{
                                 width: 6rem;

@@ -30,7 +30,15 @@
     </div>
   </div>
 
-  <router-view/>
+
+    <!-- <router-view/> -->
+      
+<router-view v-slot="{ Component }">
+  <keep-alive>
+    <component :is="Component" />
+  </keep-alive>
+</router-view>
+
 
 
 </template>
@@ -62,33 +70,33 @@ export default {
     // token:'BQB8IdCb5-breSRlb1cvprs2XBuSZUkRvDD71aURTg74QuMvJBtcfantorf-xOxaqqwmoKQuxyd_AIRpWdtXVHdPNNEhMVXzYOyH4IsnZiff_z5mdDa6Rjg_XtX5v9gFBcOF5v4wJhA5c7Abitmf89b6klf_PaMcTv1YkrgC1OJaIEiYqoICBOoZ50jRJFKWucLm7JkHucbHJzf0cKRBW0mzrC8_C-rlf-Gx'
   },
 
-  created(){
-    this.checkToken()
-  },
+//   created(){
+//     this.checkToken()
+//   },
 
   methods:{
       
-    checkToken(){
-        console.log('looking')
-        if(localStorage.getItem('access_token')){
-            console.log('tooken found') 
-            console.log('check', localStorage.getItem('access_token'))
+    // checkToken(){
+    //     console.log('looking')
+    //     if(localStorage.getItem('access_token')){
+    //         console.log('tooken found') 
+    //         console.log('check', localStorage.getItem('access_token'))
 
-            // this.showScreen()  
-
-
-
-        } else{
-            console.log('no token')
-        }
+    //         // this.showScreen()  
 
 
-    },
-    showScreen(){
-        console.log('show screen fun')
-        // document.querySelector('.user-login').style.display = 'none'
-            // document.querySelector('.nav-component').style.display = 'block'
-    },
+
+    //     } else{
+    //         console.log('no token')
+    //     }
+
+
+    // },
+    // showScreen(){
+    //     console.log('show screen fun')
+    //     // document.querySelector('.user-login').style.display = 'none'
+    //         // document.querySelector('.nav-component').style.display = 'block'
+    // },
 
     requestAuthorization(){
         

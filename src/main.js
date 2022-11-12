@@ -6,6 +6,9 @@ createApp(App).use(router).mount('#app')
 
 
 
+
+
+
 //SHOWING THE DIV WITH THE ADDITIONAL ACTIONS ie LOGOUT AND ABOUT DEVELOPER
 // function showMoreInfoDiv(){
     
@@ -45,33 +48,21 @@ var refresh_token = null;
 const TOKEN = "https://accounts.spotify.com/api/token";
 
 
-window.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('load',()=>{
     // console.log(window.location.search.length)
     // console.log('laoded')
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
     else{
-        getUserProfile()
+        // getUserProfile()
     }
     
-    // setTimeout(() => {
-    //     if ( window.location.search.length > 0 ){
-    //         handleRedirect();
-    //     }
-    //     else{
-    //         // console.log('none')
-    //         getUserProfile()
-    //     }
-    // }, 1500);
 
 })
 
 
 function onPageLoad(){
-    // client_id = localStorage.getItem("client_id");
-    // client_secret = localStorage.getItem("client_secret");
-    // console.log('on page load functon')
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
@@ -83,6 +74,7 @@ function handleRedirect(){
     let code = getCode();
     fetchAccessToken( code );
     window.history.pushState("", "", redirect_uri); // remove param from url
+
 }
 
 //function to get code from the url which is then used to the the access token
@@ -94,7 +86,7 @@ function getCode(){
         const urlParams = new URLSearchParams(queryString);
 
         if(urlParams.has('error')){
-            window.location.href = "https://spotify-wrapper.netlify.app/login.html"
+            window.location.href = "https://my-muzik.netlify.app"
         }
         else{
             code = urlParams.get('code')
@@ -148,13 +140,12 @@ function handleAuthorizationResponse(){
             refresh_token = data.refresh_token;
             localStorage.setItem("refresh_token", refresh_token);
         }
+        window.location.reload()       ///
         onPageLoad();
 
     }
 
-    // else if(this.status==401){
-    //     refreshAccessToken()
-    // }
+
     else {
         // console.log(this.responseText);
         // alert(this.responseText);
@@ -175,8 +166,7 @@ function refreshAccessToken(){
 
 
 let token = localStorage.getItem('access_token')
-console.log(token.indexOf('a'))
-// console.log(token)
+// console.log(token.indexOf('a'))
 
 
 //function to get user profile and call refreshAccessToken()
@@ -188,7 +178,6 @@ async function getUserProfile(){
             }
         })
         let info = await response.json()
-        // console.log(info)
         if(info.error.status===401 || info.error.message==="The access token has expiredd"){
             console.log('getting refresh token')
             refreshAccessToken()
@@ -199,6 +188,6 @@ async function getUserProfile(){
     }
 
 }
-// getUserProfile()
+getUserProfile()
 
 

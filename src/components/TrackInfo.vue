@@ -17,7 +17,7 @@
                     <div class="song-image">
                         <img class="song-img" src="" alt="song image">
                         <h1 class="song-name"></h1>
-                        <h1 class="artist-name"></h1>
+                        <a href="" class="artist-name"></a>
                         
                         <div class="play-song-div">
                             <a target="_blank" class="play-song" href="">play on spotify</a>
@@ -144,9 +144,6 @@
 
                 let data = await response.json()
 
-                // console.log(data)
-
-
                 //CREATING ELEMENT FOR THE IMAGE
                 let songImage = document.createElement('img')
                 songImage.setAttribute('class','song-img')
@@ -213,11 +210,12 @@
 
             .then(res => res.json())
             .then((info)=>{
-                // console.log(info)
 
                 document.querySelector('.song-img').src = info.album.images[1].url
                 document.querySelector('.song-name').textContent= info.name
                 document.querySelector('.artist-name').textContent = info.artists[0].name
+                let artistID = info.artists[0].id
+                document.querySelector('.artist-name').href =`./artistInfo?artistID=${artistID}` 
                 document.querySelector('.play-song').href=info.external_urls.spotify
 
             })

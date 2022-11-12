@@ -69,7 +69,7 @@
         methods:{
             async getFollowing(){
                 try{
-                    let response = fetch(this.following_url,{
+                    let response = await fetch(this.following_url,{
                     headers:{
                         'Authorization':`Bearer ${this.token}`,
                     }

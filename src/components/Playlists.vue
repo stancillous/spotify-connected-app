@@ -16,12 +16,12 @@
                 <h3 class="zero-playlists">You do not have any saved playlists</h3>
                 <div class="yp-content">
                     <!-- DIV WITH THE PLAYLIST DETAILS-->
-                    <!-- <div class="playlist"> -->
-                        <!-- <a href="./playlisttracks.html"><img id="playlist-image" src="../images/playlist.jpg" alt=""></a> -->
-                        <!-- <a id="playlist-name" class="artist-spotify-link" href="./playlisttracks.html">street car</a> -->
+                    <!-- <div class="playlist">
+                        <a href="./playlisttracks.html"><img id="playlist-image" src="../images/playlist.jpg" alt=""></a>
+                        <a id="playlist-name" class="artist-spotify-link" href="./playlisttracks.html">street car</a>
 
-                        <!-- <p class="playlist-track-number">43 tracks</p> -->
-                    <!-- </div> -->
+                        <p class="playlist-track-number">43 tracks</p>
+                    </div> -->
 
 
 
@@ -104,7 +104,6 @@
                         playlistname.setAttribute('id','playlist-name')
                         playlistname.textContent = item.name
                         playlistname.href = `./playlisttracks?id=${playlist_id}`
-                        playlistname.setAttribute('href','/artistinfo')
 
 
 
@@ -130,6 +129,7 @@
 
                         //APPENDING TO THE DOM
                         document.querySelector('.yp-content').append(playlistsContainer)
+
 
                     }
 

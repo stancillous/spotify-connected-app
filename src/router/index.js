@@ -3,73 +3,75 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path:'/playlists',
-    name:'playlists',
-    component:()=> import('../components/Playlists.vue')
-  },
-
-  {
     path: '/',  
     name: 'home',
-    component:()=> import('../components/HomePage.vue')
+    component:()=> import(/* webpackChunkName: "home" */'../components/HomePage.vue')
+  },
+  {
+    path:'/playlists',
+    name:'playlists',
+    component:()=> import(/* webpackChunkName: "playlists" */ '../components/Playlists.vue')
   },
 
   {
     path:'/following',  
     name:'following',
-    component:()=> import('../components/Following.vue')
+    component:()=> import(/* webpackChunkName: "following" */ '../components/Following.vue')
 
   },
   {
     path:'/trackinfo', 
     name:'trackinfo',
-    component:()=> import('../components/TrackInfo.vue')
+    component:()=> import(/* webpackChunkName: "trackinfo" */ '../components/TrackInfo.vue')
 
   },
   {
     path:'/topartists', 
     name:'topartists',
-    component:()=> import('../components/TopArtists.vue')
+    component:()=> import(/* webpackChunkName: "top artists" */ '../components/TopArtists.vue')
 
 
   },
   {
     path:'/discover', 
     name:'discover',
-    component:()=> import('../components/Discover.vue')
+    component:()=> import(/* webpackChunkName: "discoverArtists" */ '../components/Discover.vue')
 
   },
   {
     path:'/artistinfo', 
     name:'artistinfo',
-    component:()=> import('../components/ArtistInfo.vue')
+    component:()=> import(/* webpackChunkName: "artistInfo" */ '../components/ArtistInfo.vue')
 
   },
   {
     path:'/playlisttracks', 
     name:'playlisttracks',
-    component:()=> import('../components/PlaylistTracks.vue')
+    component:()=> import(/* webpackChunkName: "playlistTracks" */ '../components/PlaylistTracks.vue')
 
   },
 
   {
     path:'/recent',  
     name:'recent',
-    component:()=> import('../components/RecentSongs.vue')
+    component:()=> import(/* webpackChunkName: "recentSongs" */ '../components/RecentSongs.vue')
 
 
   },
   {
     path:'/toptracks', 
     name:'toptracks',
-    component:()=> import('../components/TopTracks.vue')
+    component:()=> import(/* webpackChunkName: "topTracks" */ '../components/TopTracks.vue')
 
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to,from,savedPosition){
+    return savedPosition || {top:0}
+  }
 })
 
 export default router

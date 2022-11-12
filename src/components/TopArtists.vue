@@ -113,18 +113,6 @@
                         artistImageLink.appendChild(artistImage)  //APPEND CHILD, THE IMAGE WILL BE INSIDE THIS TAG
 
 
-
-            // ********************************************
-            // ********************************************
-            // ********************************************
-                        // artistImageLink.href = `./artistinfo.html?artistID=${artistID}`  //SETTING HREF TO THE ANCHOR TAG
-            // ********************************************
-            // ********************************************
-            // ********************************************
-
-
-
-
                         //CREATE ELEMENT TO HOLD NAME OF THE ARTIST
                         let artistName = document.createElement('a')
                         artistName.setAttribute('id','artist-link')
@@ -132,11 +120,6 @@
                         // artistName.href = `./ArtistInfo.vue?artistID=${this.artistID}` 
                         artistName.href = `./artistInfo?artistID=${this.artistID}` 
 
-                        // artistName.addEventListener('click',()=>{
-                        //     console.log(this.artistID)
-                        //     console.log('clicked')
-                        //     this.$router.push({path:'/artistinfo',query:{artistID:this.artistID}})
-                        // })
 
 
                         //APPENDING TO THE DOM
