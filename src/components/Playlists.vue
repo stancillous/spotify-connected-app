@@ -311,11 +311,16 @@ $padding-top:7rem;
 
 }
 
+
 @media screen and (max-width:555px) {
     .your-playlists-section{
         padding-top: $padding-top;
 
-        .yp-container .yp-content .playlist{
+        .yp-container{
+            h1{
+                font-size: 1.4rem;
+            }
+        } .yp-content .playlist{
             width: 15rem;
             margin: unset;
             margin:3rem .3rem;
