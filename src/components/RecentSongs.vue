@@ -47,17 +47,14 @@
         },
         data(){
             return{
+                
                 recently_played_tracks :`https://api.spotify.com/v1/me/player/recently-played?limit=25`,
-
+                token:localStorage.getItem('access_token')
             }
         },
 
         //INJECTING THE TOKEN PROVIDED FROM THE APP.VUE COMPONENT
-        inject:['token'],
-
-        // mounted(){
-        //     this.recentlyPlayed()
-        // },
+        // inject:['token'],
 
         methods:{
              millisToMinutesAndSeconds(millis) {
@@ -131,7 +128,8 @@
 
 
                         //APPENDING TO THE DOM
-                        let recentSongDiv = document.createElement('div')
+                        let recentSongDiv = document.createElement('a')
+                        recentSongDiv.href = `/trackinfo?id=${id}`
                         recentSongDiv.setAttribute('class','recent-song-div')
 
                         let  songDetailsDiv = document.createElement('div')
@@ -226,8 +224,9 @@ $padding-top:7rem;
                     // border: 2px solid;
                     margin: 3rem 2rem;
                     position: relative;
-
+                    text-decoration: none;
                     &:hover{
+                        border: 1px solid rgba(245, 245, 245,.4);
                         opacity: .8;
                     }
                     #recently-played-song-image{
@@ -242,7 +241,7 @@ $padding-top:7rem;
                         position: absolute;
                         font-weight: $regular;
                         right: 4rem;
-                        top:40%;
+                        top:30%;
                         opacity: .9;
                     }
 

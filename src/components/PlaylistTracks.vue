@@ -267,7 +267,8 @@
 
 
                         //APPENDING TO THE DOM
-                        let trackDiv = document.createElement('div')
+                        let trackDiv = document.createElement('a')
+                        trackDiv.href=`/trackinfo?id=${id}`
                         trackDiv.setAttribute('class','playlist-tracks')
 
                         let  songDetailsDiv = document.createElement('div')
@@ -350,6 +351,7 @@ body{
             //THE DIV SHOWING THE PLAYLIST DETAILS  
             .playlist-details{
                 display: flex;
+                padding-bottom: 1rem;
                 border-bottom: 1px solid rgba(255, 255, 255,.5) ;
                 align-items: center;
                 
@@ -441,11 +443,13 @@ body{
                                 align-items: center;
                                 // margin: 3rem 2rem;
                                 margin-top: 3rem;
+                                text-decoration: none;
                                 position: relative;
                                 &:hover{
                                     opacity: .8;
-                                }
+                                    border: 1px solid rgba(245, 245, 245,.4);
 
+                                }
                                 #track-image{
                                     width: 6rem;
                                     height: 6rem;
@@ -457,7 +461,7 @@ body{
                                     font-size: 1.2rem;
                                     position: absolute;
                                     right: 4rem;
-                                    top: 40%;
+                                    top: 30%;
                                     opacity: .9;
                                     font-weight: $regular;
                                 }
