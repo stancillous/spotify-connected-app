@@ -10,29 +10,29 @@ createApp(App).use(router).mount('#app')
 
 
 //SHOWING THE DIV WITH THE ADDITIONAL ACTIONS ie LOGOUT AND ABOUT DEVELOPER
-function showMoreInfoDiv(){
+// function showMoreInfoDiv(){
     
-    let moreInfoButton = document.querySelector('#more-info-button')
+//     let moreInfoButton = document.querySelector('#more-info-button')
     
-    //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
-    moreInfoButton.addEventListener('click',()=>{
-        document.querySelector('.fd-container').classList.add('show')
+//     //SHOWING THE DIV WITH MORE DETAILS WHEN THIS ELEMENT IS CLICKED
+//     moreInfoButton.addEventListener('click',()=>{
+//         document.querySelector('.fd-container').classList.add('show')
     
-    })
+//     })
     
-    //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
-    window.addEventListener('mouseup',function(event){
-        let moreInfoContainer = document.querySelector('.fd-container');
-        if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
+//     //HIDING THE DIV ABOVE WHEN USER CILCKS OUTSIDE OF IT
+//     window.addEventListener('mouseup',function(event){
+//         let moreInfoContainer = document.querySelector('.fd-container');
+//         if(event.target != moreInfoContainer && event.target.parentNode != moreInfoContainer){
      
     
-            moreInfoContainer.classList.remove('show')
-        }
-    });  
+//             moreInfoContainer.classList.remove('show')
+//         }
+//     });  
 
-}
+// }
 
-showMoreInfoDiv()
+// showMoreInfoDiv()
 
 
 // let redirect_uri = "https://my-muzik.netlify.app/"
