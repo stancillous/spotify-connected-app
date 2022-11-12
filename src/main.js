@@ -36,7 +36,7 @@ createApp(App).use(router).mount('#app')
 
 
 // let redirect_uri = "https://my-muzik.netlify.app/"
-let redirect_uri = "http://localhost:8080/"
+let redirect_uri = "https://my-muzik.netlify.app/"
 let client_id='11e1eb62cc504e17bce8867bc8a21897'
 
 
@@ -86,7 +86,7 @@ function getCode(){
         const urlParams = new URLSearchParams(queryString);
 
         if(urlParams.has('error')){
-            window.location.href = "https://my-muzik.netlify.app"
+            window.location.href = "https://my-muzik.netlify.app/"
         }
         else{
             code = urlParams.get('code')
