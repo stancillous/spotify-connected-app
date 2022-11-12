@@ -108,9 +108,10 @@
     export default {
         name:'NavComp',
         
-        mounted:{
+        created(){
           this.showMoreInfoDiv()
-        }
+        },
+        
         methods:{
           showMoreInfoDiv(){
             let moreInfoButton = document.querySelector('#more-info-button')
