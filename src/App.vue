@@ -57,7 +57,7 @@ export default {
     return {
         AUTHORIZE:'https://accounts.spotify.com/authorize',
          scope:'user-read-private user-read-recently-played playlist-read-private user-follow-read user-top-read',
-         redirect_uri : 'http://localhost:8080/' ,
+         redirect_uri : 'https://my-muzik.netlify.app/' ,
          client_id:'11e1eb62cc504e17bce8867bc8a21897',
          token:localStorage.getItem('access_token'),
         }
