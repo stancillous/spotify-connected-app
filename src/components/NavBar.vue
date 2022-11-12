@@ -89,7 +89,7 @@
                         </div>
 
                         <div class="github-div">
-                        <a target="_blank" href="https://github.com/stancillous/"><span style="font-size: 2.5rem;" class="iconify" data-icon="charm:github"></span></a>
+                        <a target="_blank" href="https://github.com/stancillous/spotify-connected-app"><span style="font-size: 2.5rem;" class="iconify" data-icon="charm:github"></span></a>
 
                         </div>
 
