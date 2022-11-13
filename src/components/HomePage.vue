@@ -163,9 +163,7 @@
             },
 
             logUserOut(){
-                console.log( 'before', localStorage.getItem('access_token'))
                 localStorage.removeItem('access_token')
-                console.log( 'after delete',localStorage.getItem('access_token'))
 
             },
 
