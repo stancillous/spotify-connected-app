@@ -343,7 +343,10 @@ $padding-top:7rem;
 
                 .song-details{
                     .song-name{
-                        font-size: 1.3rem;
+                        font-size: 1.2rem;
+                    }
+                    .artist-name, .album-name{
+                        font-size: 1.1rem;
                     }
                 }
             }
