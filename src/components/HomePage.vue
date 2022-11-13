@@ -358,13 +358,7 @@
 
                     //ONLY SHOW AT LEAST 12 PLAYLISTS
                     if(index <12){
-
-                        // ****************************************************
-                        // ****************************************************
                         let id = item.id;
-                        // console.log(id)
-                        // ****************************************************
-                        // ****************************************************
 
                         //CREATING THE IMAGE OF THE PLAYLIST
                         let playlistImage =document.createElement("img")
@@ -376,13 +370,7 @@
                         let playlistImageLink = document.createElement('a')
                         playlistImageLink.append(playlistImage)
 
-                        // ****************************************************
-                        // ****************************************************
                         playlistImageLink.href = `/playlisttracks?id=${id}`
-                        // ****************************************************
-                        // ****************************************************
-                    
-
 
                         //CREATING THE PLAYLIST NAME
                         let playlistname = document.createElement('a')
@@ -390,14 +378,8 @@
                         playlistname.href = `/playlisttracks?id=${id}`
                         playlistname.textContent = item.name
 
-                        // ****************************************************
-                        // ****************************************************
 
                         // playlistname.href = `./playlist/playlisttracks.html?id=${id}`
-                    // ****************************************************
-                        // ****************************************************
-
-
 
                         //CREATING THE P TAG TO HOLD THE PLAYLIST TOTAL NUMBER OF TRACKS
                         let playlisttracks = document.createElement('p')
@@ -912,7 +894,7 @@ padding-left: 20rem;
 @media screen and (max-width:900px) {
     .user-details-info-section{
         padding: unset;
-        margin-bottom: 15rem;
+        margin-bottom: 6rem;
         .udis-container{
             .user-name-img{
                 display: none;
@@ -924,6 +906,8 @@ padding-left: 20rem;
 
     .top-artists-playlists{
         padding: unset;
+        margin-bottom: 15rem;
+
     }
 }
 
