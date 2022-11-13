@@ -1,6 +1,8 @@
 {
-  "name": "spot",
-  "version": "0.1.0",
+  "name": "my-muzik",
+  "developer":"Stancillous Raymond",
+  "description":"a web app for visualizing personalized spotify data",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -23,6 +25,8 @@
     "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0"
-  }
+  },
+  "license":"MIT"
+
 }
 
