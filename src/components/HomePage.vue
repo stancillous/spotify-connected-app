@@ -910,24 +910,22 @@ padding-left: 20rem;
 
 //MEDIA SCREENS
 @media screen and (max-width:900px) {
-
     .user-details-info-section{
         padding: unset;
         margin-bottom: 15rem;
-
-        .udis-container .udis-content{
-             //hiding the spotify attribution icon on smaller screens
-            .spotify-image-div{
+        .udis-container{
+            .user-name-img{
                 display: none;
-            }
-        }
 
+            }
+        } 
+            
     }
+
     .top-artists-playlists{
         padding: unset;
     }
 }
-
 
 @media screen and (max-width:840px) {
 
