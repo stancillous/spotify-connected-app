@@ -406,6 +406,19 @@ $padding-top:7rem;
             .song-details{
                 .song-name{
                     font-size: 1.2rem;
+                    position:relative;
+                    
+                    &::after{
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            height: 0.1rem;
+                            background-color: rgba(245, 245, 245,.3);
+                            left: 0;
+                            right: 0;
+                            bottom: -.3rem;
+                        }
+                        
                 }
                 .artist-name, .album-name{
                     font-size: 1.1rem;
