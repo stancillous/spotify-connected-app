@@ -143,10 +143,13 @@ async function getUserProfile(){
             }
         })
         let info = await response.json()
-        if(info.error.status===401 || info.error.message==="The access token has expiredd"){
-            console.log('getting refresh token')
-            refreshAccessToken()
+        if(info.error){
+            if(info.error.status===401 || info.error.message==="The access token has expiredd"){
+                console.log('getting refresh token')
+                refreshAccessToken()
+            }
         }
+        
     } catch (error) {
         console.log(error.message)
         
