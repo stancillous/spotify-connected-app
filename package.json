@@ -1,17 +1,17 @@
 {
-  "name": "my-muzik",
-  "author":"Stancillous Raymond (https://stanceray.com/)",
-  "description":"a web app for visualizing personalized spotify data",
+  "name": "spot",
+  //"author":"Stancillous Raymond (https://stanceray.com/)",
+  //"description":"a web app for visualizing personalized spotify data",
   "version": "0.4.0",
-  "homepage": "https://github.com/stancillous/spotify-connected-app#readme"
+  //"homepage": "https://github.com/stancillous/spotify-connected-app#readme"
   "private": true,
-  "bugs": {
-    "url": "https://github.com/stancillous/spotify-connected-app/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stancillous/spotify-connected-app.git"
-  }
+  //"bugs": {
+    //"url": "https://github.com/stancillous/spotify-connected-app/issues"
+  //},
+  //"repository": {
+    //"type": "git",
+    //"url": "https://github.com/stancillous/spotify-connected-app.git"
+  //}
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -34,7 +34,7 @@
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0"
   },
-  "license":"MIT"
+  //"license":"MIT"
 
 }
 
