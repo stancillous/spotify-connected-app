@@ -583,13 +583,13 @@ body{
 
             .playlist-info{
                 .playlist-name{
-                    font-size: 1.7rem;
+                    font-size: 1.6rem;
                 }
                 .description{
-                    font-size: 1.4rem;
+                    font-size: 1.3rem;
                 }
                 .created-by{
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
 
                 }
                 .view-on-spotify{
@@ -616,10 +616,10 @@ body{
   
                         .song-details{
                             .song-name{
-                                font-size: 1.3rem;
+                                font-size: 1.2rem;
                             }
                             .artist-name, .album-name{
-                                font-size: 1.2rem;
+                                font-size: 1.1rem;
                             }
                         }
 
