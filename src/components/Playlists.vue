@@ -242,13 +242,12 @@ $padding-top:7rem;
                 }
                 #playlist-name{
                     // text-decoration: none;
-                    font-size: 1.7rem;
+                    font-size: 1.5rem;
                     // text-transform: capitalize;
                     font-weight: $medium;
                     text-decoration: none;
                     display: block;
                     padding: .4rem 0;
-
                     &:hover{
                         text-decoration: underline;
                     }
@@ -330,7 +329,7 @@ $padding-top:7rem;
                 
             }
             #playlist-name{
-                font-size: 1.4rem;
+                font-size: 1.9rem;
             }
 
         } 
