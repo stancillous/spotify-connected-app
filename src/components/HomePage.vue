@@ -674,10 +674,10 @@ padding-left: 20rem;
     // border: 1px solid red;
     width: 100vw;
     // margin-left: 13vw;
-    padding-left: 20rem;
+    padding-left: 17rem;
     .tap-container{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 45% 55%;
         // border: 1px solid white;
         // gap: 5rem;      //GAP BETWEEN THE GRIDS
         // border: 1px solid;
@@ -824,10 +824,10 @@ padding-left: 20rem;
                             }
                             
                             .track-duration{
-                                font-size: 1.2rem;
+                                font-size: 1.1rem;
                                 position: absolute;
                                 font-weight: $regular;
-                                right: 4rem;
+                                right: 3rem;
                                 opacity: .9;
                                 top:40%;
                             }
@@ -846,7 +846,7 @@ padding-left: 20rem;
                                 .song-name{
                                     display: block;
                                     // border: 2px solid;
-                                    font-size: 1.5rem;
+                                    font-size: 1.4rem;
                                     text-transform: capitalize;
                                     font-weight: $bold;
                                     text-decoration: none;
@@ -862,7 +862,7 @@ padding-left: 20rem;
                                     opacity: .8;
                                     font-size: $medium;
                                     text-transform: capitalize;
-                                    font-size:1.3rem;
+                                    font-size:1.2rem;
                                     padding-right: 1rem;
                                     // letter-spacing: .1rem;
                                     text-decoration: none;
@@ -876,7 +876,7 @@ padding-left: 20rem;
                                     opacity: .8;
                                     font-size: $medium;
                                     text-transform: capitalize;
-                                    font-size:1.3rem;
+                                    font-size:1.2rem;
                                     padding-right: 1rem;
                                     // letter-spacing: .1rem;
                                     text-decoration: none;
@@ -1031,7 +1031,10 @@ padding-left: 20rem;
 
                 .playlist-info{
                     #hp-playlist-name{
-                        font-size: 1.1rem;
+                        font-size: 1rem;
+                    }
+                    #hp-playlist-total-tracks{
+                        font-size: .9rem;
                     }
                 }
             } 
@@ -1063,7 +1066,13 @@ padding-left: 20rem;
                 .song-details{
                     width: 60%;
                     .song-name{
-                        font-size: 1.3rem;
+                        font-size: 1.2rem;
+                    }
+                    .artist-name{
+                        font-size: 1.1rem;
+                    }
+                    .album-name{
+                        font-size: 1.1rem;
                     }
                 }
             }
