@@ -1,17 +1,8 @@
 {
   "name": "spot",
-  //"author":"Stancillous Raymond (https://stanceray.com/)",
-  //"description":"a web app for visualizing personalized spotify data",
   "version": "0.4.0",
-  //"homepage": "https://github.com/stancillous/spotify-connected-app#readme"
   "private": true,
-  //"bugs": {
-    //"url": "https://github.com/stancillous/spotify-connected-app/issues"
-  //},
-  //"repository": {
-    //"type": "git",
-    //"url": "https://github.com/stancillous/spotify-connected-app.git"
-  //}
+
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
