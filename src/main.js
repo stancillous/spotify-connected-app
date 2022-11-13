@@ -5,30 +5,20 @@ import router from './router'
 createApp(App).use(router).mount('#app')
 
 
-// let redirect_uri = "https://my-muzik.netlify.app/"
 let redirect_uri = "https://my-muzik.netlify.app/"
 let client_id='11e1eb62cc504e17bce8867bc8a21897'
-
-
 
 var access_token = null;
 var refresh_token = null;
 
 
-const TOKEN = "https://accounts.spotify.com/api/token";
-
-
 window.addEventListener('load',()=>{
-    // console.log(window.location.search.length)
-    // console.log('laoded')
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
     else{
         getUserProfile()
     }
-    
-
 })
 
 
@@ -36,7 +26,6 @@ function onPageLoad(){
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
-
 }
 
 //FUNCTION TO CALL BOTH THE GET AUTH CODE AND ACCESS TOKEN FUNCTIONS
@@ -60,8 +49,6 @@ function getCode(){
         }
         else{
             code = urlParams.get('code')
-            // console.log(code)
-            
         }
     }
     return code;
@@ -73,24 +60,17 @@ function fetchAccessToken( code ){
     let body = "grant_type=authorization_code";
     body += "&code=" + code; 
     body += "&redirect_uri=" + encodeURI(redirect_uri);
-    // body += "&client_id=" + client_id;
-    // body += "&client_secret=" + client_secret;
     callAuthorizationApi(body);
 }
 
 
-
-// ENCODED BASIC OAUTH
-let authBody = 'Basic MTFlMWViNjJjYzUwNGUxN2JjZTg4NjdiYzhhMjE4OTc6ZGUzNGIzYWIzNmY2NDFiZTkzY2RkNjNkMTVmNTMxMTg='
-
-
-
 //FUNCTION TO POST THE ACCESS TOKEN REQUEST
 function callAuthorizationApi(body){
+    const TOKEN = "https://accounts.spotify.com/api/token";
+    const authBody = 'Basic MTFlMWViNjJjYzUwNGUxN2JjZTg4NjdiYzhhMjE4OTc6ZGUzNGIzYWIzNmY2NDFiZTkzY2RkNjNkMTVmNTMxMTg='
     let xhr = new XMLHttpRequest();
     xhr.open("POST", TOKEN, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
     xhr.setRequestHeader('Authorization', authBody)
     xhr.send(body);
     xhr.onload = handleAuthorizationResponse;
@@ -100,6 +80,7 @@ function callAuthorizationApi(body){
 function handleAuthorizationResponse(){
     if ( this.status == 200 ){
         var data = JSON.parse(this.responseText);
+        console.log(data)
         if ( data.access_token != undefined ){
             access_token = data.access_token;
             localStorage.setItem("access_token", access_token);
@@ -108,17 +89,13 @@ function handleAuthorizationResponse(){
             refresh_token = data.refresh_token;
             localStorage.setItem("refresh_token", refresh_token);
         }
-        // window.location.reload()       ///
         onPageLoad();
 
     }
 
-
     else {
         //
     }
-
-
 }
 
 //function to get refresh token when the access token expires
