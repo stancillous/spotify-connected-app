@@ -387,11 +387,11 @@ $web-color:rgb(14, 14, 15);
                         .audio-features{
                             font-weight: $black;
                             font-size: 2.5rem;
-                            opacity: .8;
                             padding: 1rem 0;
                         }
-
+                        
                         .feature-name{
+                            opacity: .7;
                             font-weight: $medium;
                             font-size: 1.6rem;
                             text-transform: capitalize;
@@ -451,6 +451,32 @@ $web-color:rgb(14, 14, 15);
     .song-info-root-div .song-info-container .song-info-content .song-info-div{
         display: flex;
         flex-direction: column;
+
+        .song-image{
+            .artist-name{
+                font-size: 1.2rem;
+            }
+            .song-name{
+                font-size: 1.4rem;
+            }
+            .play-song-div{
+                .play-song{
+                    padding: .8rem 1.5rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .song-features{
+            div{
+                .audio-features{
+                    font-size: 1.4rem;
+                }
+                .feature-name{
+                    font-size: 1.2rem;
+                }
+            }
+        }
     }
 }
 
