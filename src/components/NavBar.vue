@@ -8,7 +8,7 @@
                 <div class="fd">
                     <div class="fd-logout">
                         <a href="https://accounts.spotify.com/en/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-                        <a href="https://accounts.spotify.com/en/logout">logout</a>
+                        <a @click="logUserOut()" href="">logout</a>
                     </div>
 
                     <div class="f-developer">
@@ -115,6 +115,10 @@
         },
         
         methods:{
+            logUserOut(){
+                localStorage.removeItem('access_token')
+            },
+            
           showMoreInfoDiv(){
             let moreInfoButton = document.querySelector('#more-info-button')
     
