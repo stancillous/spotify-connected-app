@@ -2,7 +2,6 @@
   "name": "spot",
   "version": "0.4.0",
   "private": true,
-
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -24,7 +23,6 @@
     "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0"
-  },
-
+  }
 }
 
