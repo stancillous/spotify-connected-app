@@ -238,7 +238,7 @@ body{
                     .artist-name{
 
                         font-weight: $medium;
-                        font-size: 5rem;
+                        font-size: 4rem;
                         padding: 1rem 0;
                         font-weight: $black;
                         text-transform: capitalize;
@@ -251,7 +251,7 @@ body{
 
                     .artist-details-p{
                         font-size: 1.2rem;
-                        letter-spacing: .15rem;
+                        letter-spacing: .1rem;
                         font-weight: $light;
                         text-transform: uppercase;
                         padding: 1rem 0;
@@ -375,19 +375,25 @@ body{
 
             .artist-name-container{
                 .artist-name{
-                    font-size: 2.3rem;
+                    font-size: 1.8rem;
                 }
             }
 
             .artist-details{
                 .artist-details-p{
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
+                    letter-spacing: unset;
                 }
             }
 
             .view-on-spotify .view-on-spotify-button{
-                font-size: 1rem;
+                font-size: .8rem;
                 padding: 1.2rem 1.5rem;
+            }
+            .related-artists{
+                #check-related-artists{
+                    font-size: 1.2rem;
+                }
             }
         } 
     }
