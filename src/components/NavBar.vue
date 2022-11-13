@@ -13,7 +13,7 @@
 
                     <div class="f-developer">
                         <a target="_blank" href="https://github.com/stancillous/spotify-connected-app"><i class="fa-brands fa-github"></i></a>
-                        <a target="_blank" href="https://github.com/stancillous/spotify-connected-app">project files</a>
+                        <a target="_blank" href="https://github.com/stancillous/spotify-connected-app">github</a>
                     </div>
                 </div>
 
